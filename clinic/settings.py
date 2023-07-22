@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'role',
     'authentication',
     'departments',
+    'ministration',
 ]
 
 MIDDLEWARE = [

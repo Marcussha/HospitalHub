@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}New Services{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <form method="POST" class="post-form" action="/services/create">
+        {% csrf_token %}
+        <div class="container">
+            <div class="col-12">
+                <h3>Create a Services</h3>
+            </div>
+
+            <div class="mb-3">
+                <label> ID:</label>
+                {{form.minisid}}
+            </div>
+            <div class="mb-3">
+                <label>Name the Service:</label>
+                {{form.name_ministration}}
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
