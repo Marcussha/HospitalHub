@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'role',
-    'departments',
     'authentication',
+    'departments',
 ]
 
 MIDDLEWARE = [
@@ -81,9 +81,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bookingweb',
         'USER': 'root',
-        'PASSWORD': "Akm246782",
-        'PORT': 3306,  
-        'HOST': '127.0.0.1',  
+        'PASSWORD': "Anhtong369369369@",
+        'PORT': 3306,
+        'HOST': '127.0.0.1',
     }
 }
 
