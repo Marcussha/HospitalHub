@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Change the New Department{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <form method="POST" class="post-form" action="/departments/update/{{departments.departmentid}}">  
+    {% csrf_token %}  
+    <div class="container">   
+        <div class="col-12">  
+            <h3>Update Department</h3>  
+        </div>
+        
+        <div class="mb-3">
+            <label>Department ID:</label>
+            <input type="text" class="form-control" name="departmentid" id="departmentid" required maxlength="20" value="{{departments.departmentid}}"/>
+        </div>
+        <div class="mb-3">
+            <label> Name Department:</label>
+            <input type="text" class="form-control" name="named" id="named" required maxlength="20" value="{{departments.named}}"/>
+        </div>
+        <div class="mb-3">
+            <button type="submit"  class="btn btn-danger btn-lg">Update</button>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock content %}
