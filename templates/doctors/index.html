@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Doctor{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <form method="POST" class="post-form" action="/doctors/addnew">
+        {% csrf_token %}
+        <div class="container">
+            <div class="col-12">
+                <h3>Enter Doctors</h3>
+            </div>
+
+            <div class="mb-3">
+                <label>Doctor ID:</label>
+                {{form.doctorid}}
+            </div>
+            <div class="mb-3">
+                <label>Doctor Name:</label>
+                {{form.doctorname}}
+            </div>
+            <div class="mb-3">
+                <label>Email:</label>
+                {{form.email}}
+            </div>
+            <div class="mb-3">
+                <label>Position:</label>
+                {{form.position}}
+            </div>
+            <div class="mb-3">
+                <label>Department ID:</label>
+                {{form.departmentid}}
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}

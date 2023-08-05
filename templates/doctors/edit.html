@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Change the New Doctor{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <form method="POST" class="post-form" action="/doctors/update/{{doctor.doctorid}}">  
+    {% csrf_token %}  
+    <div class="container">   
+        <div class="col-12">  
+            <h3>Update Doctor</h3>  
+        </div>
+        
+        <div class="mb-3">
+            <label>Doctor ID:</label>
+            <input type="text" class="form-control" name="doctorid" id="doctorid" required maxlength="20" value="{{doctor.doctorid}}"/>
+        </div>
+        <div class="mb-3">
+            <label> Name Doctor:</label>
+            <input type="text" class="form-control" name="doctorname" id="doctorname" required maxlength="20" value="{{doctor.doctorname}}"/>
+        </div>
+        <div class="mb-3">
+            <label> Email:</label>
+            <input type="text" class="form-control" name="email" id="email" required maxlength="20" value="{{doctor.email}}"/>
+        </div>
+        <div class="mb-3">
+            <label> Position:</label>
+            <input type="text" class="form-control" name="position" id="position" required maxlength="20" value="{{doctor.position}}"/>
+        </div>
+        <div class="mb-3">
+            <label> Department ID:</label>
+            <input type="select" class="form-control" name="departmentid" id="departmentid" required maxlength="20" value="{{doctor.departmentid}}"/>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-danger btn-lg">Update</button>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock content %}
