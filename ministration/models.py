@@ -9,3 +9,6 @@ class Ministration(models.Model):
     class Meta:
         managed = False
         db_table = 'ministration'
+
+    def __str__(self):
+        return self.name_ministration
