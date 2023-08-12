@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Change the New Prescription{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <form method="POST" class="post-form" action="/prescriptions/update/{{prescriptions.prescriptionid}}">  
+    {% csrf_token %}  
+    <div class="container">   
+        <div class="col-12">  
+            <h3>Update Prescription</h3>  
+        </div>
+        
+    
+        <div class="mb-3">
+            <label> Name Prescription:</label>
+            <input type="text" class="form-control" name="name_diseaase" id="name_diseaase" required maxlength="20" value="{{prescriptions.name_diseaase}}"/>
+        </div>
+        <div class="mb-3">
+            <label> Symptom:</label>
+            <input type="text" class="form-control" name="symptoms" id="symptoms" required maxlength="20" value="{{prescriptions.symptoms}}"/>
+        </div>
+        <div class="mb-3">
+            <label> Date:</label>
+            <input type="text" class="form-control" name="date" id="date" required maxlength="20" value="{{prescriptions.date}}"/>
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-danger btn-lg">Update</button>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock content %}

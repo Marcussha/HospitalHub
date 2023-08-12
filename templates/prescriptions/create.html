@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Prescription{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <form method="POST" class="post-form" action="/prescriptions/addnew">
+        {% csrf_token %}
+        <div class="container">
+            <div class="col-12">
+                <h3>Enter Prescription</h3>
+            </div>
+
+            <div class="mb-3">
+                <label>Prescription ID:</label>
+                {{form.prescriptionid}}
+            </div>
+            <div class="mb-3">
+                <label>Name of Disease:</label>
+                {{form.name_diseaase}}
+            </div>
+            <div class="mb-3">
+                <label>Symptoms:</label>
+                {{form.symptoms}}
+            </div>
+            <div class="mb-3">
+                <label>DateTime:</label>
+                {{form.date}}
+            </div>
+            <div class="mb-3">
+                <label>Medicine:</label>
+                {{form.medicine}}
+            </div>
+            <div class="mb-3">
+                <label>Note</label>
+                {{form.note}}
+            </div>
+            <div class="mb-3">
+                <label>User ID:</label>
+                {{form.userid}}
+            </div>
+            <div class="mb-3">
+                <label>Doctor ID: </label>
+                {{form.doctorid}}
+            </div>
+            <div class="mb-3">
+                <label>Re Examination Date:</label>
+                {{form.re_examination_date}}
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-danger">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}

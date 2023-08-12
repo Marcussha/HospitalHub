@@ -4,8 +4,8 @@ from doctors.forms import DoctorsForm
 
 # Create your views here.
 def index(request):
-    doctors = Doctors.objects.all()
-    return render(request, "doctors/show.html", {'doctors': doctors})
+    doctor = Doctors.objects.all()
+    return render(request, "doctors/show.html", {'doctor': doctor})
 
 def addnew(request):
     if request.method == "POST":
@@ -21,18 +21,18 @@ def addnew(request):
         return render(request,'doctors/index.html',{'form':form})
     
 def edit(request,id):
-    doctor = Doctors.objects.get(doctorid=id)
-    return render(request, 'doctors/edit.html', {'doctor': doctor})
+    doctors = Doctors.objects.get(doctorid=id)
+    return render(request, 'doctors/edit.html', {'doctors': doctors})
     
 def update(request, id):
-    doctor = Doctors.objects.get(doctorid=id)
-    form = DoctorsForm(request.POST, instance = doctor)
+    doctors = Doctors.objects.get(doctorid=id)
+    form = DoctorsForm(request.POST, instance = doctors)
     if form.is_valid():
         form.save()
         return redirect("/doctors")
-    return render(request, 'doctors/edit.html', {'doctor':doctor})
+    return render(request, 'doctors/edit.html', {'doctors':doctors})
     
 def clear(request, id):
-    doctor = Doctors.objects.get(doctorid=id)
-    doctor.delete()
+    doctors = Doctors.objects.get(doctorid=id)
+    doctors.delete()
     return redirect("/doctors")        

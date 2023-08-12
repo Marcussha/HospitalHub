@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Prescriptions{% endblock title %}
+
+{% block content %}
+<div class="col-md-12">
+    <span><a href="/prescriptions/addnew" class="btn btn-primary">Add New Prescriptions</a></span>  
+        <div class="table-responsive">
+        <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+        <thead>
+            <th><input type="checkbox" id="checkall" /></th>
+            <th>Prescription ID</th>
+            <th>Prescription Name</th>
+            <th>Symptoms</th>
+            <th>Date </th>
+            <th>Medicine id</th>
+            <th>Note </th>
+            <th>User ID </th>
+            <th>Doctor ID</th>
+            <th>Re-examination Date </th>
+        </thead>
+        <tbody>
+            {% for prescriptions in prescription  %}
+            <tr>
+                <td><input type="checkbox" class="checkthis" /></td>
+                <td>{{prescriptions.prescriptionid}}</td>
+                <td>{{prescriptions.name_diseaase}}</td>
+                <td>{{prescriptions.symptoms}}</td>
+                <td>{{prescriptions.date}}</td>
+                <td>{{prescriptions.medicine}}</td>
+                <td>{{prescriptions.note}}</td>
+                <td>{{prescriptions.userid}}</td>
+                <td>{{prescriptions.doctorid}}</td>
+                <td>{{prescriptions.re_examination_date}}</td>
+                <td><a href="prescriptions/edit/{{prescriptions.prescriptionid}}" class="btn btn-danger">Edit</a></td>
+                <td><a href="prescriptions/delete/{{prescriptions.prescriptionid}}" class="btn btn-primary">Delete</a></td>
+            </tr>
+            {% endfor %}
+{% endblock content %}
