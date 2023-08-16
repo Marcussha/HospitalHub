@@ -4,9 +4,9 @@
   
 {% block content %}
 <div class="col-md-12">    
-    <form method="POST" class="post-form" action="/appointments/create">  
+    <form method="POST" class="el-form el-form--label-top" action="/appointments/create">  
     {% csrf_token %}  
-    <div class="container">  
+    <div class="el-form-item is-required">  
         <div class="col-12">  
         <h3>Enter Details</h3>  
         </div>    
