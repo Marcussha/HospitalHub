@@ -10,7 +10,7 @@ from django.contrib.auth.forms import AuthenticationForm
 
 # Create your views here.s
 def home (request):
-    return render(request, "authentication/index.html")
+    return render(request, "main.html")
 
 def login (request):
     if request.user.is_authenticated:

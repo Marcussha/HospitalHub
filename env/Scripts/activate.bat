@@ -1,4 +1,4 @@
-@set "VIRTUAL_ENV=C:\Users\DELL\Music\HospitalHub\env"
+@set "VIRTUAL_ENV=C:\Users\thong\OneDrive\Desktop\HospitalHub\env"
 
 @if defined _OLD_VIRTUAL_PROMPT (
     @set "PROMPT=%_OLD_VIRTUAL_PROMPT%"
