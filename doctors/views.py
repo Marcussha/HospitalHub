@@ -34,5 +34,10 @@ def update(request, id):
     
 def clear(request, id):
     doctors = Doctors.objects.get(doctorid=id)
+    
+    if doctors.appointment_count > 0 or doctors.prescriptions_count > 0:
+        error_message = "Cannot delete a doctors."
+        return render (request, "error_page.html", {'error_message': error_message})
+    
     doctors.delete()
-    return redirect("/doctors")        
+    return redirect('/doctors')        

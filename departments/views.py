@@ -33,6 +33,11 @@ def update(request, id):
     
 def clear(request, id):
     departments = Departments.objects.get(departmentid=id)
+    
+    if departments.doctors_count > 0:
+        error_message = "Cannot delete a departments with associated doctor."
+        return render(request, "error_page.html", {'error_message': error_message})
+    
     departments.delete()
     return redirect("/departments")
 # Create your views here.
