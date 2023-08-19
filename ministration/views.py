@@ -36,5 +36,10 @@ def update(request, id):
 
 def clear(request, id):
     ministration = Ministration.objects.get(minisid=id)
+    
+    if ministration.appointment_count > 0:
+        error_message = "Cannot delete a ministration with associated appointments."
+        return render(request, "error_page.html", {'error_message': error_message})
+    
     ministration.delete()
     return redirect('/services')

@@ -6,37 +6,37 @@
 <div class="col-md-12">    
     <form method="POST" class="el-form el-form--label-top" action="/appointments/create">  
     {% csrf_token %}  
-    <div class="el-form-item is-required">  
-        <div class="col-12">  
+    <div class="container">  
+        <div class="form-group">  
         <h3>Enter Details</h3>  
         </div>    
     
-        <div class="mb-3"> 
+        <div class="form-group"> 
             <label>Date time:</label>  
             {{ form.datebooking }}   
         </div> 
 
-        <div class="mb-3"> 
+        <div class="form-group"> 
             <label>Client Name:</label>  
             {{ form.customerid }}   
         </div>
+        <div class= "form-row">
+            <div class="form-group col-md-4"> 
+                <label>Service:</label>  
+                {{ form.serviceid }}   
+            </div>
 
-        <div class="mb-3"> 
-            <label>Service:</label>  
-            {{ form.serviceid }}   
+            <div class="form-group col-md-6"> 
+                <label>Doctor Name</label>  
+                {{ form.docid }}   
+            </div>
         </div>
-
-        <div class="mb-3"> 
-            <label>Doctor Name</label>  
-            {{ form.docid }}   
-        </div>
-
-        <div class="mb-3"> 
+        <div class="form-group"> 
             <label>Attention:</label>  
             {{ form.note }}   
         </div>
         <br>
-        <div class="mb-3"> 
+        <div> 
             <button type="submit" class="btn btn-primary">Submit</button>   
         </div> 
     </div>  
