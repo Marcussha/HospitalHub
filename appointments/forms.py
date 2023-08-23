@@ -5,11 +5,13 @@ class AppointmentForm (forms.ModelForm):
 
     class Meta:
         model = Appointment
-        fields = ['appointmentid','datebooking','note','customerid','serviceid','docid']
-        widgets = {'appointmentid': forms.TextInput(attrs={'class': 'form-control'}),
+        fields = ['appid','fullname','email','phone','datebooking','serviceid','docid','note']
+        widgets = {'appid': forms.TextInput(attrs={'class': 'form-control'}),
+                    'fullname': forms.TextInput(attrs={'class':'form-control'}),
+                    'email': forms.EmailInput(attrs={'class':'form-control'}),
+                    'phone': forms.TextInput(attrs={'class':'form-control'}),
                     'datebooking': forms.SelectDateWidget(attrs={'class':'form-control'}),
-                    'note': forms.TextInput(attrs={'class':'form-control'}),
-                    'customerid': forms.Select(attrs={'class':'form-control'}),
                     'serviceid': forms.Select(attrs={'class':'form-control'}),
                     'docid': forms.Select(attrs={'class':'form-control'}),
+                    'note': forms.TextInput(attrs={'class':'form-control'}),                    
                     }
