@@ -9,24 +9,28 @@
             <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
             <thead>
                 <th><input type="checkbox" id="checkall" /></th>
-                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
                 <th>Date</th>
-                <th>Customer</th>
+                <th>Time</th>
                 <th>Service</th>
-                <th>Doctor Name</th>
-                <th>Attention</th>
+                <th>Doctor</th>
+                <th>Notes</th>
             </thead>
             <tbody>
             {% for appointments in appointment %}  
                 <tr>  
                 <td><input type="checkbox" class="checkthis" /></td>
-                <td>{{ appointments.appointmentid }}</td>  
-                <td>{{ appointments.datebooking }}</td>
-                <td>{{ appointments.customerid }}</td>  
-                <td>{{ appointments.serviceid }}</td>  
+                <td>{{ appointments.fullname }}</td>
+                <td>{{ appointments.email }}</td>  
+                <td>{{ appointments.phone }}</td>  
+                <td>{{ appointments.datebooking }}</td> 
+                <td>{{ appointments.timebooking }}</td>  
+                <td>{{ appointments.serviceid }}</td>
                 <td>{{ appointments.docid }}</td>  
-                <td>{{ appointments.note }}</td>    
-                <td><a href="appointments/delete/{{ appointments.appointmentid }}" class="btn btn-danger">Delete</a></td>  
+                <td>{{ appointments.note }}</td>      
+                <td><a href="appointments/delete/{{ appointments.appid }}" class="btn btn-danger">Delete</a></td>  
                 </tr>  
             {% endfor %} 
             </tbody>
