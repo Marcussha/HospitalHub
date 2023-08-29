@@ -1,5 +1,5 @@
 from django.db import models
-
+from role.models import Roles
 # Create your models here.
 class AuthUser(models.Model):
     password = models.CharField(max_length=128)
@@ -12,7 +12,8 @@ class AuthUser(models.Model):
     is_staff = models.IntegerField()
     is_active = models.IntegerField()
     date_joined = models.DateTimeField()
-
+    roleid = models.ForeignKey(Roles, on_delete=models.SET_NULL, null=True, blank=True)
+    
     class Meta:
         managed = False
         db_table = 'auth_user'
