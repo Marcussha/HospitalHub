@@ -1,8 +1,9 @@
 from django import forms
 from appointments.models import Appointment
 
-class AppointmentForm (forms.ModelForm):
 
+class AppointmentForm (forms.ModelForm):
+    
     class Meta:
         model = Appointment
         fields = ['appid','fullname','email','phone','datebooking','serviceid','docid','note']
@@ -15,3 +16,5 @@ class AppointmentForm (forms.ModelForm):
                     'docid': forms.Select(attrs={'class':'form-control'}),
                     'note': forms.TextInput(attrs={'class':'form-control'}),                    
                     }
+        
+        

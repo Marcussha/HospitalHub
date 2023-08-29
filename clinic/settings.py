@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bookingweb',
         'USER': 'root',
-        'PASSWORD': "Anhtong369369369",
+        'PASSWORD': "Akm246782",
         'PORT': 3306,
         'HOST': '127.0.0.1',
     }
@@ -137,3 +137,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#send mail
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'your-smtp-server.com'
+EMAIL_PORT = 587  # hoặc cổng thích hợp cho máy chủ SMTP của bạn
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'khoahtagcs200252@fpt.edu.vn'
+EMAIL_HOST_PASSWORD = 'khoakelin1604'
+

@@ -5,6 +5,7 @@ from ministration.models import Ministration
 from doctors.models import Doctors
 from datetime import time
 
+
 # Create your views here.
 
 from django.shortcuts import render, redirect
@@ -49,6 +50,7 @@ def create(request):
     # Retrieve the related instances for rendering the dropdown
     services = Ministration.objects.all()
     doctors = Doctors.objects.all()
+    
 
     return render(request, "appointments/create.html", {'services': services, 'doctors': doctors})
 
