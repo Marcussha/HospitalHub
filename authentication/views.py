@@ -54,7 +54,6 @@ def signup(request):
         return render(request, 'authentication/signup.html', {'form': form})
     
 def signout(request):
-    logout(request)
     return redirect('/')
 
 def profile(request):

@@ -9,7 +9,7 @@ def index(request):
 
 def addnew(request):
     if request.method == "POST":
-        form = DoctorsForm(request.POST)
+        form = DoctorsForm(request.POST,  request.FILES)
         if form.is_valid():
             try:
                 form.save()
@@ -40,4 +40,5 @@ def clear(request, id):
         return render (request, "error_page.html", {'error_message': error_message})
     
     doctors.delete()
-    return redirect('/doctors')        
+    return redirect('/doctors')      
+

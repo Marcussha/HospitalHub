@@ -9,7 +9,7 @@
         <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
         <thead>
             <th><input type="checkbox" id="checkall" /></th>
-            <th>Doctor ID</th>
+            <th>Doctor Images</th>
             <th>Doctor Name</th>
             <th>Email</th>
             <th>Position </th>
@@ -19,12 +19,13 @@
             {%for doctors in doctor %}
             <tr>  
                 <td><input type="checkbox" class="checkthis" /></td>
-                <td>{{doctors.doctorid}}</td>
+                <img src="{{ doctors.images }}" >
                 <td>{{doctors.doctorname}}</td>
                 <td>{{doctors.email}}</td>
                 <td>{{doctors.position}}</td>
                 <td>{{doctors.departmentid}}</td>
                 <td><a href="doctors/edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a></td>
+                <td><button class="schedule-button" data-doctor-name="Doctor's Name" href="/appointments/create">Schedule Appointment</button></td>
                 <td><a href="doctors/delete/{{ doctors.doctorid }}" class="btn btn-danger">Delete</a></td>  
             </tr>  
         {% endfor %} 

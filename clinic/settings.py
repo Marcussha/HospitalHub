@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bookingweb',
         'USER': 'root',
-        'PASSWORD': "Anhtong369369369",
+        'PASSWORD': "Akm246782",
         'PORT': 3306,
         'HOST': '127.0.0.1',
     }
@@ -147,3 +147,6 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'thonghqgcs200763@fpt.edu.vn'
 EMAIL_HOST_PASSWORD = 'nfhtmujiafiemdyx'
+
+MEDIA_URL = '/doctors/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'doctors/media')

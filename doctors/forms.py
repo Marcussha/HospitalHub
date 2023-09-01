@@ -4,7 +4,7 @@ from doctors.models import Doctors
 class DoctorsForm(forms.ModelForm):
     class Meta:
         model = Doctors
-        fields = ['doctorid', 'doctorname', 'email', 'position', 'departmentid']
+        fields = ['doctorid', 'doctorname', 'email', 'position', 'departmentid', 'images']
         widgets = {
             'doctorid': forms.TextInput(attrs={'class': 'form-control'}),
             'doctorname': forms.TextInput(attrs={'class': 'form-control'}),

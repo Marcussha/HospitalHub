@@ -11,6 +11,12 @@
                 <h3>Enter Doctors</h3>
             </div>
 
+            <div class ="mb-3">
+                <label> Doctor Image: </label>
+                <img src="path/to/doctor-image.jpg" alt="Doctor Image">
+                <form method="FILES" enctype="doctors/media">
+                {{forms.images}}
+            </div>
             <div class="mb-3">
                 <label>Doctor Name:</label>
                 {{form.doctorname}}
