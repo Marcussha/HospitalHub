@@ -13,6 +13,9 @@ class Departments(models.Model):
     class Meta:
         managed = False
         db_table = 'departments'
+        permissions = [
+            ("can_manage_departments", "Can manage departments"),
+        ]
 
     def __str__(self):
         return self.named

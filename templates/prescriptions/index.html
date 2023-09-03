@@ -8,7 +8,6 @@
         <div class="component-booking">
         <table class="table table-striped table-bordered" width="100%">
         <thead>
-            <th><input type="checkbox" id="checkall" /></th>
             <th>ID</th>
             <th>Prescription Name</th>
             <th>Symptoms</th>
@@ -22,7 +21,6 @@
         <tbody>
             {% for prescriptions in prescription  %}
             <tr>
-                <td><input type="checkbox" class="checkthis" /></td>
                 <td>{{prescriptions.prescriptionid}}</td>
                 <td>{{prescriptions.name_diseaase}}</td>
                 <td>{{prescriptions.symptoms}}</td>
