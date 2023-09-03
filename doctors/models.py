@@ -13,8 +13,9 @@ class Doctors(models.Model):
     email = models.CharField(db_column='Email', unique=True, max_length=50)  # Field name made lowercase.
     position = models.CharField(db_column='Position', max_length=50)  # Field name made lowercase.
     departmentid = models.ForeignKey(Departments, models.DO_NOTHING, db_column='DepartmentID', blank=True, null=True)
-    images =  models.ImageField(upload_to='doctors/media', null=True, blank=True)  # Field name made lowercase.# Field name made lowercase.
-
+    images = models.ImageField(db_column='Images', null=True)  # Field name made lowercase.
+    note = models.CharField(db_column='Note', max_length=120, blank=True, null=True)  # Field name made lowercase.
+    
     objects = DoctorsManager()
     class Meta:
         managed = False

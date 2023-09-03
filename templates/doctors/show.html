@@ -4,28 +4,27 @@
 
 {% block content %}
 <div class="col-md-12">
-    <span><a href="/doctors/addnew" class="btn btn-primary">Add Doctors</a></span>  
+    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>  
         <div class="table-responsive">
         <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
         <thead>
-            <th><input type="checkbox" id="checkall" /></th>
             <th>Doctor Images</th>
             <th>Doctor Name</th>
             <th>Email</th>
             <th>Position </th>
+            <th>Note </th>
             <th>Department id</th>
         </thead>
         <tbody>
             {%for doctors in doctor %}
             <tr>  
-                <td><input type="checkbox" class="checkthis" /></td>
-                <img src="{{ doctors.images }}" >
+                <td><img src="media/{{doctors.images}}" alt="{{ doctor.doctorname }} Image"width="10%" /></td>
                 <td>{{doctors.doctorname}}</td>
                 <td>{{doctors.email}}</td>
                 <td>{{doctors.position}}</td>
+                <td>{{doctors.note}}</td>
                 <td>{{doctors.departmentid}}</td>
                 <td><a href="doctors/edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a></td>
-                <td><button class="schedule-button" data-doctor-name="Doctor's Name" href="/appointments/create">Schedule Appointment</button></td>
                 <td><a href="doctors/delete/{{ doctors.doctorid }}" class="btn btn-danger">Delete</a></td>  
             </tr>  
         {% endfor %} 
