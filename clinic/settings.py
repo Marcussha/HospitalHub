@@ -38,13 +38,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'role',
+    'roles',
     'authentication',
     'departments',
     'ministration',
     'doctors',
     'appointments',
     'prescriptions',
+    'customer'
 ]
 
 MIDDLEWARE = [

@@ -3,10 +3,18 @@ from departments.models import Departments
 from departments.forms import DepartmentsForm
 
 def index(request):
-    department = Departments.objects.all()
-    return render(request,"departments/show.html",{'department':department})
+    # Retrieve the list of departments
+    departments = Departments.objects.all()
+
+    # Check if the user is an admin
+    is_doctor = request.user.is_doctor
+
+    # Pass the departments and is_admin variable to the template
+    return render(request, "departments/show.html", {'departments': departments, 'is_staff': is_doctor})
+
 
 def addnew(request):
+    is_admin = request.user.is_admin
     if request.method == "POST":
         form = DepartmentsForm(request.POST)
         if form.is_valid():
@@ -17,12 +25,13 @@ def addnew(request):
                 pass
     else:
         form = DepartmentsForm()
-        return render(request,'departments/index.html',{'form':form})
+        return render(request,'departments/index.html',{'form':form, 'is_admin':is_admin})
     
 def edit(request,id):
     departments = Departments.objects.get(departmentid=id)
     return render(request, 'departments/edit.html', {'departments': departments})
-    
+
+
 def update(request, id):
     departments = Departments.objects.get(departmentid=id)
     form = DepartmentsForm(request.POST, instance = departments)
@@ -30,7 +39,8 @@ def update(request, id):
         form.save()
         return redirect("/departments")
     return render(request, 'departments/edit.html', {'departments':departments})
-    
+
+
 def clear(request, id):
     departments = Departments.objects.get(departmentid=id)
     
@@ -40,4 +50,4 @@ def clear(request, id):
     
     departments.delete()
     return redirect("/departments")
-# Create your views here.
+

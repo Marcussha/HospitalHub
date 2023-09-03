@@ -9,14 +9,12 @@
         <div class="table-responsive">
             <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
             <thead>
-                <th><input type="checkbox" id="checkall" /></th>
                 <th>ID</th>
                 <th>Service</th>
             </thead>
             <tbody>
             {% for ministration in ministrations %}  
                 <tr>  
-                <td><input type="checkbox" class="checkthis" /></td>
                 <td>{{ ministration.minisid }}</td>  
                 <td>{{ ministration.name_ministration }}</td>  
                 <td><a href="services/edit/{{ ministration.minisid }}" class="btn btn-info">Edit</a></td>
