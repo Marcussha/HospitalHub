@@ -148,3 +148,9 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'thonghqgcs200763@fpt.edu.vn'
 EMAIL_HOST_PASSWORD = 'nfhtmujiafiemdyx'
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
