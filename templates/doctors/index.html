@@ -1,36 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}Add New Doctor{% endblock title %}
+{% block title %}Doctors{% endblock title %}\
 
 {% block content %}
 <div class="col-md-12">
-    <form method="POST" class="post-form" action="/doctors/addnew">
-        {% csrf_token %}
-        <div class="container">
-            <div class="col-12">
-                <h3>Enter Doctors</h3>
-            </div>
-
-            <div class="mb-3">
-                <label>Doctor Name:</label>
-                {{form.doctorname}}
-            </div>
-            <div class="mb-3">
-                <label>Email:</label>
-                {{form.email}}
-            </div>
-            <div class="mb-3">
-                <label>Position:</label>
-                {{form.position}}
-            </div>
-            <div class="mb-3">
-                <label>Department ID:</label>
-                {{form.departmentid}}
-            </div>
-            <div class="mb-3">
-                <button type="submit" class="btn btn-danger">Submit</button>
-            </div>
+    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>  
+        <div class="table-responsive">
+        <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+        <thead>
+            <th>Doctor Images</th>
+            <th>Doctor Name</th>
+            <th>Email</th>
+            <th>Position </th>
+            <th>Note </th>
+            <th>Department id</th>
+        </thead>
+        <tbody>
+            {%for doctors in doctor %}
+            <tr>  
+                <td><img src="/media/{{ doctors.images }}" alt="{{ doctors.doctorname }} Image" width="10%" /></td>
+                <td>{{doctors.doctorname}}</td>
+                <td>{{doctors.email}}</td>
+                <td>{{doctors.position}}</td>
+                <td>{{doctors.note}}</td>
+                <td>{{doctors.departmentid}}</td>
+                <td><a href="edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a></td>
+                <td><a href="delete/{{ doctors.doctorid }}" class="btn btn-danger">Delete</a></td>  
+            </tr>  
+        {% endfor %} 
+        </tbody>
+        </table>
         </div>
-    </form>
-</div>
+    </div>
 {% endblock content %}

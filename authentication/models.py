@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class AuthUser(models.Model):
     password = models.CharField(max_length=128)
@@ -12,6 +13,7 @@ class AuthUser(models.Model):
     is_staff = models.IntegerField()
     is_active = models.IntegerField()
     date_joined = models.DateTimeField()
+    
 
     class Meta:
         managed = False

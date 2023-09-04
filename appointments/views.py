@@ -1,16 +1,11 @@
 from django.shortcuts import render, redirect
-from appointments.forms import AppointmentForm
+from django.core.mail import send_mail
 from appointments.models import Appointment
 from ministration.models import Ministration
 from doctors.models import Doctors
 from datetime import time
 
 # Create your views here.
-
-from django.shortcuts import render, redirect
-from .models import Appointment
-from ministration.models import Ministration
-
 def create(request):
     if request.method == "POST":
         fullname = request.POST.get('fullname')
@@ -42,9 +37,16 @@ def create(request):
                 note=note,
                 timebooking=timebooking
             )
-            return redirect('/appointments')  # Redirect to the appointments page after successful save
-        except:
-            pass
+              # Send confirmation email
+            subject = "Appointment Confirmation"
+            message = f"Hello {fullname},\n\nYour appointment is confirmed for {datebooking} at {timebooking_hour}:{timebooking_minute}.\nService: {serviceid}\nDoctor: {docid}\n\nThank you for choosing us!"
+            from_email = "thonghqgcs200763@fpt.edu.vn"
+            recipient_list = [email]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
+            return redirect('/appointments')  
+        except Exception as e:
+            print("Error:", str(e))
 
     # Retrieve the related instances for rendering the dropdown
     services = Ministration.objects.all()
