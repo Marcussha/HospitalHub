@@ -38,13 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'role',
+    'roles',
     'authentication',
     'departments',
     'ministration',
     'doctors',
     'appointments',
     'prescriptions',
+    'customer',
+    'authrole'
 ]
 
 MIDDLEWARE = [
@@ -138,6 +140,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+<<<<<<< HEAD
 #send mail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'your-smtp-server.com'
@@ -146,4 +149,20 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'khoahtagcs200252@fpt.edu.vn'
 EMAIL_HOST_PASSWORD = 'khoakelin1604'
+=======
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'thonghqgcs200763@fpt.edu.vn'
+EMAIL_HOST_PASSWORD = 'nfhtmujiafiemdyx'
+
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+>>>>>>> origin/main
 

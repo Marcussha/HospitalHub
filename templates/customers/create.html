@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+  
+{% block title %}Booking Appointments{% endblock title %}
+  
+{% block content %}   
+ <!-- Start Card -->
+ <div class="card">
+  <!-- Start Card Body -->
+  <div class="card-body">
+    <!-- Start Form -->
+    <form id="bookingForm" action="/customers/create" method="POST" class="needs-validation" novalidate autocomplete="off">
+      {% csrf_token %} 
+      <h1>Customer input</h1>
+      <!-- Start Input Name -->
+      <div class="form-group">
+        <label for="inputName">Name</label>
+        <input type="text" class="form-control" id="inputName" name="fullname" placeholder="Your name" required />
+        <small class="form-text text-muted">Please fill your name</small>
+      </div>
+      <!-- End Input Name -->
+
+      <!-- Start Input Email -->
+      <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <!-- End Input Email -->
+
+      <div class="form-row">
+      <!-- Start Input Date -->
+      <div class="form-group col-md-6">
+        <label for="inputPhone">Phone</label>
+        <input type="tel" class="form-control" id="inputPhone" name="telephone" placeholder="099xxxxxxx" pattern="\d{3}\d{3}\d{4}" required />
+        <small class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+      </div>
+      <!-- Start Input Sex -->
+      <div class="form-group col-md-4">
+        <label>Sex</label>
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <select class="form-control mr-1" id="inputStartTimeHour" name="sex" required>
+            <option value="" disabled selected></option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+      </div>
+    </div>
+  </div>
+      <!-- End Input Sex -->
+
+    <div class="form-group">
+        <label for="inputDate">Date</label>
+        <input type="date" class="form-control" id="inputDate" name="birthday" required />
+        <small class="form-text text-muted">Your day of birth.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="inputage">Age</label>
+      <input type="Age" class="form-control" id="inputDate" name="age" required />
+      <small class="form-text text-muted">How old are u ?.</small>
+    </div>
+
+      <br>
+      <!-- Start Submit Button -->
+      <button class="btn btn-primary btn-block col-lg-2" type="submit">Submit</button>
+      <!-- End Submit Button -->
+    </form>
+  </div>
+</div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  <!-- Start Scritp for Form -->
+  <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+      'use strict';
+      window.addEventListener('load', function() {
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.getElementsByClassName('needs-validation');
+        // Loop over them and prevent submission
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+  </script>
+  <!-- End Scritp for Form -->
+</body>
+{% endblock content %} 

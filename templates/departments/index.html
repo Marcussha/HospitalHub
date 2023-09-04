@@ -3,6 +3,7 @@
 {% block title %}Add New Departments{% endblock title %}
 
 {% block content %}
+{% if user.is_admin %}
 <div class="col-md-12">
     <form method="POST" class="post-form" action="/departments/addnew">
         {% csrf_token %}
@@ -21,4 +22,5 @@
         </div>
     </form>
 </div>
+{% endif %}
 {% endblock content %}

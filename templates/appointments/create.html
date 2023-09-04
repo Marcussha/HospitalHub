@@ -9,7 +9,7 @@
   <div class="card-body">
     <!-- Start Form -->
     <form id="bookingForm" action="/appointments/create" method="POST" class="needs-validation" novalidate autocomplete="off">
-      {% csrf_token %} <!-- Include the CSRF token -->
+      {% csrf_token %} 
       <h1>Booking Appointment</h1>
       <!-- Start Input Name -->
       <div class="form-group">
@@ -85,8 +85,9 @@
       <!-- Start select Doctor -->
       <div class="form-group">
         <label for="docid">Doctor</label>
+        <input type="text" id="doctorid" name="doctorid" readonly>
         <select class="form-control" id="docid" name="docid" required>
-          <option value="" disabled selected>Select a doctor</option>
+          <option value= "" disabled selected>Select a doctor</option>
           {% for doctor in doctors %}
             <option value="{{ doctor.doctorid }}">{{ doctor.doctorname }}</option>
           {% endfor %}
