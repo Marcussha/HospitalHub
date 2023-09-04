@@ -1,35 +1,41 @@
 {% extends 'base.html' %}
 
-{% block title %}Doctors{% endblock title %}\
+{% block title %}Doctors{% endblock title %}
+
+{% load static %}
+<link href="{% static "css/main.css"%}" rel="stylesheet" />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 {% block content %}
-<div class="col-md-12">
-    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>  
-        <div class="table-responsive">
-        <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
-        <thead>
-            <th>Doctor Images</th>
-            <th>Doctor Name</th>
-            <th>Email</th>
-            <th>Position </th>
-            <th>Note </th>
-            <th>Department id</th>
-        </thead>
-        <tbody>
-            {%for doctors in doctor %}
-            <tr>  
-                <td><img src="media/{{doctors.images}}" alt="{{ doctor.doctorname }} Image"width="10%" /></td>
-                <td>{{doctors.doctorname}}</td>
-                <td>{{doctors.email}}</td>
-                <td>{{doctors.position}}</td>
-                <td>{{doctors.note}}</td>
-                <td>{{doctors.departmentid}}</td>
-                <td><a href="doctors/edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a></td>
-                <td><a href="doctors/delete/{{ doctors.doctorid }}" class="btn btn-danger">Delete</a></td>  
-            </tr>  
-        {% endfor %} 
-        </tbody>
-        </table>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-lg-6">
+            <!-- Section Heading-->
+            <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <h3>Our Doctors <span> </span></h3>
+                <div class="line"></div>
+            </div>
         </div>
     </div>
+    <div class="row">
+        {% for docs in doc %}
+        <!-- Single Advisor-->
+        <div class="col-12 col-sm-6 col-lg-3">
+            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <!-- Team Thumb-->
+                <div class="advisor_thumb"><img src="media/{{docs.images}}" alt="{{ docs.doctorname }} Image" width="10%" />
+                    <!-- Social Info-->
+                    <div class="social-info"><h4>{{docs.doctorname}}</h4></div>
+                </div>
+                <!-- Team Details-->
+                <div class="single_advisor_details_info">
+                    <h6>{{docs.position}}</h6>
+                    <h8>{{docs.departmentid}}</h8>
+                    <p class="designation">{{docs.email}} &amp; CEO</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock content %}
