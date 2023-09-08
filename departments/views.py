@@ -5,16 +5,11 @@ from departments.forms import DepartmentsForm
 def index(request):
     # Retrieve the list of departments
     departments = Departments.objects.all()
+    return render(request, "departments/show.html",{'departments': departments})
 
-    # Check if the user is an admin
-    is_doctor = request.user.is_doctor
-
-    # Pass the departments and is_admin variable to the template
-    return render(request, "departments/show.html", {'departments': departments, 'is_staff': is_doctor})
 
 
 def addnew(request):
-    is_admin = request.user.is_admin
     if request.method == "POST":
         form = DepartmentsForm(request.POST)
         if form.is_valid():
@@ -25,7 +20,7 @@ def addnew(request):
                 pass
     else:
         form = DepartmentsForm()
-        return render(request,'departments/index.html',{'form':form, 'is_admin':is_admin})
+        return render(request,'departments/index.html',{'form':form})
     
 def edit(request,id):
     departments = Departments.objects.get(departmentid=id)
