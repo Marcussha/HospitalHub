@@ -4,8 +4,21 @@ from appointments.models import Appointment
 from ministration.models import Ministration
 from doctors.models import Doctors
 from datetime import time
+from django.http import HttpResponse
+from excel_response import ExcelResponse
+import csv
+from datetime import datetime
+from django.http import HttpResponse
+from openpyxl import Workbook
+from openpyxl.utils import get_column_letter
+from openpyxl.writer.excel import save_virtual_workbook
 
 # Create your views here.
+
+def index (request): 
+    appointment = Appointment.objects.all()
+    return render(request, "appointments/index.html",{'appointment': appointment})
+
 def create(request):
     if request.method == "POST":
         fullname = request.POST.get('fullname')
@@ -55,12 +68,70 @@ def create(request):
     return render(request, "appointments/create.html", {'services': services, 'doctors': doctors})
 
 
-
-def index (request): 
-    appointment = Appointment.objects.all()
-    return render(request, "appointments/index.html",{'appointment': appointment})
-
 def clear (request,id):
     appointment = Appointment.objects.get( appid =id)
     appointment.delete()
     return redirect('/appointments')  
+
+def export_excel(request):
+    appointments = Appointment.objects.all()
+
+    # Create a new workbook and add a worksheet
+    wb = Workbook()
+    ws = wb.active
+
+    # Define the headers
+    headers = ["Full Name", "Email", "Phone", "Date", "Time", "Service", "Doctor", "Notes"]
+
+    # Set the column headers in the worksheet
+    for col_num, header_title in enumerate(headers, 1):
+        col_letter = get_column_letter(col_num)
+        cell = ws.cell(row=1, column=col_num)
+        cell.value = header_title
+
+    # Populate the data rows
+    for row_num, appointment in enumerate(appointments, 2):  # Start from row 2 (after headers)
+        ws.cell(row=row_num, column=1, value=appointment.fullname)
+        ws.cell(row=row_num, column=2, value=appointment.email)
+        ws.cell(row=row_num, column=3, value=appointment.phone)
+        ws.cell(row=row_num, column=4, value=appointment.datebooking)
+        ws.cell(row=row_num, column=5, value=appointment.timebooking)
+        ws.cell(row=row_num, column=6, value=appointment.serviceid.name_ministration)  # Replace with the actual field name
+        ws.cell(row=row_num, column=7, value=appointment.docid.doctorname)       # Replace with the actual field name
+        ws.cell(row=row_num, column=8, value=appointment.note)
+
+    # Create a response with the Excel file
+    response = HttpResponse(
+        save_virtual_workbook(wb),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+
+    # Set the filename for the download
+    current_datetime = datetime.now().strftime("%Y%m%d%H%M%S")
+    response['Content-Disposition'] = f'attachment; filename=appointments_{current_datetime}.xlsx'
+
+    return response
+
+
+def export_csv(request):
+    appointments = Appointment.objects.all()
+
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="appointments.csv"'
+
+    writer = csv.writer(response)
+    writer.writerow(["Full Name", "Email", "Phone", "Date", "Time", "Service", "Doctor", "Notes"])
+
+    for appointment in appointments:
+        writer.writerow([
+            appointment.fullname,
+            appointment.email,
+            appointment.phone,
+            appointment.datebooking,
+            appointment.timebooking,
+            appointment.serviceid,
+            appointment.docid,
+            appointment.note,
+        ])
+
+    return response

@@ -8,6 +8,7 @@ def index (request):
     return render(request, "customers/index.html",{'clients': clients})
 
 def create(request):
+    clients = Client.objects.all()
     if request.method == "POST":
         fullname = request.POST.get('fullname')
         email = request.POST.get('email')
@@ -27,11 +28,11 @@ def create(request):
                 sex=sex,
 
             )
-            return redirect('/customers')  
+            return redirect('/customers/create')  
         except Exception as e:
             print("Error:", str(e))
 
-    return render(request, "customers/create.html",)
+    return render(request, "customers/create.html",{'clients': clients})
 
 def clear(request, id):
     clients = Client.objects.get( id =id)

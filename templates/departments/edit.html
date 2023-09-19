@@ -3,7 +3,7 @@
 {% block title %}Change the New Department{% endblock title %}
 
 {% block content %}
-{% if is_doctor %}
+{% if is_doctor or is_admin %}
 <div class="col-md-12">
     <form method="POST" class="post-form" action="/departments/update/{{departments.departmentid}}">  
     {% csrf_token %}  

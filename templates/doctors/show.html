@@ -23,7 +23,7 @@
         <div class="col-12 col-sm-6 col-lg-3">
             <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                 <!-- Team Thumb-->
-                <div class="advisor_thumb"><img src="media/{{docs.images}}" alt="{{ docs.doctorname }} Image" width="10%" />
+                <div class="advisor_thumb"><img src="media/{{docs.images}}" alt="{{ docs.doctorname }} Image" width="100%" />
                     <!-- Social Info-->
                     <div class="social-info"><h4>{{docs.doctorname}}</h4></div>
                 </div>
@@ -33,9 +33,22 @@
                     <h8>{{docs.departmentid}}</h8>
                     <p class="designation">{{docs.email}} &amp; CEO</p>
                 </div>
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                <a href="{% url 'create_appointment' %}?docid={{ docs.doctorid }}&doctorname={{ docs.doctorname }}" class="book-appointment" onclick="logParameters({{ docs.doctorid }}, '{{ docs.doctorname }}')">Booking Appointment</a> </div>
+                </div>
             </div>
-        </div>
         {% endfor %}
     </div>
 </div>
+
+<script>
+    function logParameters(docid, doctorname) {
+        console.log('docid:', docid);
+        console.log('doctorname:', doctorname);
+
+        // Update the <span> element with the doctor's name
+        const doctorNameDisplay = document.getElementById('doctorNameDisplay');
+        doctorNameDisplay.textContent = doctorname;
+    }
+</script>
 {% endblock content %}

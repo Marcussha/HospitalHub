@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
-# Create your views here.s
+# Create your views here
 def home (request):
     return render(request, "main.html")
 
@@ -24,7 +24,7 @@ def login (request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect('/profile') #profile
+            return redirect('/profile') 
         else:
             msg = 'Error Login'
             form = AuthenticationForm(request.POST)
@@ -39,19 +39,16 @@ def signup(request):
         return redirect('/')
 
     if request.method == 'POST':
-        # Extract form data from request.POST
         username = request.POST.get('username')
         first_name = request.POST.get('first_name')
         email = request.POST.get('email')
-        password = request.POST.get('password1')  # Change 'password1' to match your form
-        confirm_password = request.POST.get('password2')  # Change 'password2' to match your form
+        password = request.POST.get('password1')  
+        confirm_password = request.POST.get('password2')  
 
-        # Perform form validation
         if password != confirm_password:
             messages.error(request, 'Passwords do not match. Please try again.')
             return render(request, 'authentication/signup.html')
 
-        # Check if the username or email is already taken
         if User.objects.filter(username=username).exists():
             messages.error(request, 'Username is already taken. Please choose a different one.')
             return render(request, 'authentication/signup.html')
@@ -62,7 +59,6 @@ def signup(request):
 
         # Create the user account
         user = User.objects.create_user(username=username, password=password, first_name=first_name, email=email)
-
         # Authenticate the user and log them in
         auth_login(request, user)
 

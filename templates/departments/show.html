@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="col-md-12">
-    {% if is_doctor %}
+    {% if is_admin or is_manager %}
         <span><a href="/departments/addnew" class="btn btn-primary">Add New Record</a></span>
     {% endif %}
     <div class="table-responsive">
@@ -12,7 +12,7 @@
             <thead>
                 <th>Department ID</th>
                 <th>Name Department</th>
-                {% if is_doctor %}
+                {% if is_admin %}
                     <th>Edit</th>
                     <th>Delete</th>
                 {% endif %}
@@ -22,7 +22,7 @@
                     <tr>
                         <td>{{ department.departmentid }}</td>
                         <td>{{ department.named }}</td>
-                        {% if is_doctor %}
+                        {% if is_admin %}
                             <td><a href="departments/edit/{{ department.departmentid }}" class="btn btn-info">Edit</a></td>
                             <td><a href="departments/delete/{{ department.departmentid }}" class="btn btn-danger">Delete</a></td>
                         {% endif %}
