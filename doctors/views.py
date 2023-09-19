@@ -50,8 +50,50 @@ def create(request):
 def edit(request,id):
     doctors = Doctors.objects.get(doctorid=id)
     return render(request, 'doctors/edit.html', {'doctors': doctors})
+
+def doctor_search(request):
+    query = request.GET.get('q')
+    if query:
+        results = Doctors.objects.filter(name__icontains=query)
+    else:
+        results = Doctors.objects.all()
+    return render(request, 'doctors/show.html',  {'results': results}) 
+
+def update(request, id):
+    try:
+        doctors = Doctors.objects.get(doctorid=id)
+    except Doctors.DoesNotExist:
+        # Handle the case where the doctor with the given id doesn't exist
+        return redirect('/doctors/index')  # You can redirect to a suitable page
+
+    if request.method == "POST":
+        try:
+            doctorname = request.POST.get('doctorname')
+            email = request.POST.get('email')
+            position = request.POST.get('position')
+            note = request.POST.get('note')
+            images = request.FILES.get('images')
+            
+            if images:
+                # If a new image is uploaded, update it
+                fs = FileSystemStorage()
+                filename = fs.save(images.name, images)
+                doctors.images = filename
+
+            # Update other fields
+            doctors.doctorname = doctorname
+            doctors.email = email
+            doctors.position = position
+            doctors.note = note
+            doctors.save()  # Save the changes to the doctor object
+
+            return redirect('/doctors/index')  # Redirect to the doctor list page after updating
+        except Exception as e:
+            print(str(e))
     
-    
+    return render(request, 'doctors/edit.html', {'doctors': doctors})
+
+
 def clear(request, id):
     doctor = Doctors.objects.get(doctorid=id)
     

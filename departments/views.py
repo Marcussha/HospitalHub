@@ -35,6 +35,14 @@ def update(request, id):
         return redirect("/departments")
     return render(request, 'departments/edit.html', {'departments':departments})
 
+def departments_search(request):
+    query = request.GET.get('q')
+    if query:
+        results = Departments.objects.filter(name__icontains=query)
+    else:
+        results = Departments.objects.all()
+    return render(request, 'departments/show.html',  {'results': results}) 
+
 
 def clear(request, id):
     departments = Departments.objects.get(departmentid=id)

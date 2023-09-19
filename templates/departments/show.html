@@ -3,6 +3,10 @@
 {% block title %}Departments{% endblock title %}
 
 {% block content %}
+<form id="search-form" method="GET" action="{% url 'departments_search' %}">
+    <input type="text" name="q" placeholder="Search departments">
+    <button type="submit">Search</button>
+</form>
 <div class="col-md-12">
     {% if is_admin or is_manager %}
         <span><a href="/departments/addnew" class="btn btn-primary">Add New Record</a></span>
@@ -32,4 +36,24 @@
         </table>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#search-form').submit(function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            var query = $('input[name="q"]').val();
+    
+            $.ajax({
+                url: $(this).attr('action'), // Use the form's action URL
+                type: 'GET',
+                data: { 'q': query },
+                success: function (data) {
+                    $('#search-results').html(data);
+                }
+            });
+        });
+    });
+    </script>
 {% endblock content %}
