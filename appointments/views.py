@@ -96,8 +96,8 @@ def export_excel(request):
         ws.cell(row=row_num, column=3, value=appointment.phone)
         ws.cell(row=row_num, column=4, value=appointment.datebooking)
         ws.cell(row=row_num, column=5, value=appointment.timebooking)
-        ws.cell(row=row_num, column=6, value=appointment.serviceid.name_ministration)  # Replace with the actual field name
-        ws.cell(row=row_num, column=7, value=appointment.docid.doctorname)       # Replace with the actual field name
+        ws.cell(row=row_num, column=6, value=appointment.serviceid.name_ministration)  
+        ws.cell(row=row_num, column=7, value=appointment.docid.doctorname)   
         ws.cell(row=row_num, column=8, value=appointment.note)
 
     # Create a response with the Excel file

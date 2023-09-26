@@ -6,14 +6,22 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 import logging
+from ministration.models import Ministration
+from doctors.models import Doctors 
+
+
 
 logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
 # Create your views here
-def home (request):
-    return render(request, "main.html")
+def home(request):
+    ministrations = Ministration.objects.all()[:3]
+    doc = Doctors.objects.all()[:3]
+    return render(request, "main.html", {'ministrations': ministrations, 'doc': doc})
+
+
 
 def login (request):
     if request.user.is_authenticated:

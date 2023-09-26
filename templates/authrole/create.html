@@ -3,6 +3,7 @@
 {% block title %}Role for User{% endblock title %}
 
 {% block content %}
+{%if is_admin%}
 <div class="col-md-12">
     <form method="POST" class="post-form" action="/authrole/create">
         {% csrf_token %}
@@ -26,4 +27,5 @@
         </div>
     </form>
 </div>
+{% endif %}
 {% endblock content %}

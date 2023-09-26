@@ -1,28 +1,30 @@
 {% extends ".\base.html" %}
-
   
 {% block title %}Service{% endblock title %}
   
 {% block content %}
- <div class="col-md-12">
-        <span><a href="/services/create" class="btn btn-primary">Add New Service</a></span>  
-        <div class="table-responsive">
-            <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
-            <thead>
-                <th>ID</th>
-                <th>Service</th>
-            </thead>
-            <tbody>
-            {% for ministration in ministrations %}  
-                <tr>  
-                <td>{{ ministration.minisid }}</td>  
-                <td>{{ ministration.name_ministration }}</td>  
-                <td><a href="services/edit/{{ ministration.minisid }}" class="btn btn-info">Edit</a></td>
-                <td><a href="services/delete/{{ ministration.minisid }}" class="btn btn-danger">Delete</a></td>  
-                </tr>  
-            {% endfor %} 
-            </tbody>
-            </table>
+{%if is_admin%}
+    <span><a href="/services/create" class="btn btn-primary">Add New Service</a></span>  
+{%endif%}
+    <div class="custom-container">
+        <div class="row custom-gradient-cards">
+            {% for ministration in ministrations %}
+            <div class="col-md-4 custom-card">
+                <div class="custom-square-card">
+                    <div class="custom-container-card bg-green-box">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-medkit fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <p class="custom-card-title">{{ ministration.name_ministration }}</p>
+                        <p class="custom-card-description">{{ ministration.detail }}</p>
+                        {%if is_admin%}
+                        <a href="services/edit/{{ ministration.minisid }}" class="btn btn-info">Edit</a>
+                        <a href="services/delete/{{ ministration.minisid }}" class="btn btn-danger">Delete</a>
+                        {%endif%}
+                    </div>
+                </div>
             </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock content %}

@@ -3,7 +3,7 @@
 {% block title %}Add New Departments{% endblock title %}
 
 {% block content %}
-{% if is_doctor %}
+{% if is_admin %}
 <div class="col-md-12">
     <form method="POST" class="post-form" action="/departments/addnew">
         {% csrf_token %}

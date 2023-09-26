@@ -3,6 +3,7 @@
 {% block title %}Change the New Doctor{% endblock title %}
 
 {% block content %}
+{%if is_admin %}
 <div class="col-md-12">
     <form method="POST" class="post-form" action="/doctors/update/{{doctors.doctorid}}">  
     {% csrf_token %}  
@@ -31,4 +32,5 @@
     </div>
 </form>
 </div>
+{%endif%}
 {% endblock content %}
