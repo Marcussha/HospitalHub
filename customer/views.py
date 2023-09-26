@@ -1,4 +1,6 @@
 from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.http import JsonResponse
 from .models import Client
 
 # Create your views here.
@@ -14,28 +16,35 @@ def create(request):
         email = request.POST.get('email')
         telephone = request.POST.get('telephone')
         birthday = request.POST.get('birthday')
-        age = request.POST.get('age')
+        address = request.POST.get('address')
         sex = request.POST.get('sex')
 
+        # Check if either the full name or email already exists in the database
+        if Client.objects.filter(email=email).exists():
+            messages.error(request, 'A client with the same email already exists.')
+        else:
+            try:
+                # Neither the full name nor email is a duplicate, create the Client object
+                Client.objects.create(
+                    fullname=fullname,
+                    email=email,
+                    telephone=telephone,
+                    birthday=birthday,
+                    address=address,
+                    sex=sex,
+                )
+                return redirect('/customers/create')
+            except Exception as e:
+                messages.error(request, 'An error occurred while creating the client.')
 
-        try:
-            Client.objects.create(
-                fullname=fullname,
-                email=email,
-                telephone=telephone,
-                birthday=birthday,
-                age=age,
-                sex=sex,
-
-            )
-            return redirect('/customers/create')  
-        except Exception as e:
-            print("Error:", str(e))
-
-    return render(request, "customers/create.html",{'clients': clients})
+    return render(request, "customers/create.html", {'clients': clients})
 
 def clear(request, id):
     clients = Client.objects.get( id =id)
     clients.delete()
     return redirect('/customers')  
+
+def get_client_data(request):
+    clients = Client.objects.all().values()
+    return JsonResponse(list(clients), safe=False)
 

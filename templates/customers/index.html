@@ -1,34 +1,77 @@
 {% extends ".\base.html" %}
   
-{% block title %}Index{% endblock title %}
+{% block title %}Customer Information{% endblock title %}
   
 {% block content %}
- <div class="col-md-12">
-        <span><a href="/customers/create" class="btn btn-primary">Create New</a></span>  
-        <div class="table-responsive">
-            <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
-            <thead>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Sex</th>
-                <th>Birthday</th>
-                <th>Age</th>
-            </thead>
-            <tbody>
+<div class="container">
+    <span><a href="/customers/create" class="btn btn-primary">Create New</a></span>  
+    <h1>Customer Information</h1>
+
+    <table id="customer-table" 
+        data-toggle="table"
+        data-search="true"
+        data-filter-control="true" 
+        data-show-export="true"
+        data-click-to-select="true"
+        data-toolbar="#toolbar" >
+        <thead>
+            <tr>
+                <th data-field="id" data-checkbox="true"></th>
+                <th data-field="fullname" data-filter-control="input" data-sortable="true">Fullname</th>
+                <th data-field="email" data-filter-control="select" data-sortable="true">Email</th>
+                <th data-field="birthday" data-filter-control="select" data-sortable="true">Birthday</th>
+                <th data-field="address" data-filter-control="select" data-sortable="true">Address</th>
+                <th data-field="telephone" data-sortable="true">Telephone</th>
+                <th data-field="sex" data-sortable="true">Sex</th>                
+                <th data-field="action" data-sortable="false">Action</th>
+            </tr>
+        </thead>
+        <tbody>
             {% for client in clients %}  
-                <tr>  
+            <tr>  
+                <td class="bs-checkbox"><input data-index="{{ forloop.counter0 }}" name="btSelectItem" type="checkbox"></td>
                 <td>{{ client.fullname }}</td>
-                <td>{{ client.email }}</td>  
-                <td>{{ client.telephone }}</td>  
-                <td>{{ client.sex }}</td>  
+                <td>{{ client.email }}</td>
+                <td>{{ client.telephone }}</td>
+                <td>{{ client.sex }}</td>
                 <td>{{ client.birthday }}</td> 
-                <td>{{ client.age }}</td>     
+                <td>{{ client.address }}</td>     
                 <td><a href="customers/delete/{{ client.id }}" class="btn btn-danger">Delete</a></td>  
-                </tr>  
+            </tr>  
             {% endfor %} 
-            </tbody>
-            </table>
-            </div>
-    </div>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Initialize Bootstrap Table
+        $('#customer-table').bootstrapTable({
+            columns: [
+                { field: 'state', checkbox: true },
+                { field: 'fullname', title: 'Fullname', sortable: true },
+                { field: 'email', title: 'Email', sortable: true },
+                { field: 'birthday', title: 'Birthday', sortable: true },
+                { field: 'address', title: 'Address', sortable: true },
+                { field: 'telephone', title: 'Telephone', sortable: true },
+                { field: 'sex', title: 'Sex', sortable: true }
+            ],
+            // Additional configuration options can be added here
+        });
+    
+        // Fetch data from your Django server
+        $.ajax({
+            url: '{% url "get_client_data" %}',  // Use Django template tag to generate the URL
+            method: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                // Populate the Bootstrap Table with the fetched data
+                $('#customer-table').bootstrapTable('load', data);
+            },
+            error: function (error) {
+                console.error('Error fetching data:', error);
+            }
+        });
+    });
+</script>
 {% endblock content %}
