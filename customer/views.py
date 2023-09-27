@@ -2,7 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import Client
-
+import asyncio
+from customer.database import connect_to_db
 # Create your views here.
 
 def index (request): 
@@ -20,8 +21,8 @@ def create(request):
         sex = request.POST.get('sex')
 
         # Check if either the full name or email already exists in the database
-        if Client.objects.filter(email=email).exists():
-            messages.error(request, 'A client with the same email already exists.')
+        if Client.objects.filter(email=email) or  Client.objects.filter(telephone=telephone).exists(): 
+            messages.error(request, 'A client with the same email or telephone already exists.')
         else:
             try:
                 # Neither the full name nor email is a duplicate, create the Client object
@@ -44,7 +45,4 @@ def clear(request, id):
     clients.delete()
     return redirect('/customers')  
 
-def get_client_data(request):
-    clients = Client.objects.all().values()
-    return JsonResponse(list(clients), safe=False)
 

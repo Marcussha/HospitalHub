@@ -99,33 +99,3 @@ window.addEventListener('DOMContentLoaded', event => {
   console.log('doctorName:', doctorName);
 
 // End Scritpt for Button 
-
-$(document).ready(function () {
-    // Initialize Bootstrap Table
-    $('#customer-table').bootstrapTable({
-        columns: [
-            { field: 'state', checkbox: true },
-            { field: 'fullname', title: 'Fullname', sortable: true },
-            { field: 'email', title: 'Email', sortable: true },
-            { field: 'birthday', title: 'Birthday', sortable: true },
-            { field: 'address', title: 'Address', sortable: true },
-            { field: 'telephone', title: 'Telephone', sortable: true },
-            { field: 'sex', title: 'Sex', sortable: true }
-        ],
-        // Additional configuration options can be added here
-    });
-
-    // Fetch data from your Django server
-    $.ajax({
-        url: '{% url "get_client_data" %}',  // Use Django template tag to generate the URL
-        method: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            // Populate the Bootstrap Table with the fetched data
-            $('#customer-table').bootstrapTable('load', data);
-        },
-        error: function (error) {
-            console.error('Error fetching data:', error);
-        }
-    });
-});
