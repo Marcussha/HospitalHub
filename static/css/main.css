@@ -9220,6 +9220,7 @@ footer {
   width: 100%;
   border-collapse: collapse; /* To remove default cell spacing */
 }
+
 #bold-blue {
 	font-weight: bold;
 	color: #0277BD;
