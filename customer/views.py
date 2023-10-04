@@ -2,8 +2,6 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import Client
-import asyncio
-from customer.database import connect_to_db
 # Create your views here.
 
 def index (request): 

@@ -3,12 +3,18 @@
 {% block title %}Index{% endblock %}
   
 {% block content %}
-   <h2>Welcome!</h2>
+<section class="page-section" >
+  <div class="container">
+    
    {% if user.is_authenticated %}
-      Hi {{ user.username }}!
+   <h2>Welcome {{ user.username }}!</h2>
+   <p>Please logout before login in new account</p>
       <a href="/signout" class="btn btn-danger">Logout</a>
     {% else %}
       <a href="/login" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span>Login</a> 
       <a href="/signup" class="btn btn-success">Signup</a>
     {% endif %}
+  </div>
+</section>
+   
 {% endblock %}

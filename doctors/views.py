@@ -2,13 +2,11 @@ from django.shortcuts import render, redirect
 from doctors.models import Doctors 
 from departments.models import Departments
 from django.core.files.storage import FileSystemStorage
-import os 
 
 # Create your views here.
-
 def home(request):
-    doc = Doctors.objects.all()
-    return render(request, "doctors/show.html", {'doc': doc})
+    doctor = Doctors.objects.all()
+    return render(request, "doctors/show.html", {'doctor': doctor})
 
 def index(request):
     doctor = Doctors.objects.all()

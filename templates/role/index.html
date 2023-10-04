@@ -3,7 +3,8 @@
 {% block title %}List of role{% endblock title %}
   
 {% block content %}
- <div class="col-md-12">
+<section class="page-section" >
+    <div class="container">
         <span><a href="/roles/create" class="btn btn-primary">Create New</a></span>  
         <br>
         <div class="table-responsive">
@@ -23,6 +24,6 @@
             {% endfor %} 
             </tbody>
             </table>
-            </div>
     </div>
+</section>
 {% endblock content %}

@@ -3,8 +3,9 @@
 {% block title %}Index{% endblock title %}
   
 {% block content %}
-{% if is_admin or is_manager %}
- <div class="col-md-12">
+<section class="page-section" >
+    <div class="container">
+        {% if is_admin or is_manager %}
         <span><a href="/appointments/create" class="btn btn-primary">Create New</a></span>  
         <span><a href="{% url 'export_excel' %}" class="btn btn-success">Export Excel</a></span>
         <span><a href="{% url 'export_csv' %}" class="btn btn-info">Export CSV</a></span>
@@ -46,5 +47,8 @@
             </table>
             </div>
     </div>
+</section>
+
+    
 {%endif%}
 {% endblock content %}

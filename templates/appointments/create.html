@@ -2,131 +2,127 @@
   
 {% block title %}Booking Appointments{% endblock title %}
   
-{% block content %}   
- <!-- Start Card -->
- <div class="card-booking">
-  <!-- Start Card Body -->
-  <div class="card-body-booking">
-    <!-- Start Form -->
-    <form id="bookingForm" action="/appointments/create" method="POST" class="needs-validation" novalidate autocomplete="off">
-      {% csrf_token %} 
-      <h1>Booking Appointment</h1>
-      <!-- Start Input Name -->
-      <div class="form-group">
-        <label for="inputName">Name</label>
-        <input type="text" class="form-control" id="inputName" name="fullname" placeholder="Your name" required />
-        <small class="form-text text-muted">Please fill your name</small>
-      </div>
-      <!-- End Input Name -->
-
-      <!-- Start Input Email -->
-      <div class="form-group">
-        <label for="inputEmail">Email</label>
-        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
-        <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <!-- End Input Email -->
-
-      <!-- Start Input Telephone -->
-      <div class="form-group">
-        <label for="inputPhone">Phone</label>
-        <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="099xxxxxxx" pattern="\d{3}\d{3}\d{4}" required />
-        <small class="form-text text-muted">We'll never share your phone number with anyone else.</small>
-      </div>
-      <!-- End Input Telephone -->
-
-      <div class="form-row">
-        <!-- Start Input Date -->
-        <div class="form-group col-md-5">
-          <label for="inputDate">Date</label>
-          <input type="date" class="form-control" id="inputDate" name="datebooking" required />
-          <small class="form-text text-muted">Please choose a date for the meeting.</small>
-        </div>
-        <!-- Start Input Start Time -->
-        <div class="form-group col-md-6">
-          <label>Start Time</label>
-          <div class="d-flex flex-row justify-content-between align-items-center">
-            <select class="form-control mr-1" id="inputStartTimeHour" name="timebooking_hour" required>
-              <option value="" disabled selected>Hour</option>
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">15</option>
-              <option value="17">17</option>
-            </select>
-            <div class="pl-1 pr-2">:</div>
-            <select class="form-control" id="inputStartTimeMinute" name="timebooking_minute" required>
-              <option value="" disabled selected>Min</option>
-              <option value="00">00</option>
-              <option value="15">15</option>
-              <option value="30">30</option>
-              <option value="45">45</option>
+{% block content %}
+<section class="page-section" >
+  <div class="container">
+    <div class="card-booking">
+      <!-- Start Card Body -->
+      <div class="card-body-booking">
+        <!-- Start Form -->
+        <form id="bookingForm" action="/appointments/create" method="POST" class="needs-validation" novalidate autocomplete="off">
+          {% csrf_token %} 
+          <h1>Booking Appointment</h1>
+          <!-- Start Input Name -->
+          <div class="form-group">
+            <label for="inputName">Name</label>
+            <input type="text" class="form-control" id="inputName" name="fullname" placeholder="Your name" required />
+            <small class="form-text text-muted">Please fill your name</small>
+          </div>
+          <!-- End Input Name -->
+    
+          <!-- Start Input Email -->
+          <div class="form-group">
+            <label for="inputEmail">Email</label>
+            <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required />
+            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <!-- End Input Email -->
+    
+          <!-- Start Input Telephone -->
+          <div class="form-group">
+            <label for="inputPhone">Phone</label>
+            <input type="tel" class="form-control" id="inputPhone" name="phone" placeholder="099xxxxxxx" pattern="\d{3}\d{3}\d{4}" required />
+            <small class="form-text text-muted">We'll never share your phone number with anyone else.</small>
+          </div>
+          <!-- End Input Telephone -->
+    
+          <div class="form-row">
+            <!-- Start Input Date -->
+            <div class="form-group col-md-5">
+              <label for="inputDate">Date</label>
+              <input type="date" class="form-control" id="inputDate" name="datebooking" required />
+              <small class="form-text text-muted">Please choose a date for the meeting.</small>
+            </div>
+            <!-- Start Input Start Time -->
+            <div class="form-group col-md-6">
+              <label>Start Time</label>
+              <div class="d-flex flex-row justify-content-between align-items-center">
+                <select class="form-control mr-1" id="inputStartTimeHour" name="timebooking_hour" required>
+                  <option value="" disabled selected>Hour</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">15</option>
+                  <option value="17">17</option>
+                </select>
+                <div class="pl-1 pr-2">:</div>
+                <select class="form-control" id="inputStartTimeMinute" name="timebooking_minute" required>
+                  <option value="" disabled selected>Min</option>
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
+              </div>
+            </div>
+            <!-- End Input Start Time -->
+          </div>
+          <!-- End Input Date -->
+    
+          <!-- Start select Service -->
+          <div class="form-group">
+            <label for="serviceid">Service</label>
+            <select class="form-control" id="serviceid" name="serviceid" required>
+              <option value="" disabled selected>Select a service</option>
+              {% for ministration in services %}
+                <option value="{{ ministration.minisid }}">{{ ministration.name_ministration }}</option>
+              {% endfor %}
             </select>
           </div>
-        </div>
-        <!-- End Input Start Time -->
-      </div>
-      <!-- End Input Date -->
-
-      <!-- Start select Service -->
-      <div class="form-group">
-        <label for="serviceid">Service</label>
-        <select class="form-control" id="serviceid" name="serviceid" required>
-          <option value="" disabled selected>Select a service</option>
-          {% for ministration in services %}
-            <option value="{{ ministration.minisid }}">{{ ministration.name_ministration }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      
-      <!-- End select Service -->
-
-      <!-- Start select Doctor -->
-
-      <div class="form-group">
-        <label for="docid">Doctor</label>
-        <div class="custom-select">
-            <span class="selected-doctor" id="selectedDoctorSpan">Select a doctor</span>
-            <ul class="doctor-list">
-                {% for doctor in doctors %}
-                    <li data-value="{{ doctor.doctorid }}" onclick="selectDoctor(this)">
-                        <img src="/media/{{ doctor.images }}" alt="{{ doctor.doctorname }}" class="doctor-image">
-                        <strong>{{ doctor.doctorname }}</strong>
-                    </li>
-                {% endfor %}
-            </ul>
-            <input type="hidden" id="docid" name="docid" required>
-        </div>
-      </div>
+          
+          <!-- End select Service -->
     
-      <!-- End select Doctor -->
-      <div class="form-group">
-        <label for="textAreaRemark">Notes</label>
-        <textarea class="form-control" name="note" id="textAreaRemark" rows="5" placeholder="Tell us you want more..."></textarea>
+          <!-- Start select Doctor -->
+    
+          <div class="form-group">
+            <label for="docid">Doctor</label>
+            <div class="custom-select">
+                <span class="selected-doctor" id="selectedDoctorSpan">Select a doctor</span>
+                <ul class="doctor-list">
+                    {% for doctor in doctors %}
+                        <li data-value="{{ doctor.doctorid }}" onclick="selectDoctor(this)">
+                            <img src="/media/{{ doctor.images }}" alt="{{ doctor.doctorname }}" class="doctor-image">
+                            <strong>{{ doctor.doctorname }}</strong>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <input type="hidden" id="docid" name="docid" required>
+            </div>
+          </div>
+        
+          <!-- End select Doctor -->
+          <div class="form-group">
+            <label for="textAreaRemark">Notes</label>
+            <textarea class="form-control" name="note" id="textAreaRemark" rows="5" placeholder="Tell us you want more..."></textarea>
+          </div>
+    
+            <br>
+          <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+          <button class="btn btn-primary btn-block col-lg-2" type="submit">Submit</button>
+          </div>
+    
+        </form>
       </div>
-
-        <br>
-      <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-      <button class="btn btn-primary btn-block col-lg-2" type="submit">Submit</button>
-      </div>
-
-    </form>
+    </div>
   </div>
-</div>
-
+</section>
 
   <!-- Optional JavaScript -->
-    {%load static%}
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
-    <script src="{% static "js/scripts.js"%}"></script>
-
     <script>
       function selectDoctor(doctorElement) {
         const doctorId = doctorElement.getAttribute('data-value');

@@ -3,26 +3,28 @@
 {% block title %}Update {% endblock title %}
   
 {% block content %}
-<div class="col-md-12">
-    <form method="POST" class="post-form" action="/roles/update/{{ role.roleid }}">  
-    {% csrf_token %}  
-    <div class="container">   
-        <div class="col-12">  
-            <h3>Update Details</h3>  
-        </div> 
-        <div class="mb-3"> 
-            <label>Role ID:</label>  
-            <input type="text" class="form-control" name="roleid" value="{{ role.roleid }}"/>    
-        </div> 
-        <div class="mb-3"> 
-            <label>Role Name</label>  
-            <input type="text" class="form-control" name="rolename" value="{{ role.rolename }}" />  
-        </div>
-        <div class="mb-3"> 
-            <button type="submit" class="btn btn-success btn-lg">Update</button>  
-        </div> 
-
-    </div>  
-    </form>
-</div>  
+<section class="page-section" >
+    <div class="container">
+        <form method="POST" class="post-form" action="/roles/update/{{ role.roleid }}">  
+            {% csrf_token %}  
+            <div class="container">   
+                <div class="col-12">  
+                    <h3>Update Details</h3>  
+                </div> 
+                <div class="mb-3"> 
+                    <label>Role ID:</label>  
+                    <input type="text" class="form-control" name="roleid" value="{{ role.roleid }}"/>    
+                </div> 
+                <div class="mb-3"> 
+                    <label>Role Name</label>  
+                    <input type="text" class="form-control" name="rolename" value="{{ role.rolename }}" />  
+                </div>
+                <div class="mb-3"> 
+                    <button type="submit" class="btn btn-success btn-lg">Update</button>  
+                </div> 
+        
+            </div>  
+            </form>
+    </div>
+</section>
 {% endblock content %}

@@ -19,7 +19,7 @@ User = get_user_model()
 def home(request):
     ministrations = Ministration.objects.all()[:3]
     doc = Doctors.objects.all()[:3]
-    return render(request, "main.html", {'ministrations': ministrations, 'doc': doc})
+    return render(request, "authentication/main.html", {'ministrations': ministrations, 'doc': doc})
 
 
 

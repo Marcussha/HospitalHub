@@ -3,7 +3,8 @@
 {% block title %}Update Service{% endblock title %}
 
 {% block content %}
-<div class="col-md-12">
+<section class="page-section" >
+    <div class="col-md-12">
     <form method="POST" class="post-form" action="/services/update/{{ministration.minisid}}">  
     {% csrf_token %}  
     <div class="container">   
@@ -29,4 +30,7 @@
     </div>
 </form>
 </div>
+</section>
+
+
 {% endblock content %}

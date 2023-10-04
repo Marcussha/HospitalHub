@@ -7,39 +7,44 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 {% block content %}
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-sm-8 col-lg-6">
-            <!-- Section Heading-->
-            <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                <h3>Our Doctors <span> </span></h3>
-                <div class="line"></div>
+<section class="page-section" >
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-sm-8 col-lg-6">
+                <!-- Section Heading-->
+                <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>  
+                    <h1>Our Doctors</h1>
+
+                </div>
             </div>
         </div>
+        <div class="row">
+            {%for doctors in doctor %}
+            <!-- Single Advisor-->
+            <div class="col-12 col-sm-6 col-lg-3">
+                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <!-- Team Thumb-->
+                    <div class="advisor_thumb"><img class="img-card" src="media/{{doctors.images}}" alt="{{ doctors.doctorname }} Image" width="100%" />
+                        <!-- Social Info-->
+                        <div class="social-info"><h4>{{doctors.doctorname}}</h4></div>
+                    </div>
+                    <!-- Team Details-->
+                    <div class="single_advisor_details_info">
+                        <h6>{{doctors.position}}</h6>
+                        <h8>{{doctors.departmentid}}</h8>
+                        <p class="designation">{{doctors.email}} &amp; CEO</p>
+                    </div>
+                    <a href="doctors/edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a>
+                    <a href="delete/{{ doctors.doctorid }}" class="btn btn-danger">Delete</a>
+                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                    <a href="{% url 'create_appointment' %}?docid={{ doctors.doctorid }}&doctorname={{ doctors.doctorname }}" class="book-appointment" onclick="logParameters({{ doctors.doctorid }}, '{{ doctors.doctorname }}')">Booking Appointment</a> </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-    <div class="row">
-        {% for docs in doc %}
-        <!-- Single Advisor-->
-        <div class="col-12 col-sm-6 col-lg-3">
-            <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                <!-- Team Thumb-->
-                <div class="advisor_thumb"><img class="img-card" src="media/{{docs.images}}" alt="{{ docs.doctorname }} Image" width="100%" />
-                    <!-- Social Info-->
-                    <div class="social-info"><h4>{{docs.doctorname}}</h4></div>
-                </div>
-                <!-- Team Details-->
-                <div class="single_advisor_details_info">
-                    <h6>{{docs.position}}</h6>
-                    <h8>{{docs.departmentid}}</h8>
-                    <p class="designation">{{docs.email}} &amp; CEO</p>
-                </div>
-                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                <a href="{% url 'create_appointment' %}?docid={{ docs.doctorid }}&doctorname={{ docs.doctorname }}" class="book-appointment" onclick="logParameters({{ docs.doctorid }}, '{{ docs.doctorname }}')">Booking Appointment</a> </div>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</div>
+</section>
 
 <script>
     function logParameters(docid, doctorname) {

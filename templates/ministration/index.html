@@ -3,28 +3,33 @@
 {% block title %}Service{% endblock title %}
   
 {% block content %}
-{%if is_admin%}
-    <span><a href="/services/create" class="btn btn-primary">Add New Service</a></span>  
-{%endif%}
-    <div class="custom-container">
-        <div class="row custom-gradient-cards">
-            {% for ministration in ministrations %}
-            <div class="col-md-4 custom-card">
-                <div class="custom-square-card">
-                    <div class="custom-container-card bg-green-box">
-                        <span class="fa-stack fa-4x">
-                            <i class="fas fa-medkit fa-stack-1x fa-inverse"></i>
-                        </span>
-                        <p class="custom-card-title">{{ ministration.name_ministration }}</p>
-                        <p class="custom-card-description">{{ ministration.detail }}</p>
+<section class="page-section">
+    <div class="container">
+        {%if is_admin%}
+        <span><a href="/services/create" class="btn btn-primary">Add New Service</a></span>  
+        {%endif%}
+            <h1>Our Services</h1>
+            <table class="table table-bordered" id="example" style="text-align: center;">
+                <thead class="table success">
+                    <tr>
+                        <th style="width: 20%;">Service Name</th>
+                        <th style="width: 50%;">Description</th>
+                    </tr>
+                </thead> 
+                <tbody>
+                    {% for ministration in ministrations %}
+                    <tr>
+                        <td>{{ ministration.name_ministration }}</td>
+                        <td>{{ ministration.detail }}</td>
                         {%if is_admin%}
-                        <a href="services/edit/{{ ministration.minisid }}" class="btn btn-info">Edit</a>
-                        <a href="services/delete/{{ ministration.minisid }}" class="btn btn-danger">Delete</a>
+                        <td><a  href="services/edit/{{ ministration.minisid }}" class="btn btn-info">Edit</a></td>
+                        <td><a href="services/delete/{{ ministration.minisid }}" class="btn btn-danger">Delete</a></td>
                         {%endif%}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
     </div>
+</section>   
 {% endblock content %}
+
