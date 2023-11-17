@@ -13,7 +13,9 @@
             <div class="col-12 col-sm-8 col-lg-6">
                 <!-- Section Heading-->
                 <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>  
+                    {%if is_doctor %}
+                    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>          {% endif %}
+
                     <h1>Our Doctors</h1>
 
                 </div>
@@ -35,8 +37,10 @@
                         <h8>{{doctors.departmentid}}</h8>
                         <p class="designation">{{doctors.email}} &amp; CEO</p>
                     </div>
+                    {%if is_doctor %}
                     <a href="doctors/edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a>
                     <a href="delete/{{ doctors.doctorid }}" class="btn btn-danger">Delete</a>
+                    {%endif%}
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <a href="{% url 'create_appointment' %}?docid={{ doctors.doctorid }}&doctorname={{ doctors.doctorname }}" class="book-appointment" onclick="logParameters({{ doctors.doctorid }}, '{{ doctors.doctorname }}')">Booking Appointment</a> </div>
                     </div>

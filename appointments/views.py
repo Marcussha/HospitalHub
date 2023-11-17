@@ -19,6 +19,13 @@ def index (request):
     appointment = Appointment.objects.all()
     return render(request, "appointments/index.html",{'appointment': appointment})
 
+def display_appointments(request):
+    appointment = Appointment.objects.all()
+    context = {
+        'appointments': appointment,
+    }
+    return render(request, 'appointments/calendarView.html', context)
+
 def create(request):
     if request.method == "POST":
         fullname = request.POST.get('fullname')
@@ -135,3 +142,6 @@ def export_csv(request):
         ])
 
     return response
+
+
+
