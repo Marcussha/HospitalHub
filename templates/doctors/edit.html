@@ -5,6 +5,7 @@
 {% block content %}
 <section class="page-section" >
     <div class="container">
+        {%if is_doctor or is_admin %}
         <form method="POST" class="post-form" action="/doctors/update/{{doctors.doctorid}}">  
             {% csrf_token %}  
             <div class="container">   
@@ -24,13 +25,12 @@
                     <label> Position:</label>
                     <input type="text" class="form-control" name="position" id="position" required maxlength="20" value="{{doctors.position}}"/>
                 </div>
-               
-        
                 <div class="mb-3">
                     <button type="submit" class="btn btn-danger btn-lg">Update</button>
                 </div>
             </div>
         </form>
+        {% endif %}
     </div>
 </section>
 {% endblock content %}

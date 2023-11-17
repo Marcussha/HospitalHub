@@ -5,6 +5,7 @@
 {% block content %}
 <section class="page-section" >
     <div class="container">
+        {%if is_doctor or is_admin %}
         <form method="POST" class="post-form" action="/prescriptions/update/{{prescriptions.prescriptionid}}">  
             {% csrf_token %}  
             <div class="container">   
@@ -30,6 +31,7 @@
                 </div>
             </div>
         </form>
+        {%endif%}
     </div>
 </section>
 {% endblock content %}

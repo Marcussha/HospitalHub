@@ -5,6 +5,7 @@
 {% block content %}
 <section class="page-section" >
   <div class="container">
+    {%if is_doctor or is_admin %}
     <span><a href="/customers/create" class="btn btn-primary">Create New</a></span>
     <h1>Customer Information</h1>
 
@@ -33,6 +34,7 @@
             {% endfor %}
         </tbody>
     </table>
+    {%endif%}
   </div>
 </section>
 

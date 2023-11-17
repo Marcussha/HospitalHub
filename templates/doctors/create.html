@@ -6,9 +6,8 @@
 <section class="page-section" >
     <div class="container">
         <div class="card">
-
+            {%if is_doctor or is_admin %}
             <div class="card-body">
-        
                 <form id="doctorsForm" method="POST" action="/doctors/create"  enctype="multipart/form-data" >
                     {% csrf_token %}
                     <h1>Enter Doctors</h1>
@@ -48,6 +47,7 @@
                     </div>
                 </form>
             </div>
+            {%endif%}
         </div>
     </div>
 </section>
