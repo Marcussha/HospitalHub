@@ -6,44 +6,49 @@ from django.core.files.storage import FileSystemStorage
 # Create your views here.
 def home(request):
     doctor = Doctors.objects.all()
-    return render(request, "doctors/show.html", {'doctor': doctor})
+    return render(request, "doctors/show.html", {'doctors': doctor})
 
 def index(request):
     doctor = Doctors.objects.all()
-    return render(request, "doctors/index.html", {'doctor': doctor})
+    return render(request, "doctors/index.html", {'doctors': doctor})
+
+from django.contrib import messages
 
 def create(request):
     if request.method == "POST":
-        doctorname = request.POST.get('doctorname')
+        name = request.POST.get('name')
         email = request.POST.get('email')
         position = request.POST.get('position')
         note = request.POST.get('note')
         images = request.FILES.get('images')
         
         # Get the selected Department and Doctor instances using their primary keys
-        departmentid_id = request.POST.get('departmentid')
-        departmentid = Departments.objects.get(departmentid=departmentid_id)
+        department = request.POST.get('department')
+        department_instance = Departments.objects.get(departmentid=department)
     
         try:
             fs = FileSystemStorage()
             filename = fs.save(images.name, images)
             
-            # Store only the filename in the database, not the full path
-            Doctors.objects.create(
-                doctorname=doctorname,
+            new_doctor = Doctors.objects.create(
+                name=name,
                 email=email,
                 position=position,
                 note=note,
-                images=filename,  # Store the filename here
-                departmentid=departmentid
+                images=filename,
+                department=department_instance,
             )
-            
-            return redirect('/doctors/index')
+
+            # Include the newly created doctor in the context
+            context = {'departments': Departments.objects.all(), 'new_doctor': new_doctor}
+            return render(request, 'doctors/create.html', context)
+
         except Exception as e:
             print(str(e))
             
     departments = Departments.objects.all()
     return render(request, 'doctors/create.html', {'departments': departments})
+
     
 def edit(request,id):
     doctors = Doctors.objects.get(doctorid=id)

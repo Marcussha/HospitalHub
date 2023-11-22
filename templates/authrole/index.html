@@ -3,31 +3,35 @@
 {% block title %}Assign role{% endblock title %}\
 
 {% block content %}
+
 <section class="page-section" >
     <div class="container">
         {%if is_admin %}
-    <span><a href="/authrole/create" class="btn btn-primary">Assign role</a></span>  
-        <div class="table-responsive">
-            <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
-                <thead>
-                    <th>ID</th>
-                    <th>User name</th>
-                    <th>Roles</th>
-                </thead>
-                <tbody>
-                    {%for authrole in authroles %}
-                    <tr>  
-                        <td>{{authrole.id}}</td>
-                        <td>{{authrole.user}}</td>
-                        <td>{{authrole.group}}</td>
-                        <td><a href="authrole/edit/{{ authrole.id }}" class="btn btn-info">Edit</a></td>
-                        <td><a href="authrole/delete/{{ authrole.id }}" class="btn btn-danger">Delete</a></td>  
-                    </tr>  
-                {% endfor %} 
-                </tbody>
-            </table>
-        </div>
-{% endif%}
+        <span><a href="/authrole/create" class="btn btn-primary">Assign role</a></span>  
+            <div class="table-responsive">
+                <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
+
+                    <thead>
+                        <th>ID</th>
+                        <th>User name</th>
+                        <th>Roles</th>
+                    </thead>
+
+                    <tbody>
+                        {%for authrole in authroles %}
+                        <tr>  
+                            <td>{{authrole.id}}</td>
+                            <td>{{authrole.user}}</td>
+                            <td>{{authrole.group}}</td>
+                            <td><a href="authrole/edit/{{ authrole.id }}" class="btn btn-info">Edit</a></td>
+                            <td><a href="authrole/delete/{{ authrole.id }}" class="btn btn-danger">Delete</a></td>  
+                        </tr>  
+                    {% endfor %} 
+                    </tbody>
+
+                </table>
+            </div>
+        {% endif%}
     </div>
 </section>
 

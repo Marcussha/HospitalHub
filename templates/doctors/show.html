@@ -12,37 +12,41 @@
         <div class="row justify-content-center">
             <div class="col-12 col-sm-8 col-lg-6">
                 <!-- Section Heading-->
-                <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" 
+                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                     {%if is_doctor or is_admin %}
-                    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>          {% endif %}
-
+                    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>          
+                    {% endif %}
                     <h1>Our Doctors</h1>
-
                 </div>
             </div>
         </div>
+
         <div class="row">
-            {%for doctors in doctor %}
+            {%for doctors in doctors %}
             <!-- Single Advisor-->
             <div class="col-12 col-sm-6 col-lg-3">
-                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" 
+                style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
                     <!-- Team Thumb-->
-                    <div class="advisor_thumb"><img class="img-card" src="media/{{doctors.images}}" alt="{{ doctors.doctorname }} Image" width="100%" />
+                    <div class="advisor_thumb"><img class="img-card" src="media/{{doctors.images}}" 
+                        alt="{{ doctors.name }} Image" width="100%" />
                         <!-- Social Info-->
-                        <div class="social-info"><h4>{{doctors.doctorname}}</h4></div>
+                        <div class="social-info"><h4>{{doctors.name}}</h4></div>
                     </div>
                     <!-- Team Details-->
                     <div class="single_advisor_details_info">
                         <h6>{{doctors.position}}</h6>
-                        <h8>{{doctors.departmentid}}</h8>
+                        <h8>{{doctors.department}}</h8>
                         <p class="designation">{{doctors.email}} &amp; CEO</p>
                     </div>
                     {%if is_doctor or is_admin %}
                     <a href="doctors/edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a>
-                    <a href="delete/{{ doctors.doctorid }}" class="btn btn-danger">Delete</a>
+                    <a href="delete/{{ doctors.id }}" class="btn btn-danger">Delete</a>
                     {%endif%}
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <a href="{% url 'create_appointment' %}?docid={{ doctors.doctorid }}&doctorname={{ doctors.doctorname }}" class="book-appointment" onclick="logParameters({{ doctors.doctorid }}, '{{ doctors.doctorname }}')">Booking Appointment</a> </div>
+                    <a href="{% url 'create_appointment' %}?docid={{ doctors.id }}&doctorname={{ doctors.name }}" 
+                    class="book-appointment" onclick="logParameters({{ doctors.id }}, '{{ doctors.name }}')">Booking Appointment</a> </div>
                     </div>
                 </div>
             {% endfor %}

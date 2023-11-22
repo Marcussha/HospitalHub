@@ -5,12 +5,11 @@
 {% block content %}
 <section class="page-section" >
   <div class="container">
-    
    {% if user.is_authenticated %}
    <h2>Welcome {{ user.username }}!</h2>
    <p>Please logout before login in new account</p>
       <a href="/signout" class="btn btn-danger">Logout</a>
-    {% else %}
+      {% else %}
       <a href="/login" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span>Login</a> 
       <a href="/signup" class="btn btn-success">Signup</a>
     {% endif %}

@@ -12,3 +12,6 @@ class Client(models.Model):
     class Meta:
         managed = False
         db_table = 'client'
+
+    def __str__(self):
+        return self.fullname

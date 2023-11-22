@@ -8,7 +8,6 @@ def index(request):
     return render(request, "departments/show.html",{'departments': departments})
 
 
-
 def addnew(request):
     if request.method == "POST":
         form = DepartmentsForm(request.POST)
@@ -21,6 +20,7 @@ def addnew(request):
     else:
         form = DepartmentsForm()
         return render(request,'departments/index.html',{'form':form})
+    
     
 def edit(request,id):
     departments = Departments.objects.get(departmentid=id)

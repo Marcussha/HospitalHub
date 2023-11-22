@@ -17,17 +17,21 @@
                     <label> Name Doctor:</label>
                     <input type="text" class="form-control" name="doctorname" id="doctorname" required maxlength="20" value="{{doctors.doctorname}}"/>
                 </div>
+
                 <div class="mb-3">
                     <label> Email:</label>
                     <input type="text" class="form-control" name="email" id="email" required maxlength="20" value="{{doctors.email}}"/>
                 </div>
+
                 <div class="mb-3">
                     <label> Position:</label>
                     <input type="text" class="form-control" name="position" id="position" required maxlength="20" value="{{doctors.position}}"/>
                 </div>
+
                 <div class="mb-3">
                     <button type="submit" class="btn btn-danger btn-lg">Update</button>
                 </div>
+                
             </div>
         </form>
         {% endif %}
