@@ -34,12 +34,12 @@
 
                     <div class="form-group">
                         <label for="Patient">Patient</label>
-                        <select class="form-control" id="Patient" name="patient" required>
+                        <select class="form-control" id="patient" name="patient" required>
                             {% for patient in patient %}
                                 <option value="{{ patient.id }}">{{ patient.fullname }}</option>
                             {% endfor %}
                         </select>
-                    </div>  
+                    </div>   
                     
                     <div class="form-group">
                         <label for="doctorid">Doctor</label>
@@ -50,14 +50,18 @@
                         </select>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="Medicine">Medicine</label>
-                        <select class="form-control" id="Medicine" name="medicine" required>
-                            {% for medicine in medicines %}
-                                <option value="{{ medicine.id }}">{{ medicine.name }}</option>
-                            {% endfor %}
-                        </select>
+                    <div class="form-group" id="medicineFields">
+                        <label for="Medicines">Medicines</label>
+                        <div class="medicine-entry">
+                            <select class="form-control" id="Medicine" name="medicine" required>
+                                {% for medicine in medicines %}
+                                    <option value="{{ medicine.id }}">{{ medicine.name }}</option>
+                                {% endfor %}
+                            </select>                            
+                        </div>
                     </div>
+                    <button type="button" class="btn btn-success add-medicine">Add Medicine</button>
+
 
                     <div class="form-group">
                         <label for="Note">Note</label>
@@ -74,5 +78,22 @@
         </div>
     </div>
 </section>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $(".add-medicine").click(function() {
+            var newMedicineEntry = $("#medicineFields .medicine-entry:first").clone();
+            var selectElement = newMedicineEntry.find("select");
+            
+            var newName = "medicines_" + Math.floor(Math.random() * 1000);  
+            selectElement.attr("name", newName);
+            
+            selectElement.val("");
+            
+            $("#medicineFields").append(newMedicineEntry);
+        });
+    });
+</script>
 
 {% endblock content %}

@@ -6,7 +6,6 @@ from medicine.models import Medicine
 from django.contrib import messages
 
 
-# Create your views here.
 def index(request):
     prescription = Prescriptions.objects.all()
     return render(request,"prescriptions/index.html", {'prescription':prescription})
@@ -60,6 +59,7 @@ def create(request):
             messages.error(request, 'An error occurred while creating new Prescriptions.')
 
     return render(request, 'prescriptions/create.html', {'prescription': prescription, 'doctors': doctor, 'medicines': medicines, 'patient': patient})
+
 
 
     
