@@ -30,7 +30,6 @@ def create(request):
 
         doctor_id = request.POST.get('doctor')
 
-
         try:
             doctor = Doctors.objects.get(id=doctor_id)
         except Doctors.DoesNotExist:
@@ -60,20 +59,57 @@ def create(request):
 
     return render(request, 'prescriptions/create.html', {'prescription': prescription, 'doctors': doctor, 'medicines': medicines, 'patient': patient})
 
-
-
     
-#def edit(request, id):
-    #prescriptions = Prescriptions.objects.get(prescriptionid=id)
-    #return render(request, 'prescriptions/edit.html', {'prescriptons': prescriptions})
+def edit(request, id):
+    prescription = Prescriptions.objects.get(id=id)
+    patients = Client.objects.all()
+    doctors = Doctors.objects.all()
+    medicines = Medicine.objects.all()
+    return render(request, 'prescriptions/edit.html', {'prescription': prescription, 'patients': patients, 'doctors': doctors, 'medicines': medicines})
 
-#def update(request, id):
-    #prescriptions = Prescriptions.objects.get(prescriptionid=id)
-    #form = PrescriptionsForm (request.POST, instance = prescriptions)
-   # if form.is_valid():
-        #form.save()
-        #return redirect("/prescriptions")
-    #return render(request, 'prescriptions/edit.html', {'prescriptions':prescriptions})
+
+def update(request, id):
+    try:
+        prescription = Prescriptions.objects.get(id=id)
+
+        if request.method == 'POST':
+            name_disease = request.POST.get('name_disease')
+            symptoms = request.POST.get('symptoms')
+            start_date = request.POST.get('start_date')
+            re_examination_date = request.POST.get('re_examination_date')
+            note = request.POST.get('note')
+
+            patient_id = request.POST.get('patient')
+            patient = Client.objects.get(id=patient_id)
+
+            doctor_id = request.POST.get('doctor')
+
+            try:
+                doctor = Doctors.objects.get(id=doctor_id)
+            except Doctors.DoesNotExist:
+                messages.error(request, f'Doctor with ID {doctor_id} does not exist.')
+                return redirect('/prescriptions')
+
+            medicine_id = request.POST.get('medicine')
+            medicine = Medicine.objects.get(id=medicine_id)
+
+            prescription.name_disease = name_disease
+            prescription.patient = patient
+            prescription.doctor = doctor
+            prescription.symptoms = symptoms
+            prescription.medicine = medicine
+            prescription.start_date = start_date
+            prescription.re_examination_date = re_examination_date
+            prescription.note = note
+            prescription.save()
+
+            messages.success(request, 'Prescription updated successfully.')
+            return redirect('/prescriptions')
+
+    except Prescriptions.DoesNotExist:
+        messages.error(request, f'Prescription with ID {id} does not exist.')
+
+    return render(request, 'prescriptions/edit.html', {'prescription': prescription})
 
 def delete(request, id):
     prescription = Prescriptions.objects.get(id=id)

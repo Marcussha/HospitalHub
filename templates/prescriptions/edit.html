@@ -3,37 +3,74 @@
 {% block title %}Change the New Prescription{% endblock title %}
 
 {% block content %}
-<section class="page-section" >
+<section class="page-section">
     <div class="container">
-        {%if is_doctor or is_admin %}
-        <form method="POST" class="post-form" action="/prescriptions/update/{{prescriptions.prescriptionid}}">  
-            {% csrf_token %}  
-            <div class="container">   
-                <div class="col-12">  
-                    <h3>Update Prescription</h3>  
-                </div>
-                
-                <div class="mb-3">
-                    <label> Name Prescription:</label>
-                    <input type="text" class="form-control" name="name_diseaase" id="name_diseaase" required maxlength="20" value="{{prescriptions.name_diseaase}}"/>
-                </div>
+        {% if is_doctor or is_admin %}
+            <form method="POST" class="post-form" action="/prescriptions/update/{{ prescription.id }}">  
+                {% csrf_token %}  
+                <div class="container">   
+                    <div class="col-12">  
+                        <h3>Update Prescription</h3>  
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label>Name Prescription:</label>
+                        <input type="text" class="form-control" name="name_disease" id="name_disease" required maxlength="20" value="{{ prescription.name_disease }}"/>
+                    </div>
 
-                <div class="mb-3">
-                    <label> Symptom:</label>
-                    <input type="text" class="form-control" name="symptoms" id="symptoms" required maxlength="20" value="{{prescriptions.symptoms}}"/>
-                </div>
+                    <div class="mb-3">
+                        <label>Symptom:</label>
+                        <input type="text" class="form-control" name="symptoms" id="symptoms" required maxlength="20" value="{{ prescription.symptoms }}"/>
+                    </div>
 
-                <div class="mb-3">
-                    <label> Date:</label>
-                    <input type="text" class="form-control" name="date" id="date" required maxlength="20" value="{{prescriptions.date}}"/>
+                    <div class="mb-3">
+                        <label>Date:</label>
+                        <input type="date" class="form-control" name="start_date" id="start_date" required value="{{ prescription.start_date|date:'Y-m-d' }}"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Re-examination Date:</label>
+                        <input type="date" class="form-control" name="re_examination_date" id="re_examination_date" required value="{{ prescription.re_examination_date|date:'Y-m-d' }}"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Note:</label>
+                        <textarea class="form-control" name="note" id="note" rows="3">{{ prescription.note }}</textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Patient:</label>
+                        <select class="form-control" name="patient">
+                            {% for patient in patients %}
+                                <option value="{{ patient.id }}" {% if patient.id == prescription.patient.id %}selected{% endif %}>{{ patient.fullname }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Doctor:</label>
+                        <select class="form-control" name="doctor">
+                            {% for doctor in doctors %}
+                                <option value="{{ doctor.id }}" {% if doctor.id == prescription.doctor.id %}selected{% endif %}>{{ doctor.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Medicine:</label>
+                        <select class="form-control" name="medicine">
+                            {% for medicine in medicines %}
+                                <option value="{{ medicine.id }}" {% if medicine.id == prescription.medicine.id %}selected{% endif %}>{{ medicine.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-danger btn-lg">Update</button>
+                    </div>
                 </div>
-                
-                <div class="mb-3">
-                    <button type="submit" class="btn btn-danger btn-lg">Update</button>
-                </div>
-            </div>
-        </form>
-        {%endif%}
+            </form>
+        {% endif %}
     </div>
 </section>
 {% endblock content %}

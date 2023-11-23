@@ -18,12 +18,10 @@ def create(request):
         address = request.POST.get('address')
         sex = request.POST.get('sex')
 
-        # Check if either the full name or email already exists in the database
         if Client.objects.filter(email=email) or  Client.objects.filter(telephone=telephone).exists(): 
             messages.error(request, 'A client with the same email or telephone already exists.')
         else:
             try:
-                # Neither the full name nor email is a duplicate, create the Client object
                 Client.objects.create(
                     fullname=fullname,
                     email=email,
@@ -37,6 +35,32 @@ def create(request):
                 messages.error(request, 'An error occurred while creating the client.')
 
     return render(request, "customers/create.html", {'clients': clients})
+
+def edit(request, id):
+    client = Client.objects.all()
+    return render(request, 'customers/edit.html', {'client': client})
+
+def update(request, id):
+    client = Client.objects.all()
+
+    if request.method == 'POST':
+        try:
+            client.fullname = request.POST.get('fullname')
+            client.email = request.POST.get('email')
+            client.telephone = request.POST.get('telephone')
+            client.birthday = request.POST.get('birthday')
+            client.address = request.POST.get('address')
+            client.sex = request.POST.get('sex')
+            
+            client.save()
+
+            messages.success(request, 'Client details updated successfully.')
+            return redirect('/customers')
+        except Exception as e:
+            messages.error(request, f'An error occurred while updating the client: {e}')
+
+    return render(request, 'customers/edit.html', {'client': client})
+
 
 def clear(request, id):
     clients = Client.objects.get( id =id)
