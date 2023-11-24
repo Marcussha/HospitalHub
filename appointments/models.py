@@ -10,8 +10,8 @@ class Appointment(models.Model):
     email = models.CharField(db_column='Email', max_length=50)  # Field name made lowercase.
     phone = models.IntegerField(db_column='Phone')  # Field name made lowercase.
     datebooking = models.DateField(db_column='Datebooking')  # Field name made lowercase.
-    serviceid = models.ForeignKey(Ministration, on_delete=models.DO_NOTHING, db_column='ServiceID', blank=True, null=True)
-    docid = models.ForeignKey(Doctors, on_delete=models.DO_NOTHING, db_column='DocID', blank=True, null=True) 
+    serviceid = models.ForeignKey(Ministration, on_delete=models.DO_NOTHING, db_column='ServiceID')
+    docid = models.ForeignKey(Doctors, on_delete=models.DO_NOTHING, db_column='DocID' ) 
     note = models.CharField(db_column='Note', max_length=100, blank=True, null=True)  # Field name made lowercase.
     timebooking = models.TimeField(db_column='Timebooking', blank=True, null=True)  # Field name made lowercase.
 

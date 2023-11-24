@@ -3,45 +3,34 @@
 {% block title %}Prescriptions{% endblock title %}
 
 {% block content %}
-<section class="page-section" >
+<section class="page-section">
     <div class="container">
-        {%if is_doctor or is_admin %}
-        <span><a href="/prescriptions/create" class="btn btn-primary">Create Prescriptions</a></span>  
+        {% if is_doctor or is_admin %}
+            <span><a href="/prescriptions/create" class="btn btn-primary">Create Prescription</a></span>
 
-        <div class="component-booking">
-            <table class="table table-striped table-bordered" width="100%">
-
-                <thead>
-                    <th>Name Disease</th>
-                    <th>Patient</th>
-                    <th>Doctor</th>
-                    <th>Symptoms</th>
-                    <th>Medicine</th>
-                    <th>Date</th>
-                    <th>Date to return </th>
-                    <th>Note</th>
-                </thead>
-                
-                <tbody>
-                    {% for prescriptions in prescription  %}
-                    <tr>
-                        <td>{{prescriptions.name_disease}}</td>
-                        <td>{{prescriptions.patient}}</td>
-                        <td>{{prescriptions.doctor}}</td>
-                        <td>{{prescriptions.symptoms}}</td>
-                        <td>{{prescriptions.medicine}}</td>
-                        <td>{{prescriptions.start_date}}</td>
-                        <td>{{prescriptions.re_examination_date}}</td>
-                        <td>{{prescriptions.note}}</td>
-
-                        <td><a href="prescriptions/edit/{{prescriptions.id}}" class="btn btn-info">Edit</a></td>
-                        <td><a href="prescriptions/delete/{{prescriptions.id}}" class="btn btn-primary">Delete</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        {%endif%}
-        </div>
+            <div class="row mt-3">
+                {% for prescription in prescription %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card">
+                            <div class="card-body ">
+                                <h4 class="card-title">{{ prescription.name_disease }}</h4>
+                                <p class="card-text"><strong>Patient:</strong> {{ prescription.patient }}</p>
+                                <p class="card-text"><strong>Doctor:</strong> {{ prescription.doctor }}</p>
+                                <p class="card-text"><strong>Symptoms:</strong> {{ prescription.symptoms }}</p>
+                                <p class="card-text"><strong>Medicine:</strong> {{ prescription.medicine }}</p>
+                                <p class="card-text"><strong>Date:</strong> {{ prescription.start_date }}</p>
+                                <p class="card-text"><strong>Date to return:</strong> {{ prescription.re_examination_date }}</p>
+                                <p class="card-text"><strong>Note:</strong> {{ prescription.note }}</p>
+                                <div class="btn-group">
+                                    <a href="prescriptions/edit/{{ prescription.id }}" class="btn btn-info">Edit</a>
+                                    <a href="prescriptions/delete/{{ prescription.id }}" class="btn btn-danger">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
     </div>
 </section>
 {% endblock content %}

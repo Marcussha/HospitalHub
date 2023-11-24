@@ -41,7 +41,8 @@ def create(request):
         serviceid = Ministration.objects.get(minisid=serviceid_id)
 
         docid_id = request.POST.get('docid')
-        docid = Doctors.objects.get(doctorid=docid_id)
+        docid = Doctors.objects.get(id=docid_id)
+
 
         # Combine timebooking_hour and timebooking_minute into a valid time object
         timebooking = time(int(timebooking_hour), int(timebooking_minute))

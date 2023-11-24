@@ -95,9 +95,9 @@
                 <span class="selected-doctor" id="selectedDoctorSpan">Select a doctor</span>
                 <ul class="doctor-list">
                     {% for doctor in doctors %}
-                        <li data-value="{{ doctor.doctorid }}" onclick="selectDoctor(this)">
-                            <img src="/media/{{ doctor.images }}" alt="{{ doctor.doctorname }}" class="doctor-image">
-                            <strong>{{ doctor.doctorname }}</strong>
+                        <li data-value="{{ doctor.id }}" onclick="selectDoctor(this)">
+                            <img src="/media/{{ doctor.images }}" alt="{{ doctor.name }}" class="doctor-image">
+                            <strong>{{ doctor.name }}</strong>
                         </li>
                     {% endfor %}
                 </ul>

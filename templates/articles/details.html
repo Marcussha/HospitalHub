@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock title %}
+
+{% block content %}
+    <section class="page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <h2 class="section-heading mb-4">{{ article.title }}</h2>
+                    <p>{{ article.content }}</p>
+                    <p><small class="text-muted">Published on: {{ article.pub_date }}</small></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'prescriptions',
     'medicine',
     'customer',
+    'news',
     'authrole'
 ]
 
