@@ -5,17 +5,19 @@
 {% block content %}
 <section class="page-section" >
     <div class="container">
-        {% if is_admin or is_manager %}
+        {% if is_admin or is_doctor %}
         <span><a href="/appointments/create" class="btn btn-primary">Create New</a></span>  
         <span><a href="{% url 'export_excel' %}" class="btn btn-success">Export Excel</a></span>
         <span><a href="{% url 'export_csv' %}" class="btn btn-info">Export CSV</a></span>
 
     <div class="row">
         <div class="col">
-        <form method="get">
-            {{ filter.form.as_p }}
-            <button type="submit">Filter</button>
-        </form>
+            <div class="card card-body">
+                <form method="get">
+                    {{ filter.form.as_p }}
+                    <button type="submit">Search</button>
+                </form>
+            </div>
         </div>
     </div>
     

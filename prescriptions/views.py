@@ -4,11 +4,15 @@ from customer.models import Client
 from doctors.models import Doctors
 from medicine.models import Medicine
 from django.contrib import messages
+from prescriptions.filters import PrescriptionFilter
 
 
 def index(request):
     prescription = Prescriptions.objects.all()
-    return render(request,"prescriptions/index.html", {'prescription':prescription})
+    prescriptionFilter = PrescriptionFilter(request.GET, queryset=prescription)
+    prescription = prescriptionFilter.qs
+    
+    return render(request,"prescriptions/index.html", {'prescription':prescription, 'filter': PrescriptionFilter})
 
 
 def create(request):
