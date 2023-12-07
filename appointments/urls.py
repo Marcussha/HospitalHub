@@ -8,5 +8,4 @@ urlpatterns = [
     path('/delete/<int:id>', views.clear, name="clear"),
     path('/excel/', views.export_excel, name='export_excel'),
     path('/csv/', views.export_csv, name='export_csv'),
-    path('/calendar/', views.display_appointments, name='display_appointments'),
 ]

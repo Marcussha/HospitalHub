@@ -5,7 +5,8 @@ from departments.models import Departments
 # Create your models here.
 class DoctorsManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset()
+        return super().get_queryset().annotate(appointment_count=models.Count('appointment'),
+                                               prescriptions_count=models.Count('prescriptions'))
 
 class Doctors(models.Model):
     name = models.CharField(max_length=100)

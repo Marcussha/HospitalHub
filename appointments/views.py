@@ -5,29 +5,29 @@ from ministration.models import Ministration
 from doctors.models import Doctors
 from datetime import time
 from django.http import HttpResponse
-from excel_response import ExcelResponse
 import csv
 from datetime import datetime
 from django.http import HttpResponse
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.writer.excel import save_virtual_workbook
+from .filters import AppointmentFilter
+
 
 # Create your views here.
 
 def index (request): 
     appointment = Appointment.objects.all()
-    return render(request, "appointments/index.html",{'appointment': appointment})
+    appointment_filter = AppointmentFilter(request.GET, queryset=appointment)
+    appointment = appointment_filter.qs
 
-def display_appointments(request):
-    appointment = Appointment.objects.all()
-    context = {
-        'appointments': appointment,
-    }
-    return render(request, 'appointments/calendarView.html', context)
+    return render(request, "appointments/index.html", {'appointment': appointment, 'filter': appointment_filter})
+
 
 def create(request):
     if request.method == "POST":
+
+        # Extract data from the form
         fullname = request.POST.get('fullname')
         email = request.POST.get('email')
         phone = request.POST.get('phone')
@@ -48,6 +48,8 @@ def create(request):
         timebooking = time(int(timebooking_hour), int(timebooking_minute))
 
         try:
+            
+            # Create a new appointment
             Appointment.objects.create(
                 fullname=fullname,
                 email=email,
@@ -75,7 +77,6 @@ def create(request):
 
     return render(request, "appointments/create.html", {'services': services, 'doctors': doctors})
 
-
 def clear (request,id):
     appointment = Appointment.objects.get( appid =id)
     appointment.delete()
@@ -98,14 +99,14 @@ def export_excel(request):
         cell.value = header_title
 
     # Populate the data rows
-    for row_num, appointment in enumerate(appointments, 2):  # Start from row 2 (after headers)
+    for row_num, appointment in enumerate(appointments, 2):  
         ws.cell(row=row_num, column=1, value=appointment.fullname)
         ws.cell(row=row_num, column=2, value=appointment.email)
         ws.cell(row=row_num, column=3, value=appointment.phone)
         ws.cell(row=row_num, column=4, value=appointment.datebooking)
         ws.cell(row=row_num, column=5, value=appointment.timebooking)
         ws.cell(row=row_num, column=6, value=appointment.serviceid.name_ministration)  
-        ws.cell(row=row_num, column=7, value=appointment.docid.doctorname)   
+        ws.cell(row=row_num, column=7, value=appointment.docid.name)   
         ws.cell(row=row_num, column=8, value=appointment.note)
 
     # Create a response with the Excel file
@@ -113,13 +114,11 @@ def export_excel(request):
         save_virtual_workbook(wb),
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     )
-
     # Set the filename for the download
     current_datetime = datetime.now().strftime("%Y%m%d%H%M%S")
     response['Content-Disposition'] = f'attachment; filename=appointments_{current_datetime}.xlsx'
 
     return response
-
 
 def export_csv(request):
     appointments = Appointment.objects.all()
@@ -143,6 +142,3 @@ def export_csv(request):
         ])
 
     return response
-
-
-

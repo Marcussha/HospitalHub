@@ -61,10 +61,15 @@ def create(request):
 
     
 def edit(request, id):
+    # Retrieve the prescription to be edited using its unique identifier (id)
     prescription = Prescriptions.objects.get(id=id)
+
+    #Retrieve all patients, doctors, and medicines for the form
     patients = Client.objects.all()
     doctors = Doctors.objects.all()
     medicines = Medicine.objects.all()
+    
+    # Render the 'prescriptions/edit.html' template with necessary context
     return render(request, 'prescriptions/edit.html', {'prescription': prescription, 'patients': patients, 'doctors': doctors, 'medicines': medicines})
 
 
@@ -73,12 +78,14 @@ def update(request, id):
         prescription = Prescriptions.objects.get(id=id)
 
         if request.method == 'POST':
+            # Extract data from the form
             name_disease = request.POST.get('name_disease')
             symptoms = request.POST.get('symptoms')
             start_date = request.POST.get('start_date')
             re_examination_date = request.POST.get('re_examination_date')
             note = request.POST.get('note')
 
+            # Retrieve related instances using their primary keys
             patient_id = request.POST.get('patient')
             patient = Client.objects.get(id=patient_id)
 
@@ -93,6 +100,7 @@ def update(request, id):
             medicine_id = request.POST.get('medicine')
             medicine = Medicine.objects.get(id=medicine_id)
 
+            # Update the prescription object with new data
             prescription.name_disease = name_disease
             prescription.patient = patient
             prescription.doctor = doctor
@@ -101,14 +109,18 @@ def update(request, id):
             prescription.start_date = start_date
             prescription.re_examination_date = re_examination_date
             prescription.note = note
+
+            # Save the updated prescription
             prescription.save()
 
+            # Display a success message and redirect to the prescriptions page
             messages.success(request, 'Prescription updated successfully.')
             return redirect('/prescriptions')
 
     except Prescriptions.DoesNotExist:
         messages.error(request, f'Prescription with ID {id} does not exist.')
 
+    # Render the 'prescriptions/edit.html' template with the prescription for further editing
     return render(request, 'prescriptions/edit.html', {'prescription': prescription})
 
 def delete(request, id):

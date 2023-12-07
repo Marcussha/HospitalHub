@@ -20,7 +20,7 @@
                     </thead>
 
                     <tbody>
-                        {% for doctor in doctors %}  <!-- Corrected variable name here -->
+                        {% for doctor in doctors %}  
                         <tr>  
                             <td><img src="/media/{{ doctor.images }}" alt="{{ doctor.name }} Image" width="10%" /></td>
                             <td>{{ doctor.name }}</td>
@@ -28,8 +28,8 @@
                             <td>{{ doctor.position }}</td>
                             <td>{{ doctor.note }}</td>
                             <td>{{ doctor.department }}</td>
-                            <td><a href="edit/{{ doctor.id }}" class="btn btn-info">Edit</a></td>
-                            <td><a href="delete/{{ doctor.id }}" class="btn btn-danger">Delete</a></td>  
+                            <td><a href="/doctors/edit/{{ doctor.id }}" class="btn btn-info">Edit</a></td>
+                            <td><a href="/doctors/delete/{{ doctor.id }}" class="btn btn-danger">Delete</a></td>  
                         </tr>  
                         {% endfor %} 
                     </tbody>

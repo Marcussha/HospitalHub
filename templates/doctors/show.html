@@ -41,8 +41,8 @@
                         <p class="designation">{{doctors.email}} &amp; CEO</p>
                     </div>
                     {%if is_doctor or is_admin %}
-                    <a href="doctors/edit/{{ doctors.doctorid }}" class="btn btn-info">Edit</a>
-                    <a href="delete/{{ doctors.id }}" class="btn btn-danger">Delete</a>
+                    <a href="/doctors/edit/{{ doctors.id }}" class="btn btn-info">Edit</a>
+                    <a href="/doctors/delete/{{ doctors.id }}" class="btn btn-danger">Delete</a>
                     {%endif%}
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                     <a href="{% url 'create_appointment' %}?docid={{ doctors.id }}&doctorname={{ doctors.name }}" 

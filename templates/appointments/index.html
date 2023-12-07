@@ -9,13 +9,15 @@
         <span><a href="/appointments/create" class="btn btn-primary">Create New</a></span>  
         <span><a href="{% url 'export_excel' %}" class="btn btn-success">Export Excel</a></span>
         <span><a href="{% url 'export_csv' %}" class="btn btn-info">Export CSV</a></span>
-        <form method="GET" action="">
-            <div class="form-group">
-                <label for="date">Select Date:</label>
-                <input type="date" id="date" name="date">
-                <button type="submit" class="btn btn-success">Filter Appointments</button>
-            </div>
+
+    <div class="row">
+        <div class="col">
+        <form method="get">
+            {{ filter.form.as_p }}
+            <button type="submit">Filter</button>
         </form>
+        </div>
+    </div>
     
         <div class="table-responsive">
             <table id="bootstrapdatatable" class="table table-striped table-bordered" width="100%">
