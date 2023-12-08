@@ -238,15 +238,15 @@
   
   .custom-select .doctor-list li {
     padding: 10px;
-    display: block; /* Change display to block to display as a list */
+    display: block;
     cursor: pointer;
-    border-bottom: 1px solid #ccc; /* Add a border between items */
   }
   
   .custom-select .doctor-image {
     width: 30px;
     height: 30px;
     margin-right: 10px;
+    border-radius: 50%; /* Make the image round */
   }
   
   .custom-select .doctor-list li:hover {
@@ -256,3 +256,4 @@
   .custom-select.show .doctor-list {
     display: block;
   }
+  

@@ -11,7 +11,7 @@
                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
             </ul>
-            {% endif %}
+        {% endif %}
         <div class="card">
             {%if is_doctor or is_admin %}
             <div class="card-body">

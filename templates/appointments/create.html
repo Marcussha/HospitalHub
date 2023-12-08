@@ -123,81 +123,79 @@
 </section>
 
   <!-- Optional JavaScript -->
-    <script>
-      function selectDoctor(doctorElement) {
-        const doctorId = doctorElement.getAttribute('data-value');
-        const doctorName = doctorElement.textContent;
-        const selectedDoctorSpan = document.getElementById('selectedDoctorSpan');
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const selectedDoctor = document.querySelector('.selected-doctor');
+      const docidInput = document.getElementById('docid');
+      const bookingForm = document.getElementById('bookingForm');
+  
+      selectedDoctor.addEventListener('click', function () {
+        const doctorList = document.querySelector('.doctor-list');
+        doctorList.style.display = 'block'; 
+      });
+  
+      bookingForm.addEventListener('submit', function (event) {
         const docidInput = document.getElementById('docid');
-
-        selectedDoctorSpan.textContent = doctorName;
-        docidInput.value = doctorId;
-
-        // Enable form submission if a doctor is selected
-        const bookingForm = document.getElementById('bookingForm');
-        if (doctorId) {
-            bookingForm.removeAttribute('onsubmit'); // Remove the onsubmit attribute
+  
+        
+        if (!docidInput.value) {
+          event.preventDefault(); 
+          alert('Please select a doctor before submitting.');
         }
-    }
-
+      });
+  
       document.addEventListener('click', function (event) {
         const customSelect = document.querySelector('.custom-select');
         const doctorList = customSelect.querySelector('.doctor-list');
-
+  
         if (!event.target.closest('.custom-select')) {
-          doctorList.style.display = 'none'; // Hide the list when clicking outside the custom select
+          doctorList.style.display = 'none';
         }
       });
-
-      document.addEventListener('DOMContentLoaded', function () {
-        const selectedDoctor = document.querySelector('.selected-doctor');
-        const docidInput = document.getElementById('docid');
-
-        selectedDoctor.addEventListener('click', function () {
-          const doctorList = document.querySelector('.doctor-list');
-          doctorList.style.display = 'block'; // Show the list when clicking the selected doctor
-        });
-      });
-
-      // Add this event listener to handle form submission
-    bookingForm.addEventListener('submit', function (event) {
-      const docidInput = document.getElementById('docid');
-
-      // Check if a doctor is selected
-      if (!docidInput.value) {
-          event.preventDefault(); // Prevent form submission
-          alert('Please select a doctor before submitting.'); // Display an alert to the user
-      }
-    });
-    
-    document.addEventListener('DOMContentLoaded', function () {
+  
       const inputDate = document.getElementById('inputDate');
-      
+  
       function updateDateInput() {
         const today = new Date();
         const twoMonthsLater = new Date();
         twoMonthsLater.setMonth(today.getMonth() + 2);
-
+  
         const formattedToday = formatDate(today);
         const formattedTwoMonthsLater = formatDate(twoMonthsLater);
-        
+  
         inputDate.setAttribute('min', formattedToday);
         inputDate.setAttribute('max', formattedTwoMonthsLater);
       }
-
+  
       function formatDate(date) {
         const yyyy = date.getFullYear();
         const mm = String(date.getMonth() + 1).padStart(2, '0');
         const dd = String(date.getDate()).padStart(2, '0');
         return `${yyyy}-${mm}-${dd}`;
       }
-
+  
       inputDate.addEventListener('focus', updateDateInput);
       inputDate.addEventListener('change', updateDateInput);
-      
+  
       updateDateInput();
     });
+  
+    function selectDoctor(doctorElement) {
+      const doctorId = doctorElement.getAttribute('data-value');
+      const doctorName = doctorElement.textContent;
+      const selectedDoctorSpan = document.getElementById('selectedDoctorSpan');
+      const docidInput = document.getElementById('docid');
+      const bookingForm = document.getElementById('bookingForm'); 
+  
+      selectedDoctorSpan.textContent = doctorName;
+      docidInput.value = doctorId;
+  
+      if (doctorId) {
+        bookingForm.removeAttribute('onsubmit');
+      }
+    }
   </script>
+  
 
 </body>
 {% endblock content %} 

@@ -10,8 +10,6 @@ from datetime import datetime
 from openpyxl.utils import get_column_letter
 from openpyxl.writer.excel import save_virtual_workbook
 
-
-
 # Create your views here.
 def home(request):
     doctor = Doctors.objects.all()
