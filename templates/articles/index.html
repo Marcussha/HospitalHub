@@ -14,7 +14,7 @@
                     {% for article in articles %}
                         <div class="card mb-4">
                             <div class="card-body ">
-                                <h3 class="card-title"><a href="/news/details/{{ article.id }}">{{ article.title }}</h3>
+                                <h3 class="card-title">{{ article.title }}</h3>
                                 <p class="card-text">{{ article.content }}</p>
                                 <p class="card-text"><small class="text-muted">Published on: {{ article.pub_date }}</small></p>
                             </div>

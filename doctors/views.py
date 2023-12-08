@@ -5,8 +5,6 @@ from django.core.files.storage import FileSystemStorage
 from django.db import IntegrityError
 from django.contrib import messages
 
-
-
 # Create your views here.
 def home(request):
     doctor = Doctors.objects.all()

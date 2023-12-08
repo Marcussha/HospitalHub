@@ -5,6 +5,8 @@ from doctors.models import Doctors
 from medicine.models import Medicine
 from django.contrib import messages
 from prescriptions.filters import PrescriptionFilter
+from django.http import Http404
+from django.db.utils import IntegrityError
 
 
 def index(request):
@@ -128,6 +130,13 @@ def update(request, id):
     return render(request, 'prescriptions/edit.html', {'prescription': prescription})
 
 def delete(request, id):
-    prescription = Prescriptions.objects.get(id=id)
-    prescription.delete()
-    return redirect("/prescriptions")
+    try:
+        prescription = Prescriptions.objects.get(id=id)
+        prescription.delete()
+    except Prescriptions.DoesNotExist:
+        raise Http404("Prescription does not exist")
+    except IntegrityError as e:
+        error_message = f"Cannot delete prescription: {e}"
+        return render(request, "error_page.html", {'error_message': error_message})
+
+    return redirect('/prescriptions/index')

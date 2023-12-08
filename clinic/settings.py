@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'customer',
     'news',
     'authrole',
-    'django_filters'
+    'django_filters',
+    'customadmin'
 ]
 
 MIDDLEWARE = [
@@ -92,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bookingweb',
         'USER': 'root',
-        'PASSWORD': "Akm246782",
+        'PASSWORD': "Anhtong369369369@",
         'PORT': 3306,
         'HOST': '127.0.0.1',
     }

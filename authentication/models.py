@@ -26,11 +26,9 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    # Add any additional fields you need here
 
     objects = CustomUserManager()
 
-    # Add related_name arguments to avoid clashes
     groups = models.ManyToManyField(
         Group,
         verbose_name=('groups'),

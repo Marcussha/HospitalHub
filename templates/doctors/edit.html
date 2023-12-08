@@ -6,7 +6,7 @@
 <section class="page-section" >
     <div class="container">
         {%if is_doctor or is_admin %}
-        <form method="POST" class="post-form" action="/doctors/update/{{doctors.doctorid}}">  
+        <form method="POST" class="post-form" action="/doctors/update/{{doctors.id}}">  
             {% csrf_token %}  
             <div class="container">   
                 <div class="col-12">  
@@ -15,7 +15,7 @@
                 
                 <div class="mb-3">
                     <label> Name Doctor:</label>
-                    <input type="text" class="form-control" name="doctorname" id="doctorname" required maxlength="20" value="{{doctors.doctorname}}"/>
+                    <input type="text" class="form-control" name="doctorname" id="doctorname" required maxlength="20" value="{{doctors.name}}"/>
                 </div>
 
                 <div class="mb-3">
