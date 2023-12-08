@@ -129,12 +129,7 @@ def update(request, id):
     # Render the 'prescriptions/edit.html' template with the prescription for further editing
     return render(request, 'prescriptions/edit.html', {'prescription': prescription})
 
-<<<<<<< HEAD
-def delete(request, id):    
-    prescription = Prescriptions.objects.get(id=id)
-    prescription.delete()
-    return redirect("/prescriptions")
-=======
+
 def delete(request, id):
     try:
         prescription = Prescriptions.objects.get(id=id)
@@ -146,4 +141,3 @@ def delete(request, id):
         return render(request, "error_page.html", {'error_message': error_message})
 
     return redirect('/prescriptions/index')
->>>>>>> 0856da6ec91c8c16a5e75cd8c25d462630d7fd64

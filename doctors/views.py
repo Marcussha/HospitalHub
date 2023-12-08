@@ -111,7 +111,7 @@ def excel(request):
     wb = Workbook()
     ws = wb.active  
     
-    headers = ["Name", "Email", "Position", "Department", "Images" ,"Note"]
+    headers = ["Name", "Email", "Position", "Department","Note"]
     
     for col_num, header_title in enumerate(headers, 1):
         col_letter = get_column_letter(col_num)
@@ -123,8 +123,7 @@ def excel(request):
         ws.cell(row=row_num, column=2, value=doctor.email)
         ws.cell(row=row_num, column=3, value=doctor.position)
         ws.cell(row=row_num, column=4, value=doctor.department.named)
-        ws.cell(row=row_num, column=5, value=doctor.images)
-        ws.cell(row=row_num, column=6, value=doctor.note) 
+        ws.cell(row=row_num, column=5, value=doctor.note) 
         
         
     response = HttpResponse(

@@ -6,14 +6,8 @@
 <section class="page-section" >
     <div class="container">
         {%if is_doctor or is_admin %}
-<<<<<<< HEAD
-        <form method="POST" class="post-form" action="/doctors/update/{{ doctors.doctorid }}" enctype="multipart/form-data">
-            <!-- ... Các trường input khác ... -->
-        </form>
-         
-=======
-        <form method="POST" class="post-form" action="/doctors/update/{{doctors.id}}">  
->>>>>>> 0856da6ec91c8c16a5e75cd8c25d462630d7fd64
+        <form method="POST" class="post-form" action="/doctors/update/{{doctors.id}}" enctype="multipart/form-data">  
+
             {% csrf_token %}  
             <div class="container">   
                 <div class="col-12">  
