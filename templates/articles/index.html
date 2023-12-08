@@ -5,8 +5,8 @@
 {% block content %}
     <section class="page-section">
         <div class="container">
-            {% if is_doctor or is_admin %}
-            <span><a href="/news/create" class="btn btn-primary">Add New</a></span>
+            {% if is_admin %}
+            <span><a href="/news/addnew" class="btn btn-primary">Add New</a></span>
             {%endif%}
             <div class="row">
                 <div class="col-">
@@ -14,9 +14,14 @@
                     {% for article in articles %}
                         <div class="card mb-4">
                             <div class="card-body ">
-                                <h3 class="card-title"><a href="/news/details/{{ article.id }}">{{ article.title }}</h3>
+                                <h3 class="card-title">{{ article.title }}</h3>
                                 <p class="card-text">{{ article.content }}</p>
                                 <p class="card-text"><small class="text-muted">Published on: {{ article.pub_date }}</small></p>
+                                {% if is_admin%}
+                                <td>
+                                    <a href="/news/delete/{{ article.id }}" class="btn btn-danger">Delete</a>
+                                </td>
+                                {%endif%}
                             </div>
                         </div>
                     {% endfor %}

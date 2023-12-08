@@ -9,18 +9,17 @@
             <span><a href="/prescriptions/create" class="btn btn-primary">Create Prescription</a></span>
             <br>
             <br>
-            <div class="card card-body">
-                <form method="get">
-                    <div class="row">
-                        <div class="col-md-2">
+            <div class="center">
+                <div class="center">
+                    <div class="card card-body center">
+                        <form method="get" class="form-inline">
                             {{filter.form.as_p}}
-                            <button type="submit">Search</button>
-                        </div>
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
             <br>
-
             <div class="row mt-3">
                 {% for prescription in prescription %}
                     <div class="col-md-6 mb-4">

@@ -13,7 +13,7 @@ class Doctors(models.Model):
     email = models.CharField(unique=True, max_length=70)
     position = models.CharField(max_length=50, blank=True, null=True)
     department = models.ForeignKey(Departments, models.DO_NOTHING, db_column='department')
-    images = models.CharField(db_column='Images', max_length=255, blank=True, null=True)
+    images = models.ImageField(upload_to="media", db_column='Images', max_length=255, blank=True, null=True)
     note = models.CharField(max_length=120, blank=True, null=True)
 
     objects = DoctorsManager()

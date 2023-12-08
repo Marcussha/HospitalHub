@@ -7,4 +7,6 @@ class PrescriptionFilter(django_filters.FilterSet):
         fields = {
             'patient':['exact'],
             'doctor':['exact'],
+            'start_date':['exact'],
         }
+   

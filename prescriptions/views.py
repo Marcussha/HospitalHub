@@ -127,7 +127,7 @@ def update(request, id):
     # Render the 'prescriptions/edit.html' template with the prescription for further editing
     return render(request, 'prescriptions/edit.html', {'prescription': prescription})
 
-def delete(request, id):
+def delete(request, id):    
     prescription = Prescriptions.objects.get(id=id)
     prescription.delete()
     return redirect("/prescriptions")

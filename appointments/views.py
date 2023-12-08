@@ -7,7 +7,6 @@ from datetime import time
 from django.http import HttpResponse
 import csv
 from datetime import datetime
-from django.http import HttpResponse
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.writer.excel import save_virtual_workbook

@@ -2,8 +2,13 @@ from django.shortcuts import render, redirect
 from doctors.models import Doctors 
 from departments.models import Departments
 from django.core.files.storage import FileSystemStorage
+from django.http import HttpResponse
 from django.db import IntegrityError
 from django.contrib import messages
+from openpyxl import Workbook
+from datetime import datetime 
+from openpyxl.utils import get_column_letter
+from openpyxl.writer.excel import save_virtual_workbook
 
 
 
@@ -43,7 +48,8 @@ def create(request):
 
             # Include the newly created doctor in the context
             context = {'departments': Departments.objects.all(), 'new_doctor': new_doctor}
-            return render(request, 'doctors/index.html', context)
+           # return render(request, 'doctors/index.html', context)
+            return redirect ('/doctors/index')
 
         except IntegrityError as e:
             # Check if the error is related to a duplicate key
@@ -59,8 +65,36 @@ def create(request):
     
 def edit(request,id):
     doctors = Doctors.objects.get(id=id)
+    #return render(request, 'doctors/edit.html', {'doctors': doctors})
+    return redirect ('doctors')
+
+
+def update_doctor(request, id):
+    if request.method == "POST":
+        
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        position = request.POST.get('position')
+   
+        doctor_id = request.POST.get('id')
+        doctor = Doctors.objects.get(id=doctor_id)
+
+        doctor.name = name
+        doctor.email = email
+        doctor.position = position
+
+        new_image = request.FILES.get('images')
+        if new_image:
+            doctor.images = new_image
+            doctor.save()
+        else:
+            doctor.save()
+
+        return redirect('index')
+
+    # Nếu không phải là phương thức POST, hiển thị form chỉnh sửa
+    doctors = Doctors.objects.get(id=id)
     return render(request, 'doctors/edit.html', {'doctors': doctors})
-    
     
 def clear(request, id):
     doctor = Doctors.objects.get(id=id)
@@ -70,5 +104,37 @@ def clear(request, id):
         return render (request, "error_page.html", {'error_message': error_message})
     
     doctor.delete()
-    return redirect('/doctors/index')      
+    return redirect('/doctors/index')  
 
+def excel(request):
+    doctor = Doctors.objects.all()
+    
+    
+    wb = Workbook()
+    ws = wb.active  
+    
+    headers = ["Name", "Email", "Position", "Department", "Images" ,"Note"]
+    
+    for col_num, header_title in enumerate(headers, 1):
+        col_letter = get_column_letter(col_num)
+        cell = ws.cell(row=1, column=col_num)
+        cell.value = header_title
+        
+    for row_num, doctor in enumerate(doctor, 4):
+        ws.cell(row=row_num, column=1, value=doctor.name)
+        ws.cell(row=row_num, column=2, value=doctor.email)
+        ws.cell(row=row_num, column=3, value=doctor.position)
+        ws.cell(row=row_num, column=4, value=doctor.department.named)
+        ws.cell(row=row_num, column=5, value=doctor.images)
+        ws.cell(row=row_num, column=6, value=doctor.note) 
+        
+        
+    response = HttpResponse(
+        save_virtual_workbook(wb),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    
+    current_datetime = datetime.now().strftime("%Y%m%d%H%M%S")
+    response['Content-Disposition'] = f'attachment; filename=doctors_{current_datetime}.xlsx'
+    
+    return response
