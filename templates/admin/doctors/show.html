@@ -14,9 +14,6 @@
                 <!-- Section Heading-->
                 <div class="section_heading text-center wow fadeInUp" data-wow-delay="0.2s" 
                 style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
-                    {%if is_doctor or is_admin %}
-                    <span><a href="/doctors/create" class="btn btn-primary">Add Doctors</a></span>          
-                    {% endif %}
                     <h1>Our Doctors</h1>
                 </div>
             </div>
@@ -41,10 +38,10 @@
                         <p class="designation">{{doctors.email}} &amp; CEO</p>
                     </div>
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <a href="{% url 'create_appointment' %}?docid={{ doctors.id }}&doctorname={{ doctors.name }}" 
-                    class="book-appointment" onclick="logParameters({{ doctors.id }}, '{{ doctors.name }}')">Booking Appointment</a> </div>
+                        <a href="{% url 'create_appointment' %}?docid={{ doctors.id }}&docname={{ doctors.name }}" class="book-appointment" onclick="saveDoctorInfo('{{ doctors.name }}')">Booking Appointment</a> 
                     </div>
                 </div>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -58,6 +55,12 @@
         // Update the <span> element with the doctor's name
         const doctorNameDisplay = document.getElementById('doctorNameDisplay');
         doctorNameDisplay.textContent = doctorname;
+    }
+</script>
+
+<script>
+    function saveDoctorInfo(doctorName) {
+        sessionStorage.setItem('selectedDoctor', doctorName);
     }
 </script>
 {% endblock content %}

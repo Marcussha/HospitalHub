@@ -10,10 +10,33 @@
             <br>
             <br>
             <div class="center">
-                <div class="center">
-                    <div class="card card-body center">
+                <div class="col">
+                    <div class="card card-body ">
                         <form method="get" class="form-inline">
-                            {{filter.form.as_p}}
+                            <div class="form-group" style="margin-right: 10px;">
+                                <label for="patient">Patient:</label>
+                                <select class="form-control" id="patient" name="patient">
+                                    {% for patient_choice in filter.form.patient.field.choices %}
+                                       <option value="{{patient_choice.0}}" {% if patient_choice.0 == filter.form.patient.value %} selected {% endif %}>{{patient_choice.1}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-right: 10px;">
+                                <label for="doctor">Doctor:</label>
+                                <select class="form-control" id="doctor" name="doctor">
+                                    {% for doctor_choice in filter.form.doctor.field.choices %}
+                                      <option value="{{doctor_choice.0}}" {% if doctor_choice.0 == filter.form.doctor.value %} selected {% endif %}>{{doctor_choice.1}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-right: 10px;">
+                                <label for="start_date"> Date:</label>
+                                <input type="date" name="start_date" class="form-control" value="{{filter.form.start_date.value}}"/>
+                            </div>
+                            <div class="form-group" style="margin-right: 10px;">
+                                <label for="re_examination_date"> Date to Return:</label>
+                                <input type="date" name="re_examination_date" class="form-control" value="{{filter.form.re_examination_date.value}}"/>
+                            </div>
                             <button type="submit" class="btn btn-primary">Search</button>
                         </form>
                     </div>

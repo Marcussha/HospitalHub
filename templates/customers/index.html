@@ -1,93 +1,44 @@
 {% extends ".\base.html" %}
-
+  
 {% block title %}Customer Information{% endblock title %}
-
+  
 {% block content %}
-{%load static%}
-    <link href="{% static "css/admin.css"%}" rel="stylesheet" />
-    <link href="{% static "css/bootstrap.min.css"%}" rel="stylesheet" />
-    <link href="{% static "css/font-awesome.min.css"%}" rel="stylesheet" />
-    <link href="{% static "css/select2.min.css"%}" rel="stylesheet" />
-    <script src="{% static "js/jquery-3.2.1.min.js"%}"></script>
-    <script src="{% static "js/popper.min.js"%}"></script>
-    <script src="{% static "js/bootstrap.min.js"%}"></script>
-    <script src="{% static "js/jquery.slimscroll.js"%}"></script>
-    <script src="{% static "js/app.js"%}"></script>
-    <script src="{% static "js/jquery.dataTables.min.js"%}"></script>
-    <script src="{% static "js/dataTables.bootstrap4.min.js"%}"></script>
-
-<section class="page-section">
+<section class="page-section" >
   <div class="container">
-    {% if is_doctor or is_admin %}
-    <div class="row">
-      <div class="col-sm-4 col-3">
-        <h4 class="page-title">Patients</h4>
-      </div>
-      <div class="col-sm-8 col-9 text-right m-b-20">
-        <a href="/customers/create" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Patient</a>
-      </div>
-    </div>
+    {%if is_doctor or is_admin %}
+    <span><a href="/customers/create" class="btn btn-primary">Create New</a></span>
+      
+      <h1>Customer Information</h1>
 
-    <div class="row">
-      <div class="col-md-12">
-        <div class="table-responsive">
-          <table class="table table-border table-striped custom-table datatable mb-0">
-            <thead>
+      <table class="table table-bordered" id="example" style="text-align: center;">
+          <thead class="table success">
               <tr>
-                <th>Full Name</th>
-                <th>Age</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Sex</th>
-                <th class="text-right">Action</th>
+                  <th style="width: 20%;">Full Name</th>
+                  <th style="width: 30%;">Email</th>
+                  <th style="width: 10%;">Birthday</th>
+                  <th style="width: 20%;">Address</th>
+                  <th style="width: 15%;">Telephone</th>
+                  <th style="width: 15%;">Sex</th>
               </tr>
-            </thead>
-            <tbody>
+          </thead> 
+
+          <tbody>
               {% for client in clients %}
-              <tr>
-                <td>{{ client.fullname }}</td>
-                <td>{{ client.birthday }}</td>
-                <td>{{ client.address }}</td>
-                <td>{{ client.telephone }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.sex }}</td>
-                <td class="text-right">
-                  <div class="dropdown dropdown-action">
-                    <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                      <a class="dropdown-item" href=""><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                      <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+                <tr>
+                    <td>{{ client.fullname }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.birthday }}</td>
+                    <td>{{ client.address }}</td>
+                    <td>{{ client.telephone }}</td>
+                    <td>{{ client.sex }}</td>
+                    <td><a href="customers/delete/{{ client.id }}" class="btn btn-danger">Delete</a></td>
+                </tr>
               {% endfor %}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+          </tbody>
 
-    {% endif %}
+      </table>
+    {%endif%}
   </div>
 </section>
-
-<div id="delete_patient" class="modal fade delete-modal" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        <img src="media/sent.png" alt="" width="50" height="46">
-        <h3>Are you sure want to delete this Patient?</h3>
-        <div class="m-t-20">
-          <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
 
 {% endblock content %}

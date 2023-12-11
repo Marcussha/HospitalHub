@@ -140,4 +140,4 @@ def delete(request, id):
         error_message = f"Cannot delete prescription: {e}"
         return render(request, "error_page.html", {'error_message': error_message})
 
-    return redirect('/prescriptions/index')
+    return redirect('/prescriptions')
