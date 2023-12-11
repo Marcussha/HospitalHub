@@ -1,0 +1,47 @@
+{% extends "admin.html" %}
+
+{% block content %}
+
+{%if is_admin %}
+<section class="page-section" >
+    <div class="container">
+        <form method="POST" class="post-form" action="/doctors/update/{{doctors.id}}" enctype="multipart/form-data">  
+            <div class="row">
+                <div class="col text-center">
+                    <h3>Update Doctor</h3>
+                </div>
+            </div>
+            {% csrf_token %}  
+            <div class="container">   
+                <div class="mb-3">
+                    <label>Image:</label>
+                    <img alt="{{doctors.images}} Image" width="10%" />
+                    <input type="file" class="form-control" id="img" name="images" accept="media" value="{{ doctors.images }}">
+                </div>                
+                
+                <div class="mb-3">
+                    <label> Name Doctor:</label>
+                    <input type="text" class="form-control" name="name" id="name" required maxlength="20" value="{{doctors.name}}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label> Email:</label>
+                    <input type="text" class="form-control" name="email" id="email" required maxlength="20" value="{{doctors.email}}"/>
+                </div>
+
+                <div class="mb-3">
+                    <label> Position:</label>
+                    <input type="text" class="form-control" name="position" id="position" required maxlength="20" value="{{doctors.position}}"/>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-danger btn-lg">Update</button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+</section>
+
+{% endif %}
+{% endblock content %}

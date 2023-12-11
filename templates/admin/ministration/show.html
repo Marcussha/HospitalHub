@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+  
+{% block title %}Service{% endblock title %}
+  
+{% block content %}
+<section class="page-section">
+    <div class="container">
+            <h1>Our Services</h1>
+        <table class="table table-bordered" id="example" style="text-align: center;">
+                <thead class="table success">
+                    <tr>
+                        <th style="width: 20%;">Service Name</th>
+                        <th style="width: 50%;">Description</th>
+                    </tr>
+                </thead> 
+                
+                <tbody>
+                    {% for ministration in ministrations %}
+                    <tr>
+                        <td>{{ ministration.name_ministration }}</td>
+                        <td>{{ ministration.detail }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+</section>   
+{% endblock content %}
+

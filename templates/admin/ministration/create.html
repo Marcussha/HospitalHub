@@ -1,0 +1,35 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+
+{% if is_admin%}
+<section class="page-section" >
+    <div class="col-md-12">
+        <form method="POST" class="post-form" action="/services/create">
+            <div class="row">
+                <div class="col text-center">
+                    <h3>Create New Service</h3>
+                </div>
+            </div>
+            {% csrf_token %}
+            <div class="container">
+                <div class="mb-3">
+                    <label><strong>Name the Service:</strong></label>
+                    {{form.name_ministration}}
+                </div>
+    
+                <div class="mb-3">
+                    <label><strong>Detail of services</strong></label>
+                    {{form.detail}}
+                </div>
+    
+                <div class="form-group">
+                    <button type="submit" class="btn btn-danger mx-auto d-block">Submit</button>
+                </div>               
+            </div>
+        </form>
+    </div>
+</section>
+
+{%endif%}
+{% endblock content %}

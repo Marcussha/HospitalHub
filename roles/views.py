@@ -15,16 +15,16 @@ def create (request):
                 pass
     else:  
         form = RoleForm()
-    return render(request,"role/create.html",{'form': form})
+    return render(request,"admin/role/create.html",{'form': form})
 
 
 def index (request): 
     roles = AuthGroup.objects.all()
-    return render(request, "role/index.html",{'roles': roles})
+    return render(request, "admin/role/index.html",{'roles': roles})
 
 def edit (request, id):
     role = AuthGroup.objects.get( id =id)
-    return render(request, "role/edit.html", {'role': role})
+    return render(request, "admin/role/edit.html", {'role': role})
 
 def update(request, id):
     role = AuthGroup.objects.get(id =id)
@@ -32,7 +32,7 @@ def update(request, id):
     if form.is_valid():
         form.save()
         return redirect("/roles")
-    return render(request,'role/edit.html', {'roles':role})
+    return render(request,'admin/role/edit.html', {'roles':role})
 
 def clear(request, id):
     role = AuthGroup.objects.get( id =id)

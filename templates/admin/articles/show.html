@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section class="page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-">
+                    <h2 class="section-heading mb-4 text-center">Latest News</h2>
+                    {% for article in articles %}
+                        <div class="card mb-4">
+                            <div class="card-body ">
+                                <h3 class="card-title">{{ article.title }}</h3>
+                                <p class="card-text">{{ article.content }}</p>
+                                <p class="card-text"><small class="text-muted">Published on: {{ article.pub_date }}</small></p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

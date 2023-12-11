@@ -9,15 +9,15 @@ from openpyxl import Workbook
 from datetime import datetime 
 from openpyxl.utils import get_column_letter
 from openpyxl.writer.excel import save_virtual_workbook
-
+import os
 # Create your views here.
 def home(request):
     doctor = Doctors.objects.all()
-    return render(request, "doctors/show.html", {'doctors': doctor})
+    return render(request, "admin/doctors/show.html", {'doctors': doctor})
 
 def index(request):
     doctor = Doctors.objects.all()
-    return render(request, "doctors/index.html", {'doctors': doctor})
+    return render(request, "admin/doctors/index.html", {'doctors': doctor})
 
 def create(request):
     if request.method == "POST":
@@ -58,41 +58,42 @@ def create(request):
                 messages.error(request, 'An error occurred during the creation of the doctor.')
 
     departments = Departments.objects.all()
-    return render(request, 'doctors/create.html', {'departments': departments})
+    return render(request, 'admin/doctors/create.html', {'departments': departments})
 
     
 def edit(request,id):
     doctors = Doctors.objects.get(id=id)
-    #return render(request, 'doctors/edit.html', {'doctors': doctors})
-    return redirect ('doctors')
+    return render(request, 'admin/doctors/edit.html', {'doctors': doctors})
 
 
-def update_doctor(request, id):
+def update(request, id):
     if request.method == "POST":
-        
         name = request.POST.get('name')
         email = request.POST.get('email')
         position = request.POST.get('position')
-   
-        doctor_id = request.POST.get('id')
-        doctor = Doctors.objects.get(id=doctor_id)
+
+        doctor = Doctors.objects.get(id=id)
+
+        new_images = request.FILES.get('images')
+
+        if new_images:
+            if doctor.images:
+                old_images_path = doctor.images.path
+                os.remove(old_images_path)
+            doctor.images = new_images
+
 
         doctor.name = name
         doctor.email = email
         doctor.position = position
+        doctor.save()
 
-        new_image = request.FILES.get('images')
-        if new_image:
-            doctor.images = new_image
-            doctor.save()
-        else:
-            doctor.save()
+        return redirect('/doctors/index')
 
-        return redirect('index')
-
-    # Nếu không phải là phương thức POST, hiển thị form chỉnh sửa
     doctors = Doctors.objects.get(id=id)
-    return render(request, 'doctors/edit.html', {'doctors': doctors})
+    return render(request, 'admin/doctors/edit.html', {'doctors': doctors})
+
+
     
 def clear(request, id):
     doctor = Doctors.objects.get(id=id)
@@ -106,7 +107,6 @@ def clear(request, id):
 
 def excel(request):
     doctor = Doctors.objects.all()
-    
     
     wb = Workbook()
     ws = wb.active  

@@ -1,0 +1,40 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+
+{% if is_admin %}
+<section class="page-section">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <form id="articleForm" method="POST" action="/news/addnew" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1>Add more health-related news</h2>
+                        </div>
+                    </div>
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea class="form-control" id="content" name="content" row="10"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="title">Pub Date</label>
+                        <input type="date" class="form-control" id="pub_date" name="pub_date" required/>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-danger mx-auto d-block">Add News </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endif %}
+{% endblock content %}

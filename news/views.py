@@ -4,11 +4,15 @@ from .models import Article
 
 def article_list(request):
     articles = Article.objects.all()
-    return render(request, 'articles/index.html', {'articles': articles})
+    return render(request, 'admin/articles/show.html', {'articles': articles})
+
+def index(request):
+    articles = Article.objects.all()
+    return render(request, 'admin/articles/index.html', {'articles': articles})
 
 def article_detail(request, id):
     article = Article.objects.get( id = id)
-    return render(request, 'articles/details.html', {'article': article})
+    return render(request, 'admin/articles/details.html', {'article': article})
 
 def add_news(request):
     if request.method == 'POST':
@@ -27,10 +31,10 @@ def add_news(request):
         
         except Exception as e:
             print(f"An error occurred: {e}")
-            return render(request, 'articles/create.html', {'error_message': 'An error occurred while creating the article.'})
+            return render(request, 'admin/articles/create.html', {'error_message': 'An error occurred while creating the article.'})
             
     articles = Article.objects.all()
-    return render(request, 'articles/create.html', {'articles': articles})
+    return render(request, 'admin/articles/create.html', {'articles': articles})
 
 def delete(request, id):
     article = Article.objects.get(id = id)

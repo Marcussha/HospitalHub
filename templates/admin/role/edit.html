@@ -1,0 +1,29 @@
+{% extends "admin.html" %}
+    
+{% block content %}
+
+{%if is_admin%}
+<section class="page-section" >
+    <div class="container">
+        <form method="POST" class="post-form" action="/roles/update/{{ role.id }}">  
+            <div class="row">
+                <div class="col text-center">
+                    <h1>Update Role</h2>
+                </div>
+            </div>
+            {% csrf_token %}  
+            <div class="container">   
+                <div class="mb-3"> 
+                    <label>Role Name</label>  
+                    <input type="text" class="form-control" name="name" value="{{ role.name }}" />  
+                </div>
+                <div class="mb-3"> 
+                    <button type="submit" class="btn btn-success mx-auto d-block">Update</button>  
+                </div>      
+            </div>  
+        </form>
+    </div>
+</section>
+
+{%endif%}
+{% endblock content %}

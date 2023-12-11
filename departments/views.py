@@ -5,7 +5,7 @@ from departments.forms import DepartmentsForm
 def index(request):
     # Retrieve the list of departments
     departments = Departments.objects.all()
-    return render(request, "departments/show.html",{'departments': departments})
+    return render(request, "admin/departments/show.html",{'departments': departments})
 
 
 def addnew(request):
@@ -19,12 +19,12 @@ def addnew(request):
                 pass
     else:
         form = DepartmentsForm()
-        return render(request,'departments/index.html',{'form':form})
+        return render(request,'admin/departments/create.html',{'form':form})
     
     
 def edit(request,id):
     departments = Departments.objects.get(departmentid=id)
-    return render(request, 'departments/edit.html', {'departments': departments})
+    return render(request, 'admin/departments/edit.html', {'departments': departments})
 
 
 def update(request, id):
@@ -33,7 +33,7 @@ def update(request, id):
     if form.is_valid():
         form.save()
         return redirect("/departments")
-    return render(request, 'departments/edit.html', {'departments':departments})
+    return render(request, 'admin/departments/edit.html', {'departments':departments})
 
 
 def clear(request, id):

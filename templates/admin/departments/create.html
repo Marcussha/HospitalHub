@@ -1,0 +1,30 @@
+{% extends 'admin.html' %}
+
+{% block title %}Add New Departments{% endblock title %}
+
+{% block content %}
+<section class="page-section" >
+    <div class="container">
+        {% if is_admin %}
+            <form method="POST" class="post-form" action="/departments/addnew">
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>Enter Departments</h2>
+                    </div>
+                </div>
+                {% csrf_token %}
+                <div class="container">
+                    <div class="mb-3">
+                        <label><strong>Name Department:</strong></label>
+                        {{form.named}}
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-danger mx-auto d-block">Submit</button>
+                    </div> 
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

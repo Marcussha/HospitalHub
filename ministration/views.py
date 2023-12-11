@@ -7,7 +7,11 @@ from ministration.models import Ministration
 
 def index (request):
     ministrations = Ministration.objects.all()
-    return render (request, "ministration/index.html",{'ministrations': ministrations})
+    return render (request, "admin/ministration/show.html",{'ministrations': ministrations})
+
+def home (request):
+    ministrations = Ministration.objects.all()
+    return render (request, "admin/ministration/index.html",{'ministrations': ministrations})
 
 def create (request):
     if request.method == "POST":
@@ -20,11 +24,11 @@ def create (request):
                 pass
     else:
         form = MinistrationForm()
-        return render (request,'ministration/create.html', {'form':form})
+        return render (request,'admin/ministration/create.html', {'form':form})
     
 def edit (request, id):
     ministration = Ministration.objects.get( minisid = id)
-    return render (request, "ministration/edit.html",{'ministration': ministration})
+    return render (request, "admin/ministration/edit.html",{'ministration': ministration})
 
 def update(request, id):  
     ministration = Ministration.objects.get( minisid = id) 
@@ -32,7 +36,7 @@ def update(request, id):
     if form.is_valid():  
         form.save()  
         return redirect("/services")  
-    return render(request, "ministration/edit.html", {'ministration': ministration})  
+    return render(request, "admin/ministration/edit.html", {'ministration': ministration})  
 
 def clear(request, id):
     ministration = Ministration.objects.get(minisid=id)

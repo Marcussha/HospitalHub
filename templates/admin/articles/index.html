@@ -1,0 +1,37 @@
+{% extends 'admin.html' %}
+
+{% block content %}
+
+{% if is_admin %}
+    <section class="page-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-3">
+                    <h3>List of News</h3>
+                </div>
+                <div class="col-sm-8 col-9 text-right m-b-20">
+                  <a href="/news/addnew" class="btn btn btn-warning btn-rounded float-right"><i class="fa fa-plus"></i>Add News</a>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    {% for article in articles %}
+                        <div class="card mb-4">
+                            <div class="card-body ">
+                                <h3 class="card-title">{{ article.title }}</h3>
+                                <p class="card-text">{{ article.content }}</p>
+                                <p class="card-text"><small class="text-muted">Published on: {{ article.pub_date }}</small></p>
+                                <td>
+                                    <a href="/news/delete/{{ article.id }}" class="btn btn-danger">Delete</a>
+                                </td>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {%endif%}
+{% endblock content %}

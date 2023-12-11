@@ -1,0 +1,28 @@
+{% extends "admin.html" %}
+    
+{% block content %}
+
+{%if is_admin%}
+<section class="page-section" >
+    <div class="container">
+        <form method="POST" class="post-form" action="/roles/create">  
+            <div class="col text-center">
+                <h2>Enter New Role</h2>
+            </div>
+            {% csrf_token %}  
+            <div class="container">      
+                <div class="mb-3"> 
+                    <label>Role Name:</label>  
+                    {{ form.name }}   
+                </div> 
+                <br>
+                <div class="mb-3"> 
+                    <button type="submit" class="btn btn-danger mx-auto d-block">Submit</button>   
+                </div> 
+            </div>  
+        </form>  
+    </div>
+</section>
+
+{%endif%}
+{% endblock content %} 

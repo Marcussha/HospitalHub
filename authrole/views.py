@@ -7,7 +7,7 @@ from django.http import HttpResponse
 # Create your views here.
 def index (request):
     authroles = AuthUserGroups.objects.all()
-    return render(request, 'authrole/index.html',{'authroles': authroles})
+    return render(request, 'admin/authrole/index.html',{'authroles': authroles})
 
 def create(request):
     if request.method == "POST":
@@ -22,4 +22,13 @@ def create(request):
     else:
         # If the request method is not POST, it means the user is accessing the page to fill out the form
         form = UserGroupsForm()
-        return render(request,'authrole/create.html',{'form':form})
+        return render(request,'admin/authrole/create.html',{'form':form})
+    
+def delete(request, id):
+    authroles = AuthUserGroups.objects.get(id=id)
+    authroles.delete()
+
+    # Fetch the updated queryset after deletion
+    updated_authroles = AuthUserGroups.objects.all()
+
+    return render(request, 'admin/authrole/index.html', {'authroles': updated_authroles})

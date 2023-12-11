@@ -1,0 +1,32 @@
+{% extends "admin.html" %}
+
+{% block title %}Change the New Department{% endblock title %}
+
+{% block content %}
+<section class="page-section" >
+    <div class="container">
+        {% if is_doctor or is_admin %}
+            <form method="POST" class="post-form" action="/departments/update/{{departments.departmentid}}">  
+                <div class="row">
+                    <div class="col text-center">
+                        <h2>Update Department</h2>
+                    </div>
+                </div>
+                {% csrf_token %}  
+                <div class="container">     
+
+                    <div class="mb-3">
+                        <label> Name Department:</label>
+                        <input type="text" class="form-control" name="named" id="named" required maxlength="20" value="{{departments.named}}"/>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit"  class="btn btn-danger btn-lg mx-auto d-block">Update</button>
+                    </div>
+                    
+                </div>
+            </form>
+        {%endif%}
+    </div>
+</section>
+{% endblock content %}
