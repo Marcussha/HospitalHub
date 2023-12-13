@@ -111,7 +111,7 @@ def edit_profile(request):
         # Update other profile fields as needed
         user_to_edit.save()
 
-        messages.success(request, 'Profile updated successfully!')
+        messages.success(request, 'Updated information successfully!')
         return redirect('profile')
 
     return render(request, 'authentication/edit_profile.html', {'user_to_edit': user_to_edit})

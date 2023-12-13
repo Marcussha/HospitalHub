@@ -43,6 +43,13 @@
                             <input type="date" name="datebooking" class="form-control" value="{{ filter.form.datebooking.value }}"/>
                         </div>
                         <button type="submit" class="btn btn-primary center" style="margin-right: 40px;">Search</button>
+                        <span>
+                            <a href="{% url 'export_filtered_excel' %}?
+                            {% if filter.form.serviceid.value %}serviceid={{ filter.form.serviceid.value }}{% endif %}
+                            {% if filter.form.docid.value %}&docid={{ filter.form.docid.value }}{% endif %}
+                            {% if filter.form.datebooking.value %}&datebooking={{ filter.form.datebooking.value }}{% endif %}"
+                             class="btn btn-success"><i class="fa fa-download"></i>Excel</a>
+                        </span>
                     </form>
                 </div>
             </div>

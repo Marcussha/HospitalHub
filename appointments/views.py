@@ -122,6 +122,44 @@ def export_excel(request):
     return response
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
+def export_filtered_excel(request):
+    appointments = AppointmentFilter(request.GET, queryset=Appointment.objects.all()).qs
+    
+    wb = Workbook()
+    ws = wb.active
+
+    # Define the headers
+    headers = ["Full Name", "Email", "Phone", "Date", "Time", "Service", "Doctor", "Notes"]
+
+    # Set the column headers in the worksheet
+    for col_num, header_title in enumerate(headers, 1):
+        col_letter = get_column_letter(col_num)
+        cell = ws.cell(row=1, column=col_num)
+        cell.value = header_title
+
+    # Populate the data rows
+    for row_num, appointment in enumerate(appointments, 2):  
+        ws.cell(row=row_num, column=1, value=appointment.fullname)
+        ws.cell(row=row_num, column=2, value=appointment.email)
+        ws.cell(row=row_num, column=3, value=appointment.phone)
+        ws.cell(row=row_num, column=4, value=appointment.datebooking)
+        ws.cell(row=row_num, column=5, value=appointment.timebooking)
+        ws.cell(row=row_num, column=6, value=appointment.serviceid.name_ministration)  
+        ws.cell(row=row_num, column=7, value=appointment.docid.name)   
+        ws.cell(row=row_num, column=8, value=appointment.note)
+
+    # Create a response with the Excel file
+    response = HttpResponse(
+        save_virtual_workbook(wb),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    # Set the filename for the download
+    current_datetime = datetime.now().strftime("%Y%m%d%H%M%S")
+    response['Content-Disposition'] = f'attachment; filename=appointments_{current_datetime}.xlsx'
+
+    return response
+
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def export_csv(request):
     appointments = Appointment.objects.all()
 
