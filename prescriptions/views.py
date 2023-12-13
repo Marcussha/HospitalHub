@@ -7,8 +7,10 @@ from django.contrib import messages
 from prescriptions.filters import PrescriptionFilter
 from django.http import Http404
 from django.db.utils import IntegrityError
+from django.contrib.auth.decorators import user_passes_test
+from authrole.custom_context import user_is_admin, user_is_doctor
 
-
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def index(request):
     prescription = Prescriptions.objects.all()
     prescriptionFilter = PrescriptionFilter(request.GET, queryset=prescription)
@@ -17,6 +19,7 @@ def index(request):
     return render(request,"prescriptions/index.html", {'prescription':prescription, 'filter': PrescriptionFilter})
 
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def create(request):
     prescription = Prescriptions.objects.all()
     
@@ -65,7 +68,8 @@ def create(request):
 
     return render(request, 'prescriptions/create.html', {'prescription': prescription, 'doctors': doctor, 'medicines': medicines, 'patient': patient})
 
-    
+
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')    
 def edit(request, id):
     # Retrieve the prescription to be edited using its unique identifier (id)
     prescription = Prescriptions.objects.get(id=id)
@@ -79,6 +83,7 @@ def edit(request, id):
     return render(request, 'prescriptions/edit.html', {'prescription': prescription, 'patients': patients, 'doctors': doctors, 'medicines': medicines})
 
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def update(request, id):
     try:
         prescription = Prescriptions.objects.get(id=id)
@@ -130,6 +135,7 @@ def update(request, id):
     return render(request, 'prescriptions/edit.html', {'prescription': prescription})
 
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def delete(request, id):
     try:
         prescription = Prescriptions.objects.get(id=id)

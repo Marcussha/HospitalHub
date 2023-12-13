@@ -2,12 +2,16 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.http import JsonResponse
 from .models import Client
-# Create your views here.
+from django.contrib.auth.decorators import user_passes_test
+from authrole.custom_context import user_is_admin, user_is_doctor
 
+# Create your views here.
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def index (request): 
     clients = Client.objects.all()
     return render(request, "customers/index.html",{'clients': clients})
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def create(request):
     clients = Client.objects.all()
     if request.method == "POST":
@@ -36,10 +40,12 @@ def create(request):
 
     return render(request, "customers/create.html", {'clients': clients})
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def edit(request, id):
     client = Client.objects.all()
     return render(request, 'customers/edit.html', {'client': client})
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def update(request, id):
     client = Client.objects.all()
 
@@ -61,7 +67,7 @@ def update(request, id):
 
     return render(request, 'customers/edit.html', {'client': client})
 
-
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def clear(request, id):
     clients = Client.objects.get( id =id)
     clients.delete()

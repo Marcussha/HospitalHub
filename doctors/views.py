@@ -10,15 +10,20 @@ from datetime import datetime
 from openpyxl.utils import get_column_letter
 from openpyxl.writer.excel import save_virtual_workbook
 import os
+from django.contrib.auth.decorators import user_passes_test
+from authrole.custom_context import user_is_admin, user_is_doctor
+
 # Create your views here.
 def home(request):
     doctor = Doctors.objects.all()
     return render(request, "admin/doctors/show.html", {'doctors': doctor})
 
+@user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def index(request):
     doctor = Doctors.objects.all()
     return render(request, "admin/doctors/index.html", {'doctors': doctor})
 
+@user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def create(request):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -60,12 +65,12 @@ def create(request):
     departments = Departments.objects.all()
     return render(request, 'admin/doctors/create.html', {'departments': departments})
 
-    
+@user_passes_test(lambda u: user_is_admin(u), login_url='login')    
 def edit(request,id):
     doctors = Doctors.objects.get(id=id)
     return render(request, 'admin/doctors/edit.html', {'doctors': doctors})
 
-
+@user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def update(request, id):
     if request.method == "POST":
         name = request.POST.get('name')
@@ -94,7 +99,7 @@ def update(request, id):
     return render(request, 'admin/doctors/edit.html', {'doctors': doctors})
 
 
-    
+@user_passes_test(lambda u: user_is_admin(u), login_url='login')    
 def clear(request, id):
     doctor = Doctors.objects.get(id=id)
     

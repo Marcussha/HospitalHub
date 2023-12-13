@@ -1,14 +1,16 @@
 from django.shortcuts import render,redirect
 from medicine.models import Medicine
 from django.contrib import messages
- 
-
+from django.contrib.auth.decorators import user_passes_test
+from authrole.custom_context import user_is_admin, user_is_doctor
 
 # Create your views here.
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def index(request):
     medicine = Medicine.objects.all()
     return render(request,"medicine/index.html", {'medicine':medicine})
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def create(request):
     medicine = Medicine.objects.all()
     if request.method == "POST":
@@ -28,11 +30,12 @@ def create(request):
 
     return render(request, "medicine/create.html", {'medicine': medicine})
 
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def edit(request,id):
     medicine = Medicine.objects.get(id=id)
     return render(request, 'medicine/edit.html', {'medicine': medicine})
 
-
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def update(request, id):
     medicine = Medicine.objects.get(id=id)
     if request.method == 'POST':
@@ -54,7 +57,7 @@ def update(request, id):
             
     return render(request, 'medicine/edit.html', {'medicine':medicine})
 
-
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def clear(request, id):
     medicine = Medicine.objects.get(id=id)
     
