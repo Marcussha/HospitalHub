@@ -69,23 +69,21 @@
 							<img class="rounded-circle" src="/media/user.jpg" width="24" alt="Admin">
 							<span class="status online"></span>
 						</span>
-						<span>Admin</span>
+						<span>{{ user.username }}</span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="profile.html">My Profile</a>
-						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-						<a class="dropdown-item" href="settings.html">Settings</a>
-						<a class="dropdown-item" href="login.html">Logout</a>
+                        <a class="dropdown-item" href="/profile">My Profile</a>
+                        <a class="dropdown-item" href="/profile/edit ">Edit Profile</a>
+                        <a class="dropdown-item" href="/signout">Logout</a>
 					</div>
                 </li>
             </ul>
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                    <a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
-                    <a class="dropdown-item" href="settings.html">Settings</a>
-                    <a class="dropdown-item" href="login.html">Logout</a>
+                    <a class="dropdown-item" href="/profile">My Profile</a>
+                    <a class="dropdown-item" href="/edit-profile">Edit Profile</a>
+                    <a class="dropdown-item" href="/signout">Logout</a>
                 </div>
             </div>
         </div>
@@ -167,7 +165,6 @@
 	<script src="{% static "js/popper.min.js"%}"></script>
     <script src="{% static "js/bootstrap.min.js"%}"></script>
     <script src="{% static "js/jquery.slimscroll.js"%}"></script>
-    <script src="{% static "js/chart.js"%}"></script>
     <script src="{% static "js/app.js"%}"></script>
 
 </body>

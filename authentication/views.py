@@ -10,6 +10,7 @@ from ministration.models import Ministration
 from doctors.models import Doctors 
 from django.contrib.auth.decorators import user_passes_test, login_required
 from authrole.custom_context import user_is_doctor,user_is_admin
+from authentication.models import CustomUserManager, CustomUser
 
 
 logger = logging.getLogger(__name__)
@@ -97,6 +98,7 @@ def signout(request):
     logout(request)
     return redirect('/')
 
+@login_required(login_url='/login')
 def profile(request):
     return render(request, "authentication/profile.html")
 
