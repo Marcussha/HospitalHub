@@ -42,12 +42,12 @@ def create(request):
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def edit(request, id):
-    client = Client.objects.all()
+    client = Client.objects.get(id=id)
     return render(request, 'customers/edit.html', {'client': client})
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def update(request, id):
-    client = Client.objects.all()
+    client = Client.objects.get(id=id)
 
     if request.method == 'POST':
         try:

@@ -9,6 +9,15 @@
             {%if is_doctor or is_admin %}
             <div class="card-body">
                 <form id="medicineForm" method="POST" action="/medicine/create"  enctype="multipart/form-data" >
+                    {% if messages %}
+                        <div class="alert alert-danger">
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     {% csrf_token %}
                     <h1>Enter Medicine</h1>
                    

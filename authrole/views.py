@@ -35,5 +35,4 @@ def create(request):
 def delete(request, id):
     authroles = AuthUserGroups.objects.get(id=id)
     authroles.delete()
-
-    return redirect ('/authrole')
+    return redirect('/authrole')

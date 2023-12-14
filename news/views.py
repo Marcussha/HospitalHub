@@ -22,12 +22,14 @@ def add_news(request):
         title = request.POST.get('title')
         content = request.POST.get('content')
         pub_date = request.POST.get('pub_date')
+        description = request.POST.get('description')
         
         try:
             new_article = Article.objects.create(
                 title=title, 
                 content=content, 
-                pub_date=pub_date
+                pub_date=pub_date,
+                description = description,
             ) 
             #return render(request, 'articles/create.html', {'new_article': new_article})
             return redirect('/news/index')

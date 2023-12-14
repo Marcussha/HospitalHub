@@ -6,12 +6,20 @@
 <section class="page-section">
     <div class="container">
         <form method="POST" class="post-form" action="/customers/update/{{ client.id }}">
-            {% csrf_token %}
+            {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
             <div class="container">
                 <div class="col-12">
                     <h3>Edit Customer</h3>
                 </div>
-
+                {% csrf_token %}
                 <div class="mb-3">
                     <label for="fullname">Full Name:</label>
                     <input type="text" class="form-control" name="fullname" id="fullname" value="{{ client.fullname }}" required>
@@ -29,7 +37,7 @@
 
                 <div class="mb-3">
                     <label for="birthday">Birthday</label>
-                    <input type="date" class="form-control" name="birthday" id="birthday" value="{{ client.birthday }}" required>
+                    <input type="date" class="form-control" name="birthday" id="birthday" value="{{ client.birthday |date:'Y-m-d' }}" required>
                 </div>
 
                 <div class="mb-3">
