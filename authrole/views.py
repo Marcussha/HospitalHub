@@ -25,7 +25,7 @@ def create(request):
             except Exception as e:
                 messages.error(request, f'An error occurred during user group creation: {e}')
         else:
-            messages.error(request, 'Please correct the form errors.')
+            messages.error(request, 'This username is already taken, please choose another one')
     else:
         form = UserGroupsForm()
 

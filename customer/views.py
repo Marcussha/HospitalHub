@@ -34,7 +34,7 @@ def create(request):
                     address=address,
                     sex=sex,
                 )
-                return redirect('/customers/create')
+                return redirect('/customers')
             except Exception as e:
                 messages.error(request, 'An error occurred while creating the client.')
 
