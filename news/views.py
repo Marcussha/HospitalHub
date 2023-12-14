@@ -30,7 +30,7 @@ def add_news(request):
                 pub_date=pub_date
             ) 
             #return render(request, 'articles/create.html', {'new_article': new_article})
-            return redirect('/news')
+            return redirect('/news/index')
         
         except Exception as e:
             print(f"An error occurred: {e}")
@@ -43,5 +43,5 @@ def add_news(request):
 def delete(request, id):
     article = Article.objects.get(id = id)
     article.delete()
-    return redirect('/news')
+    return redirect('/news/index')
             
