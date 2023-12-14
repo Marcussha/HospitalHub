@@ -1,0 +1,47 @@
+{% extends "admin.html" %}
+    
+{% block content %}
+<section class="page-section" >
+  <div class="container">
+    {%if  is_admin %}
+    <div class="row">
+      <div class="col-sm-4 col-3">
+          <h3>Customer Informations</h3>
+      </div>
+      <div class="col-sm-8 col-9 text-right m-b-20">
+        <a href="/customers/add" class="btn btn btn-warning btn-rounded float-right"><i class="fa fa-plus"></i>Create New</a>
+      </div>
+  </div>
+
+      <table class="table table-bordered" id="example" style="text-align: center;">
+          <thead class="table success">
+              <tr>
+                  <th style="width: 20%;">Full Name</th>
+                  <th style="width: 30%;">Email</th>
+                  <th style="width: 10%;">Birthday</th>
+                  <th style="width: 20%;">Address</th>
+                  <th style="width: 15%;">Telephone</th>
+                  <th style="width: 15%;">Sex</th>
+              </tr>
+          </thead> 
+
+          <tbody>
+              {% for client in clients %}
+                <tr>
+                    <td>{{ client.fullname }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.birthday }}</td>
+                    <td>{{ client.address }}</td>
+                    <td>{{ client.telephone }}</td>
+                    <td>{{ client.sex }}</td>
+                    <td><a href="/customers/admin/delete/{{ client.id }}" class="btn btn-danger">Delete</a></td>
+                </tr>
+              {% endfor %}
+          </tbody>
+
+      </table>
+    {%endif%}
+  </div>
+</section>
+
+{% endblock content %}

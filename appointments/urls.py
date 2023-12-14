@@ -4,6 +4,7 @@ from .import views
 
 urlpatterns = [
     path('', views.index, name="index"),
+    path('/home', views.home, name="home"),
     path('/create',views.create, name="create_appointment"),
     path('/delete/<int:id>', views.clear, name="clear"),
     path('/excel/', views.export_excel, name='export_excel'),

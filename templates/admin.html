@@ -16,13 +16,16 @@
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="/" class="logo">
+				<a href="/admin" class="logo">
 					<span>HospitalHub</span>
 				</a>
 			</div>
 			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
+                <li class="nav-item dropdown d-none d-sm-block">
+                    <a href="/" class="dropdown-toggle nav-link" >View Site</a>
+                </li>
                 <li class="nav-item dropdown d-none d-sm-block">
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
                     <div class="dropdown-menu notifications">
@@ -100,52 +103,51 @@
                             <a href="/doctors/index"><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
                         <li>
-                            <a href="/customers"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            <a href="/customers/admin"><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
                         <li>
-                            <a href="/appointments"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
+                            <a href="/appointments/home"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
                         <li>
                             <a href="/departments"><i class="fa fa-hospital-o"></i> <span>Departments</span></a>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="fa fa-pencil-square-o"></i> <span>Prescription</span> <span class="menu-arrow"></span></a>
+                            <a href="/prescriptions"><i class="fa fa-pencil-square-o"></i> <span>Prescription</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="/prescriptions">Prescription</a></li>
                                 <li><a href="/prescriptions/create">Add Prescription</a></li>
-                                <li><a href="/prescriptions/edit">Edit Prescription</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
+                            <a href="/news/index"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="/news/index">Blog</a></li>
                                 <li><a href="/news/addnew">Add Blog</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="fa fa-address-card-o"></i> <span>Roles</span> <span class="menu-arrow"></span></a>
+                            <a href="/roles"><i class="fa fa-address-card-o"></i> <span>Roles</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="/roles">Roles List</a></li>
                                 <li><a href="/roles/create">Add New Role</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="fa fa-address-card-o"></i> <span>Assign Role</span> <span class="menu-arrow"></span></a>
+                            <a href="/authrole"><i class="fa fa-address-card-o"></i> <span>Assign Role</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="/authrole">List</a></li>
                                 <li><a href="/authrole/create">Assign new role</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="#"><i class="fa fa-list-alt"></i> <span>Services</span> <span class="menu-arrow"></span></a>
+                            <a href="/services/index"><i class="fa fa-list-alt"></i> <span>Services</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="/services/index">List of Services</a></li>
-                                <li><a href="/services/create">Add New Role</a></li>
+                                <li><a href="/services/create">Add New</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="settings.html"><i class="fa fa-cog"></i> <span>Settings</span></a>
+                            <a href="#"><i class="fa fa-cog"></i> <span>Settings</span></a>
                         </li>
                     </ul>
                 </div>
