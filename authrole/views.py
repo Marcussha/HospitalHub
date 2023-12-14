@@ -32,8 +32,4 @@ def create(request):
 def delete(request, id):
     authroles = AuthUserGroups.objects.get(id=id)
     authroles.delete()
-
-    # Fetch the updated queryset after deletion
-    updated_authroles = AuthUserGroups.objects.all()
-
-    return render(request, 'admin/authrole/index.html', {'authroles': updated_authroles})
+    return redirect('/authrole')
