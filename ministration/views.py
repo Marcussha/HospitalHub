@@ -9,6 +9,10 @@ def index (request):
     ministrations = Ministration.objects.all()
     return render (request, "admin/ministration/show.html",{'ministrations': ministrations})
 
+def detail(request, id):
+    ministration = Ministration.objects.get(minisid=id)
+    return render (request, 'admin/ministration/details.html', {'ministration': ministration})
+
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def home (request):
     ministrations = Ministration.objects.all()

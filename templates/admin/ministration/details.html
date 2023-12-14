@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-section">
+    <form method="POST" class="post-form" action="/services/details/{{ministration.minisid}}">
+        <div class="jumbotron text-center">
+            <h1>{{ ministration.name_ministration }}</h1> 
+            <h6>{{ ministration.detail }}</h6>
+        </div>
+        <div class="card">
+            <div class="card-body center">
+                <img src="/media/quy-trinh-kham-benh-va-nhung-dieu-can-luu-y-2.jpg" alt="image" style="width:100%" class="float-left img-thumbnail">
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <p>{{ministration.note}}</p>
+            </div>
+        </div>
+    </form>  
+</section>
+{% endblock content %}
