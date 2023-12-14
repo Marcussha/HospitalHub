@@ -5,6 +5,15 @@
 {% block content %}
 <section class="page-section">
   <div class="container">
+    {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+    {% endif %}
     <div class="main-body">       
       <div class="row gutters-sm">
         <div class="col-md-4 mb-3">

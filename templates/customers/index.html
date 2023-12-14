@@ -31,7 +31,8 @@
                     <td>{{ client.address }}</td>
                     <td>{{ client.telephone }}</td>
                     <td>{{ client.sex }}</td>
-                    <td><a href="customers/delete/{{ client.id }}" class="btn btn-danger">Delete</a></td>
+                    <td> <a href="/customers/edit/{{ client.id }}" class="btn btn-primary">Edit</a> </td>
+                    <td><a href="/customers/delete/{{ client.id }}" class="btn btn-danger">Delete</a></td>
                 </tr>
               {% endfor %}
           </tbody>
