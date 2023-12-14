@@ -104,7 +104,7 @@ def clear(request, id):
     doctor = Doctors.objects.get(id=id)
     
     if doctor.appointment_count > 0 or doctor.prescriptions_count > 0:
-        error_message = "Cannot delete a doctors."
+        error_message = "Cannot delete a doctor."
         return render (request, "error_page.html", {'error_message': error_message})
     
     doctor.delete()
