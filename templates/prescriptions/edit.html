@@ -17,11 +17,12 @@
                     </div>
                 {% endif %}
                 {% csrf_token %}  
-                <div class="container">   
-                    <div class="col-12">  
-                        <h3>Update Prescription</h3>  
+                <div class="row">
+                    <div class="col text-center">
+                        <h2>Update Prescription</h2>
                     </div>
-                    
+                </div>
+                <div class="container">                       
                     <div class="mb-3">
                         <label>Name Prescription:</label>
                         <input type="text" class="form-control" name="name_disease" id="name_disease" required maxlength="20" value="{{ prescription.name_disease }}"/>
@@ -75,7 +76,7 @@
                     </div>
                     
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-danger btn-lg">Update</button>
+                        <button type="submit" class="btn btn-primary mx-auto d-block">Update</button>
                     </div>
                 </div>
             </form>

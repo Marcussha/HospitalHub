@@ -51,6 +51,8 @@ def update(request, id):
 
             medicine.save()
 
+            messages.success(request, 'Update successfully')
+
             return redirect('/medicine')
         except Exception as e:
             messages.error(request, 'An error occurred while updating the medicine.')

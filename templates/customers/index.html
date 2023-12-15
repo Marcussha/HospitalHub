@@ -6,11 +6,29 @@
 <section class="page-section" >
   <div class="container">
     {%if is_doctor or is_admin %}
-    <span><a href="/customers/create" class="btn btn-primary">Create New</a></span>
-      
-      <h1>Customer Information</h1>
+    {% if messages %}
+      <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {% for message in messages %}
+          {{ message }}
+        {% endfor %}
+      </div>
+    {% endif %}
 
+    <div class="row">
+      <div class="col-sm-6 col-4">
+          <h3>Customer Informations</h3>
+      </div>
+      <div class="col-sm-3 col-8 text-right m-b-20">
+        <a href="/customers/create" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i>Create New</a>
+      </div>
+    </div>
+    <br>
+      
       <table class="table table-bordered" id="example" style="text-align: center;">
+        
           <thead class="table success">
               <tr>
                   <th style="width: 20%;">Full Name</th>
@@ -31,7 +49,7 @@
                     <td>{{ client.address }}</td>
                     <td>{{ client.telephone }}</td>
                     <td>{{ client.sex }}</td>
-                    <td> <a href="/customers/edit/{{ client.id }}" class="btn btn-primary">Edit</a> </td>
+                    <td> <a href="/customers/edit/{{ client.id }}" class="btn btn-info">Edit</a> </td>
                     <td><a href="/customers/delete/{{ client.id }}" class="btn btn-danger">Delete</a></td>
                 </tr>
               {% endfor %}

@@ -7,18 +7,20 @@
     <div class="container">
         <form method="POST" class="post-form" action="/customers/update/{{ client.id }}">
             {% if messages %}
-            <div class="alert alert-danger">
-                <ul>
+            <div class="alert alert-danger{% if messages.tags %} {{ messages.tags }}{% endif %}">
+                <ul class="messages">
                     {% for message in messages %}
                         <li>{{ message }}</li>
                     {% endfor %}
                 </ul>
             </div>
             {% endif %}
-            <div class="container">
-                <div class="col-12">
-                    <h3>Edit Customer</h3>
+            <div class="row">
+                <div class="col text-center">
+                    <h2>Update Customer</h2>
                 </div>
+            </div>
+            <div class="container">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="fullname">Full Name:</label>
@@ -42,16 +44,21 @@
 
                 <div class="mb-3">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" name="address" id="address" value="{{ client.address }}" required>
+                    <input type="text" class="form-control" name="address" id="address" value="{{ client.address }}" >
                 </div>
 
                 <div class="mb-3">
                     <label for="sex">Sex</label>
-                    <input type="text" class="form-control" name="sex" id="sex" value="{{ client.sex }}" required>
+                    <select class="form-control" id="inputSex" name="sex" required>
+                        <option value="" disabled>Select sex</option>
+                        <option value="Male" {% if client.sex == "Male" %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if client.sex == "Female" %}selected{% endif %}>Female</option>
+                        <option value="Other" {% if client.sex == "Other" %}selected{% endif %}>Other</option>
+                    </select>
                 </div>
 
                 <div class="mb-3">
-                    <button type="submit" class="btn btn-primary btn-lg">Update</button>
+                    <button type="submit" class="btn btn-primary btn-lg mx-auto d-block">Update</button>
                 </div>
 
             </div>

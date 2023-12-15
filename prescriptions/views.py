@@ -124,7 +124,6 @@ def update(request, id):
             # Save the updated prescription
             prescription.save()
 
-            # Display a success message and redirect to the prescriptions page
             messages.success(request, 'Prescription updated successfully.')
             return redirect('/prescriptions')
 

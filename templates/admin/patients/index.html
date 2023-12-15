@@ -3,7 +3,6 @@
 {% block content %}
 <section class="page-section" >
   <div class="container">
-    {%if  is_admin %}
     <div class="row">
       <div class="col-sm-4 col-3">
           <h3>Customer Informations</h3>
@@ -11,7 +10,7 @@
       <div class="col-sm-8 col-9 text-right m-b-20">
         <a href="/customers/add" class="btn btn btn-warning btn-rounded float-right"><i class="fa fa-plus"></i>Create New</a>
       </div>
-  </div>
+    </div>
 
       <table class="table table-bordered" id="example" style="text-align: center;">
           <thead class="table success">
@@ -38,9 +37,7 @@
                 </tr>
               {% endfor %}
           </tbody>
-
       </table>
-    {%endif%}
   </div>
 </section>
 
