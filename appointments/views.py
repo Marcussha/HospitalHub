@@ -80,7 +80,14 @@ def create(request):
 def clear (request,id):
     appointment = Appointment.objects.get( appid =id)
     appointment.delete()
-    return redirect('/appointments')  
+    return redirect('/appointments') 
+
+@user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
+def delete (request,id):
+    appointment = Appointment.objects.get( appid =id)
+    appointment.delete()
+    return redirect('/appointments/home')
+
 
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
