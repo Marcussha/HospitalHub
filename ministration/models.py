@@ -8,7 +8,7 @@ class Ministration(models.Model):
     minisid = models.AutoField(db_column='MinisID', primary_key=True)
     name_ministration = models.CharField(db_column='Name_ministration', max_length=70)
     detail = models.CharField(db_column='Detail', max_length=90, blank=True, null=True)
-    note = models.CharField(db_column='Note', max_length=12000, blank=True, null=True)  # Field name made lowercase.
+    note = models.CharField(db_column='Note', max_length=12000, blank=True, null=True) 
     
     objects = MinistrationManager()
 

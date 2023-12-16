@@ -23,14 +23,17 @@ def home(request):
     doc = Doctors.objects.all()[:3]
     return render(request, "authentication/main.html", {'ministrations': ministrations, 'doc': doc})
 
+
 @user_passes_test(lambda u: user_is_doctor(u), login_url='login')
 def static(request):
     doc = Doctors.objects.all()[:3]
     return render(request, "authentication/doctor.html", {'doc': doc})
 
+
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def index (request):
     return render (request,"admin/dashboard.html")
+
 
 def login(request):
     if request.user.is_authenticated:
@@ -59,7 +62,7 @@ def login(request):
             return render(request, 'authentication/login.html', {'form': form, 'msg': msg})
     else:
         form = AuthenticationForm()
-        return render(request, 'authentication/login.html', {'form': form})
+    return render(request, 'authentication/login.html', {'form': form})
     
 
 def signup(request):
@@ -94,13 +97,16 @@ def signup(request):
     else:
         return render(request, 'authentication/signup.html')
     
+
 def signout(request):
     logout(request)
     return redirect('/')
 
+
 @login_required(login_url='/login')
 def profile(request):
     return render(request, "authentication/profile.html")
+
 
 @login_required(login_url='/login')
 def edit_profile(request):

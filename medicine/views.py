@@ -10,6 +10,7 @@ def index(request):
     medicine = Medicine.objects.all()
     return render(request,"medicine/index.html", {'medicine':medicine})
 
+
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def create(request):
     medicine = Medicine.objects.all()
@@ -30,10 +31,13 @@ def create(request):
 
     return render(request, "medicine/create.html", {'medicine': medicine})
 
+
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def edit(request,id):
     medicine = Medicine.objects.get(id=id)
+
     return render(request, 'medicine/edit.html', {'medicine': medicine})
+
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def update(request, id):
@@ -52,12 +56,12 @@ def update(request, id):
             medicine.save()
 
             messages.success(request, 'Update successfully')
-
             return redirect('/medicine')
         except Exception as e:
             messages.error(request, 'An error occurred while updating the medicine.')
             
     return render(request, 'medicine/edit.html', {'medicine':medicine})
+
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def clear(request, id):

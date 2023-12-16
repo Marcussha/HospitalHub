@@ -18,10 +18,12 @@ def home(request):
     doctor = Doctors.objects.all()
     return render(request, "admin/doctors/show.html", {'doctors': doctor})
 
+
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def index(request):
     doctor = Doctors.objects.all()
     return render(request, "admin/doctors/index.html", {'doctors': doctor})
+
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def create(request):
@@ -32,7 +34,6 @@ def create(request):
         note = request.POST.get('note')
         images = request.FILES.get('images')
         
-        # Get the selected Department and Doctor instances using their primary keys
         department = request.POST.get('department')
         department_instance = Departments.objects.get(departmentid=department)
     
@@ -48,27 +49,23 @@ def create(request):
                 images=filename,
                 department=department_instance,
             )
-
-            # Include the newly created doctor in the context
-            context = {'departments': Departments.objects.all(), 'new_doctor': new_doctor}
-           # return render(request, 'doctors/index.html', context)
             return redirect ('/doctors/index')
 
         except IntegrityError as e:
-            # Check if the error is related to a duplicate key
             if 'unique constraint' in str(e).lower() and 'email' in str(e).lower():
                 messages.error(request, 'Email already exists. Please choose a different email.')
             else:
-                # Handle other IntegrityError cases if needed
                 messages.error(request, 'An error occurred during the creation of the doctor.')
 
     departments = Departments.objects.all()
     return render(request, 'admin/doctors/create.html', {'departments': departments})
 
+
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')    
 def edit(request,id):
     doctors = Doctors.objects.get(id=id)
     return render(request, 'admin/doctors/edit.html', {'doctors': doctors})
+
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def update(request, id):

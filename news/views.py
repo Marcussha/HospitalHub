@@ -3,18 +3,22 @@ from .models import Article
 from django.contrib.auth.decorators import user_passes_test
 from authrole.custom_context import user_is_admin, user_is_manager
 
+# Create your views here
 def article_list(request):
     articles = Article.objects.all()
     return render(request, 'admin/articles/show.html', {'articles': articles})
+
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_manager(u), login_url='login')
 def index(request):
     articles = Article.objects.all()
     return render(request, 'admin/articles/index.html', {'articles': articles})
 
+
 def article_detail(request, id):
     article = Article.objects.get( id = id)
     return render(request, 'admin/articles/details.html', {'article': article})
+
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_manager(u), login_url='login')
 def add_news(request):
@@ -31,7 +35,6 @@ def add_news(request):
                 pub_date=pub_date,
                 description = description,
             ) 
-            #return render(request, 'articles/create.html', {'new_article': new_article})
             return redirect('/news/index')
         
         except Exception as e:
@@ -40,6 +43,7 @@ def add_news(request):
             
     articles = Article.objects.all()
     return render(request, 'admin/articles/create.html', {'articles': articles})
+
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_manager(u), login_url='login')
 def delete(request, id):

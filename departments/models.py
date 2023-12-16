@@ -6,8 +6,8 @@ class DepartmentsManager(models.Manager):
         return super().get_queryset().annotate(doctors_count = models.Count('doctors'))
     
 class Departments(models.Model):
-    departmentid = models.AutoField(db_column='DepartmentID', primary_key=True)  # Field name made lowercase.
-    named = models.CharField(db_column='NameD', max_length=50, blank=True, null=True)  # Field name made lowercase.
+    departmentid = models.AutoField(db_column='DepartmentID', primary_key=True)  
+    named = models.CharField(db_column='NameD', max_length=50, blank=True, null=True) 
     
     objects = DepartmentsManager()
     class Meta:

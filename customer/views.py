@@ -11,6 +11,7 @@ def index (request):
     clients = Client.objects.all()
     return render(request, "customers/index.html",{'clients': clients})
 
+
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def create(request):
     clients = Client.objects.all()
@@ -34,16 +35,18 @@ def create(request):
                     address=address,
                     sex=sex,
                 )
+
                 return redirect('/customers')
             except Exception as e:
                 messages.error(request, 'An error occurred while creating the client.')
-
     return render(request, "customers/create.html", {'clients': clients})
+
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def edit(request, id):
     client = Client.objects.get(id=id)
     return render(request, 'customers/edit.html', {'client': client})
+
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def update(request, id):
@@ -67,6 +70,7 @@ def update(request, id):
 
     return render(request, 'customers/edit.html', {'client': client})
 
+
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def clear(request, id):
     clients = Client.objects.get( id =id)
@@ -74,12 +78,14 @@ def clear(request, id):
     return redirect('/customers')  
 
 
-#### View for admin page
+
+#### Function for admin page
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def home (request): 
     clients = Client.objects.all()
     return render(request, "admin/patients/index.html",{'clients': clients})
+
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def add(request):
@@ -110,10 +116,12 @@ def add(request):
 
     return render(request, "admin/patients/create.html", {'clients': clients})
 
+
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def edit_in(request, id):
     client = Client.objects.all()
     return render(request, 'admin/patients/edit.html', {'client': client})
+
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def update_in(request, id):
@@ -136,6 +144,7 @@ def update_in(request, id):
             messages.error(request, f'An error occurred while updating the client: {e}')
 
     return render(request, 'admin/patients/edit.html', {'client': client})
+
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')
 def delete(request, id):

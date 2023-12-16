@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{%if is_admin %}
 <section class="page-section" >
     <div class="container">
         <form method="POST" class="post-form" action="/doctors/update/{{doctors.id}}" enctype="multipart/form-data">  
@@ -43,5 +42,4 @@
     </div>
 </section>
 
-{% endif %}
 {% endblock content %}

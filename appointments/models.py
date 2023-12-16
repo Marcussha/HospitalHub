@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User as AuthUser
 from ministration.models import Ministration
 from doctors.models import Doctors
-import django_filters
+
 
 # Create your models here.
 class Appointment(models.Model):

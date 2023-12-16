@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{%if is_admin %}
 <section class="page-section" >
     <div class="col-md-12">
         <form method="POST" class="post-form" action="/services/update/{{ministration.minisid}}">  
@@ -27,7 +26,7 @@
 
                 <div class="mb-3">
                     <label>Note</label>
-                    <input type="text" class="form-control" name="note" id="note" required maxlength="12000"
+                    <input type="text" class="form-control" name="note" id="note"
                     value="{{ministration.note}}"/>
                 </div>
 
@@ -40,5 +39,4 @@
     </div>
 </section>
 
-{%endif%}
 {% endblock content %}

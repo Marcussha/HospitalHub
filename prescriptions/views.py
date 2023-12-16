@@ -10,6 +10,7 @@ from django.db.utils import IntegrityError
 from django.contrib.auth.decorators import user_passes_test
 from authrole.custom_context import user_is_admin, user_is_doctor
 
+# Create your views here
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')
 def index(request):
     prescription = Prescriptions.objects.all()
@@ -71,7 +72,6 @@ def create(request):
 
 @user_passes_test(lambda u: user_is_admin(u) or user_is_doctor(u), login_url='login')    
 def edit(request, id):
-    # Retrieve the prescription to be edited using its unique identifier (id)
     prescription = Prescriptions.objects.get(id=id)
 
     #Retrieve all patients, doctors, and medicines for the form
@@ -79,7 +79,6 @@ def edit(request, id):
     doctors = Doctors.objects.all()
     medicines = Medicine.objects.all()
     
-    # Render the 'prescriptions/edit.html' template with necessary context
     return render(request, 'prescriptions/edit.html', {'prescription': prescription, 'patients': patients, 'doctors': doctors, 'medicines': medicines})
 
 
@@ -89,7 +88,6 @@ def update(request, id):
         prescription = Prescriptions.objects.get(id=id)
 
         if request.method == 'POST':
-            # Extract data from the form
             name_disease = request.POST.get('name_disease')
             symptoms = request.POST.get('symptoms')
             start_date = request.POST.get('start_date')
@@ -121,7 +119,6 @@ def update(request, id):
             prescription.re_examination_date = re_examination_date
             prescription.note = note
 
-            # Save the updated prescription
             prescription.save()
 
             messages.success(request, 'Prescription updated successfully.')
@@ -130,7 +127,6 @@ def update(request, id):
     except Prescriptions.DoesNotExist:
         messages.error(request, f'Prescription with ID {id} does not exist.')
 
-    # Render the 'prescriptions/edit.html' template with the prescription for further editing
     return render(request, 'prescriptions/edit.html', {'prescription': prescription})
 
 
