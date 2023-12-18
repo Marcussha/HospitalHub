@@ -110,7 +110,7 @@ def add(request):
                     address=address,
                     sex=sex,
                 )
-                return redirect('/customers/home')
+                return redirect('/customers/admin')
             except Exception as e:
                 messages.error(request, 'An error occurred while creating the client.')
 

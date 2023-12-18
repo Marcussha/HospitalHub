@@ -20,18 +20,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('dj-admin/', admin.site.urls),
+    path('dj-admin', admin.site.urls),
     path('',include('authentication.urls')),
-    path('roles', include('roles.urls')),
-    path('departments', include('departments.urls')),
-    path('services', include('ministration.urls')),
-    path('doctors', include('doctors.urls')),
-    path('appointments', include('appointments.urls')),
-    path('prescriptions', include('prescriptions.urls')),
-    path('medicine', include('medicine.urls')),
-    path('customers', include('customer.urls')),
-    path('news', include('news.urls')),
-    path('authrole', include('authrole.urls')),
+    path('roles/', include('roles.urls')),
+    path('departments/', include('departments.urls')),
+    path('services/', include('ministration.urls')),
+    path('doctors/', include('doctors.urls')),
+    path('appointments/', include('appointments.urls')),
+    path('prescriptions/', include('prescriptions.urls')),
+    path('medicine/', include('medicine.urls')),
+    path('customers/', include('customer.urls')),
+    path('news/', include('news.urls')),
+    path('authrole/', include('authrole.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
