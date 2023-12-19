@@ -20,19 +20,3 @@ def user_is_doctor(user):
 
 def user_is_manager(user):
     return user.groups.filter(name='Manager').exists()
-
-# Apply the decorator to a view function
-@user_passes_test(user_is_admin)
-def admin_view(request):
-    # Your view logic here
-    return render(request, 'admin_template.html')
-
-@user_passes_test(user_is_doctor)
-def doctor_view(request):
-    # Your view logic here
-    return render(request, 'doctor_template.html')
-
-@user_passes_test(user_is_manager)
-def manager_view(request):
-    # Your view logic here
-    return render(request, 'manager_template.html')

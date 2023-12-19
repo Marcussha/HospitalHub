@@ -17,6 +17,8 @@ logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
+
+
 # Create your views here
 def home(request):
     ministrations = Ministration.objects.all()[:3]
@@ -116,7 +118,7 @@ def edit_profile(request):
         user_to_edit.first_name = request.POST.get('first_name')
         user_to_edit.last_name = request.POST.get('last_name')
         user_to_edit.email = request.POST.get('email')
-        # Update other profile fields as needed
+
         user_to_edit.save()
 
         messages.success(request, 'Updated information successfully!')
