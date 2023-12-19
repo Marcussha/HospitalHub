@@ -27,8 +27,8 @@
                         <tr>
                             <td>{{ department.departmentid }}</td>
                             <td>{{ department.named }}</td>
-                            <td><a href="departments/edit/{{ department.departmentid }}" class="btn btn-info">Edit</a>
-                                <a href="departments/delete/{{ department.departmentid }}" class="btn btn-danger">Delete</a></td>
+                            <td><a href="edit/{{ department.departmentid }}" class="btn btn-info">Edit</a>
+                                <a href="delete/{{ department.departmentid }}" class="btn btn-danger">Delete</a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

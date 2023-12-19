@@ -8,6 +8,6 @@ class MinistrationForm(forms.ModelForm):
         widgets = { 'minisid': forms.TextInput(attrs={ 'class': 'form-control' }), 
                    'name_ministration': forms.TextInput(attrs={ 'class': 'form-control' }),
                    'detail': forms.TextInput(attrs={ 'class': 'form-control' }),
-                   'note': forms.TextInput(attrs={'class': 'form-control'}),
+                   'note': forms.TextInput(attrs={'class': 'form-control', 'style': 'height: 300px;'}),
                           
         }

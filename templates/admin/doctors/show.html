@@ -34,7 +34,7 @@
                         <p class="designation">{{doctors.email}} &amp; CEO</p>
                     </div>
                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                        <a href="{% url 'create_appointment' %}?docid={{ doctors.id }}&docname={{ doctors.name }}" class="book-appointment" onclick="saveDoctorInfo('{{ doctors.name }}')">Booking Appointment</a> 
+                        <a href="{% url 'create_appointment' %}">Booking Appointment</a> 
                     </div>
                 </div>
             </div>
@@ -43,20 +43,4 @@
     </div>
 </section>
 
-<script>
-    function logParameters(docid, doctorname) {
-        console.log('docid:', docid);
-        console.log('doctorname:', doctorname);
-
-        // Update the <span> element with the doctor's name
-        const doctorNameDisplay = document.getElementById('doctorNameDisplay');
-        doctorNameDisplay.textContent = doctorname;
-    }
-</script>
-
-<script>
-    function saveDoctorInfo(doctorName) {
-        sessionStorage.setItem('selectedDoctor', doctorName);
-    }
-</script>
 {% endblock content %}

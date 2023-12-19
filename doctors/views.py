@@ -85,15 +85,24 @@ def update(request, id):
             doctor.images = new_images
 
 
-        doctor.name = name
-        doctor.email = email
-        doctor.position = position
-        doctor.save()
-
-        return redirect('/doctors/index')
+        if email != doctor.email:
+            try:
+                doctor.email = email
+                doctor.save()
+                messages.success(request, 'Doctor information updated successfully.')
+            except IntegrityError:
+                messages.error(request, 'Email is already in use. Please choose a different email.')
+            else:
+                return redirect('/doctors/index')
+        else:
+            doctor.name = name
+            doctor.position = position
+            doctor.save()
+            messages.success(request, 'Doctor information updated successfully.')
 
     doctors = Doctors.objects.get(id=id)
     return render(request, 'admin/doctors/edit.html', {'doctors': doctors})
+       
 
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')    
