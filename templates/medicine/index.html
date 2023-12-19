@@ -39,8 +39,8 @@
                             <td>{{medicine.name}}</td>
                             <td>{{medicine.active_ingredient}}</td>
                             <td>{{medicine.manufacturer}}</td>
-                            <td><a href="medicine/edit/{{ medicine.id }}" class="btn btn-info">Edit</a>
-                                <a href="medicine/delete/{{ medicine.id }}" class="btn btn-danger">Delete</a></td>
+                            <td><a href="edit/{{ medicine.id }}" class="btn btn-info">Edit</a>
+                                <a href="delete/{{ medicine.id }}" class="btn btn-danger">Delete</a></td>
                         </tr>  
                         {% endfor %} 
                     </tbody>

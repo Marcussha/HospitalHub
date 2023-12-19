@@ -4,6 +4,16 @@
 
 <section class="page-section" >
     <div class="col-md-12">
+        {% if messages %}
+            <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col text-center">
                 <h2>Doctors</h2>

@@ -61,4 +61,4 @@ def clear(request, id):
         return render(request, "error_page.html", {'error_message': error_message})
     
     ministration.delete()
-    return redirect('/services')
+    return redirect('/services/index')

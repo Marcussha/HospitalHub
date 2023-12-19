@@ -197,16 +197,5 @@
     }
   </script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectedDoctor = sessionStorage.getItem('selectedDoctor');
-        
-        const doctorNameDisplay = document.getElementById('selectedDoctorSpan');
-        if (selectedDoctor) {
-           selectedDoctorSpan.textContent = selectedDoctor;
-        }
-    });
-  </script>
-
 </body>
 {% endblock content %} 
