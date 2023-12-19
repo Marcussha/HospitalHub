@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'customer',
     'news',
     'authrole',
-    'django_filters'
+    'django_filters',
+    'user'
 ]
 
 MIDDLEWARE = [
