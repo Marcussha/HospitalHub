@@ -49,6 +49,7 @@ def create(request):
                 images=filename,
                 department=department_instance,
             )
+            messages.success(request, 'Doctor create successfully.')
             return redirect ('/doctors/index')
 
         except IntegrityError as e:
@@ -99,6 +100,8 @@ def update(request, id):
             doctor.position = position
             doctor.save()
             messages.success(request, 'Doctor information updated successfully.')
+            return redirect('/doctors/index')
+
 
     doctors = Doctors.objects.get(id=id)
     return render(request, 'admin/doctors/edit.html', {'doctors': doctors})

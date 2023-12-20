@@ -10,14 +10,10 @@ from ministration.models import Ministration
 from doctors.models import Doctors 
 from django.contrib.auth.decorators import user_passes_test, login_required
 from authrole.custom_context import user_is_doctor,user_is_admin
-from authentication.models import CustomUserManager, CustomUser
-
 
 logger = logging.getLogger(__name__)
 
 User = get_user_model()
-
-
 
 # Create your views here
 def home(request):
@@ -28,8 +24,7 @@ def home(request):
 
 @user_passes_test(lambda u: user_is_doctor(u), login_url='login')
 def static(request):
-    doc = Doctors.objects.all()[:3]
-    return render(request, "authentication/doctor.html", {'doc': doc})
+    return render(request, "authentication/doctor.html")
 
 
 @user_passes_test(lambda u: user_is_admin(u), login_url='login')

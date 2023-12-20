@@ -8,7 +8,6 @@ from ministration.models import Ministration
 from doctors.models import Doctors
 from .filters import AppointmentFilter
 from datetime import time
-from datetime import datetime
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.writer.excel import save_virtual_workbook
